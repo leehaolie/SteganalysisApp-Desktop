@@ -1605,5 +1605,18 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void detectAnyMethod_EnabledChanged(object sender, EventArgs e)
+        {
+            detectOpenSpacesMethods.Enabled = detectAnyMethod.Enabled;
+            detectWordMappingsMethods.Enabled = detectAnyMethod.Enabled;
+            detectFontTypeMethod.Enabled = detectAnyMethod.Enabled;
+            detectColorQuantizationMethod.Enabled = detectAnyMethod.Enabled;
+            detectInvisibleCharactesMethods.Enabled = detectAnyMethod.Enabled;
+            detectUnicodesMethod.Enabled = detectAnyMethod.Enabled;
+            detectCharactersScaleMethods.Enabled = detectAnyMethod.Enabled;
+            detectUnderlineMethods.Enabled = detectAnyMethod.Enabled;
+            detectSentenceBorderMethods.Enabled = detectAnyMethod.Enabled;
+            detectParagraphBorderMethods.Enabled = detectAnyMethod.Enabled;
+        }
     }
 }
