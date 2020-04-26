@@ -1,0 +1,115 @@
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+C:\Users\Ivan i Zoki\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Knigi za Fax\Postdiplomski\bezbednost na softver\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Ivan i Zoki\Desktop\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+C:\Users\Ivan i Zoki\Desktop\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+C:\Users\Ivan i Zoki\Desktop\Krienje na informacii vo Word dokument\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Ivan i Zoki\Desktop\Krienje na informacii vo Word dokument\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Ivan i Zoki\Desktop\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Ivan i Zoki\Desktop\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Ivan i Zoki\Desktop\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Ivan i Zoki\Desktop\Krienje na informacii vo Word dokument\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi - testovi\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - paragrafi - testovi\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor - testovi\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor - testovi\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor - testovi\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na zbor\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\Knigi za Fax\Postdiplomski\Bezbednost na Softver\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\Krienje na informacii vo Word dokument - border na recenica\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.SentenceBorder.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Underline.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.WhiteSpaces.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.HomeScreen.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.DetectCoding.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ParagraphBorder.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Scaling.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.HomeScreen.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.DetectCoding.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.DetectCoding.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\Bezbednost na Softver-Za Magisterska\DataHidingApp - Steganalysis - Generalna\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultScreen.resources
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultScreen.resources
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.DetectCoding.resources
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
