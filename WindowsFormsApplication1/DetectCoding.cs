@@ -93,6 +93,12 @@ namespace WindowsFormsApplication1
         #region check for character scaling - general
         Dictionary<string, int> generalScalingMap = new Dictionary<string, int>();
         #endregion
+        #region check for underline - general
+        Dictionary<string, int> generalUnderlineMap = new Dictionary<string, int>();
+        //Dictionary<string, int> generalUnderlineColorMap = new Dictionary<string, int>();
+        //Dictionary<string, int> generalUnderlineStyleMap = new Dictionary<string, int>();
+        String[] excludeUnderlineChars = new String[] { "g", "j", "p", "q", "y" };
+        #endregion
 
         public DetectCoding()
         {
@@ -271,10 +277,6 @@ namespace WindowsFormsApplication1
             var generalSentenceLeftBorderMap = new Dictionary<string, int>();
             //var generalSentenceLeftBorderColorMap = new Dictionary<string, int>();
             //var generalSentenceLeftBorderStyleMap = new Dictionary<string, int>();            
-            var generalUnderlineMap = new Dictionary<string, int>();
-            //var generalUnderlineColorMap = new Dictionary<string, int>();
-            //var generalUnderlineStyleMap = new Dictionary<string, int>();
-            String[] excludeUnderlineChars = new String[] { "g", "j", "p", "q", "y" };
             
             #region check for paragraph border
             //approach 1: first we check if our concrete algotirtam is used            
@@ -2377,6 +2379,66 @@ namespace WindowsFormsApplication1
             word.Quit();
 
             (new ResultCharacterScaleGeneralScreen(resultValues)).ShowDialog();
+        }
+
+        private void detectUnderlineMethods_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            // Define a range of 1 character. 
+            object start = 0; object startGeneral = 0; int startGeneralCount = 0;
+            object end = 1; object endGeneral = 3; int endGeneralCount = 3;
+            Microsoft.Office.Interop.Word.Range rngGeneralUnderline = docs.Range(ref start, ref end);
+            Microsoft.Office.Interop.Word.Range rngGeneralUnderlineAll = docs.Range(ref start);
+            Microsoft.Office.Interop.Word.Range rngUnderline = docs.Range(ref start, ref end);
+            Microsoft.Office.Interop.Word.Range rngUnderlineAll = docs.Range(ref start);
+
+            #region check for underline
+            //approach 2: then we are doing more general check if character underline is susposious
+            int actualSizeGeneralUnderline = rngGeneralUnderlineAll.Text.Length - 1;
+
+            while ((rngGeneralUnderline.End - 1) < actualSizeGeneralUnderline)
+            {
+                if (Array.IndexOf(excludeUnderlineChars, rngUnderline.Text.Trim().ToLower()) > -1)
+                {
+                    rngUnderline.Select();
+                    // Move the start position 1 character
+                    rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                    // Move the end position 1 character
+                    rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                    continue;
+                }
+
+                string underColor = rngGeneralUnderline.Font.UnderlineColor.ToString();
+                string underStyle = rngGeneralUnderline.Font.Underline.ToString();
+                if (generalUnderlineMap.ContainsKey(underColor + "-" + underStyle))
+                {
+                    int generalUnderlineColorCount = generalUnderlineMap[underColor + "-" + underStyle] + 1;
+                    generalUnderlineMap[underColor + "-" + underStyle] = generalUnderlineColorCount;
+                }
+                else
+                {
+                    generalUnderlineMap.Add(underColor + "-" + underStyle, 1);
+                }
+
+                rngGeneralUnderline.Select();
+                // Move the start position 1 character
+                rngGeneralUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                // Move the end position 1 character
+                rngGeneralUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+            }
+            #endregion
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.generalUnderlineMap = generalUnderlineMap;
+
+            docs.Close();
+            word.Quit();
+
+            (new ResultUnderlineGeneralScreen(resultValues)).ShowDialog();
         }
     }
 }

@@ -160,8 +160,9 @@
             this.detectUnderlineMethods.Name = "detectUnderlineMethods";
             this.detectUnderlineMethods.Size = new System.Drawing.Size(265, 28);
             this.detectUnderlineMethods.TabIndex = 13;
-            this.detectUnderlineMethods.Text = "Detect underline methods";
+            this.detectUnderlineMethods.Text = "Detect underline general method";
             this.detectUnderlineMethods.UseVisualStyleBackColor = true;
+            this.detectUnderlineMethods.Click += new System.EventHandler(this.detectUnderlineMethods_Click);
             // 
             // detectSentenceBorderMethods
             // 
