@@ -38,9 +38,9 @@
             this.detectInvisibleCharactesMethods = new System.Windows.Forms.Button();
             this.detectUnicodesMethod = new System.Windows.Forms.Button();
             this.detectCharactersScaleGeneralMethod = new System.Windows.Forms.Button();
-            this.detectUnderlineMethods = new System.Windows.Forms.Button();
-            this.detectSentenceBorderMethods = new System.Windows.Forms.Button();
-            this.detectParagraphBorderMethods = new System.Windows.Forms.Button();
+            this.detectUnderlineGeneralMethod = new System.Windows.Forms.Button();
+            this.detectSentenceBorderGeneralMethod = new System.Windows.Forms.Button();
+            this.detectParagraphBorderGeneralMethod = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // choseDocument
@@ -153,45 +153,46 @@
             this.detectCharactersScaleGeneralMethod.UseVisualStyleBackColor = true;
             this.detectCharactersScaleGeneralMethod.Click += new System.EventHandler(this.detectCharactersScaleMethods_Click);
             // 
-            // detectUnderlineMethods
+            // detectUnderlineGeneralMethod
             // 
-            this.detectUnderlineMethods.Location = new System.Drawing.Point(299, 323);
-            this.detectUnderlineMethods.Margin = new System.Windows.Forms.Padding(4);
-            this.detectUnderlineMethods.Name = "detectUnderlineMethods";
-            this.detectUnderlineMethods.Size = new System.Drawing.Size(265, 28);
-            this.detectUnderlineMethods.TabIndex = 13;
-            this.detectUnderlineMethods.Text = "Detect underline general method";
-            this.detectUnderlineMethods.UseVisualStyleBackColor = true;
-            this.detectUnderlineMethods.Click += new System.EventHandler(this.detectUnderlineMethods_Click);
+            this.detectUnderlineGeneralMethod.Location = new System.Drawing.Point(299, 323);
+            this.detectUnderlineGeneralMethod.Margin = new System.Windows.Forms.Padding(4);
+            this.detectUnderlineGeneralMethod.Name = "detectUnderlineGeneralMethod";
+            this.detectUnderlineGeneralMethod.Size = new System.Drawing.Size(265, 28);
+            this.detectUnderlineGeneralMethod.TabIndex = 13;
+            this.detectUnderlineGeneralMethod.Text = "Detect underline general method";
+            this.detectUnderlineGeneralMethod.UseVisualStyleBackColor = true;
+            this.detectUnderlineGeneralMethod.Click += new System.EventHandler(this.detectUnderlineMethods_Click);
             // 
-            // detectSentenceBorderMethods
+            // detectSentenceBorderGeneralMethod
             // 
-            this.detectSentenceBorderMethods.Location = new System.Drawing.Point(299, 359);
-            this.detectSentenceBorderMethods.Margin = new System.Windows.Forms.Padding(4);
-            this.detectSentenceBorderMethods.Name = "detectSentenceBorderMethods";
-            this.detectSentenceBorderMethods.Size = new System.Drawing.Size(265, 28);
-            this.detectSentenceBorderMethods.TabIndex = 14;
-            this.detectSentenceBorderMethods.Text = "Detect sentence border methods";
-            this.detectSentenceBorderMethods.UseVisualStyleBackColor = true;
+            this.detectSentenceBorderGeneralMethod.Location = new System.Drawing.Point(299, 359);
+            this.detectSentenceBorderGeneralMethod.Margin = new System.Windows.Forms.Padding(4);
+            this.detectSentenceBorderGeneralMethod.Name = "detectSentenceBorderGeneralMethod";
+            this.detectSentenceBorderGeneralMethod.Size = new System.Drawing.Size(265, 28);
+            this.detectSentenceBorderGeneralMethod.TabIndex = 14;
+            this.detectSentenceBorderGeneralMethod.Text = "Detect sentence border general method";
+            this.detectSentenceBorderGeneralMethod.UseVisualStyleBackColor = true;
+            this.detectSentenceBorderGeneralMethod.Click += new System.EventHandler(this.detectSentenceBorderMethods_Click);
             // 
-            // detectParagraphBorderMethods
+            // detectParagraphBorderGeneralMethod
             // 
-            this.detectParagraphBorderMethods.Location = new System.Drawing.Point(299, 398);
-            this.detectParagraphBorderMethods.Margin = new System.Windows.Forms.Padding(4);
-            this.detectParagraphBorderMethods.Name = "detectParagraphBorderMethods";
-            this.detectParagraphBorderMethods.Size = new System.Drawing.Size(265, 28);
-            this.detectParagraphBorderMethods.TabIndex = 15;
-            this.detectParagraphBorderMethods.Text = "Detect paragraph border methods";
-            this.detectParagraphBorderMethods.UseVisualStyleBackColor = true;
+            this.detectParagraphBorderGeneralMethod.Location = new System.Drawing.Point(299, 398);
+            this.detectParagraphBorderGeneralMethod.Margin = new System.Windows.Forms.Padding(4);
+            this.detectParagraphBorderGeneralMethod.Name = "detectParagraphBorderGeneralMethod";
+            this.detectParagraphBorderGeneralMethod.Size = new System.Drawing.Size(265, 28);
+            this.detectParagraphBorderGeneralMethod.TabIndex = 15;
+            this.detectParagraphBorderGeneralMethod.Text = "Detect paragraph border general method";
+            this.detectParagraphBorderGeneralMethod.UseVisualStyleBackColor = true;
             // 
             // DetectCoding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 462);
-            this.Controls.Add(this.detectParagraphBorderMethods);
-            this.Controls.Add(this.detectSentenceBorderMethods);
-            this.Controls.Add(this.detectUnderlineMethods);
+            this.Controls.Add(this.detectParagraphBorderGeneralMethod);
+            this.Controls.Add(this.detectSentenceBorderGeneralMethod);
+            this.Controls.Add(this.detectUnderlineGeneralMethod);
             this.Controls.Add(this.detectCharactersScaleGeneralMethod);
             this.Controls.Add(this.detectUnicodesMethod);
             this.Controls.Add(this.detectInvisibleCharactesMethods);
@@ -221,9 +222,9 @@
         private System.Windows.Forms.Button detectInvisibleCharactesMethods;
         private System.Windows.Forms.Button detectUnicodesMethod;
         private System.Windows.Forms.Button detectCharactersScaleGeneralMethod;
-        private System.Windows.Forms.Button detectUnderlineMethods;
-        private System.Windows.Forms.Button detectSentenceBorderMethods;
-        private System.Windows.Forms.Button detectParagraphBorderMethods;
+        private System.Windows.Forms.Button detectUnderlineGeneralMethod;
+        private System.Windows.Forms.Button detectSentenceBorderGeneralMethod;
+        private System.Windows.Forms.Button detectParagraphBorderGeneralMethod;
     }
 }
 

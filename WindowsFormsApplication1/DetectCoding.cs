@@ -99,6 +99,11 @@ namespace WindowsFormsApplication1
         //Dictionary<string, int> generalUnderlineStyleMap = new Dictionary<string, int>();
         String[] excludeUnderlineChars = new String[] { "g", "j", "p", "q", "y" };
         #endregion
+        #region check for underline - general
+        Dictionary<string, int> generalSentenceLeftBorderMap = new Dictionary<string, int>();
+        //Dictionary<string, int> generalSentenceLeftBorderColorMap = new Dictionary<string, int>();
+        //Dictionary<string, int> generalSentenceLeftBorderStyleMap = new Dictionary<string, int>();            
+        #endregion
 
         public DetectCoding()
         {
@@ -274,9 +279,6 @@ namespace WindowsFormsApplication1
             var generalParagraphRightBorderMap = new Dictionary<string, int>();
             //var generalParagraphRightBorderColorMap = new Dictionary<string, int>();
             //var generalParagraphRightBorderStyleMap = new Dictionary<string, int>();
-            var generalSentenceLeftBorderMap = new Dictionary<string, int>();
-            //var generalSentenceLeftBorderColorMap = new Dictionary<string, int>();
-            //var generalSentenceLeftBorderStyleMap = new Dictionary<string, int>();            
             
             #region check for paragraph border
             //approach 1: first we check if our concrete algotirtam is used            
@@ -1630,9 +1632,9 @@ namespace WindowsFormsApplication1
             detectInvisibleCharactesMethods.Enabled = detectAnyMethod.Enabled;
             detectUnicodesMethod.Enabled = detectAnyMethod.Enabled;
             detectCharactersScaleGeneralMethod.Enabled = detectAnyMethod.Enabled;
-            detectUnderlineMethods.Enabled = detectAnyMethod.Enabled;
-            detectSentenceBorderMethods.Enabled = detectAnyMethod.Enabled;
-            detectParagraphBorderMethods.Enabled = detectAnyMethod.Enabled;
+            detectUnderlineGeneralMethod.Enabled = detectAnyMethod.Enabled;
+            detectSentenceBorderGeneralMethod.Enabled = detectAnyMethod.Enabled;
+            detectParagraphBorderGeneralMethod.Enabled = detectAnyMethod.Enabled;
         }
 
         private void detectOpenSpacesMethods_Click(object sender, EventArgs e)
@@ -2439,6 +2441,45 @@ namespace WindowsFormsApplication1
             word.Quit();
 
             (new ResultUnderlineGeneralScreen(resultValues)).ShowDialog();
+        }
+
+        private void detectSentenceBorderMethods_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            Microsoft.Office.Interop.Word.Range rangeSentenceGeneralBorderCountSentences = word.ActiveDocument.Content;
+
+            #region check for sentence border
+            //approach 2: then we are doing more general check if sentence border is susposious
+            var leftBorderGeneralSentenceBorder = WdBorderType.wdBorderLeft;
+            for (int k = 1; k <= rangeSentenceGeneralBorderCountSentences.Sentences.Count; k++)
+            {
+                Microsoft.Office.Interop.Word.Range s1 = rangeSentenceGeneralBorderCountSentences.Sentences[k];
+
+                string bordSentenceGeneralColor = s1.Borders[leftBorderGeneralSentenceBorder].Color.ToString();
+                string bordSentenceGeneralStyle = s1.Borders[leftBorderGeneralSentenceBorder].LineStyle.ToString();
+                if (generalSentenceLeftBorderMap.ContainsKey(bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle))
+                {
+                    int generalUnderlineColorCount = generalSentenceLeftBorderMap[bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle] + 1;
+                    generalSentenceLeftBorderMap[bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle] = generalUnderlineColorCount;
+                }
+                else
+                {
+                    generalSentenceLeftBorderMap.Add(bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle, 1);
+                }
+            }
+            #endregion
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.generalSentenceLeftBorderMap = generalSentenceLeftBorderMap;
+
+            docs.Close();
+            word.Quit();
+
+            (new ResultSentenceBorderGeneralScreen(resultValues)).ShowDialog();
         }
     }
 }
