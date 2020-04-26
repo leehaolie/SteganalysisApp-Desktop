@@ -99,10 +99,18 @@ namespace WindowsFormsApplication1
         //Dictionary<string, int> generalUnderlineStyleMap = new Dictionary<string, int>();
         String[] excludeUnderlineChars = new String[] { "g", "j", "p", "q", "y" };
         #endregion
-        #region check for underline - general
+        #region check for sentence border - general
         Dictionary<string, int> generalSentenceLeftBorderMap = new Dictionary<string, int>();
         //Dictionary<string, int> generalSentenceLeftBorderColorMap = new Dictionary<string, int>();
         //Dictionary<string, int> generalSentenceLeftBorderStyleMap = new Dictionary<string, int>();            
+        #endregion
+        #region check for paragraph border - general
+        Dictionary<string, int> generalParagraphLeftBorderMap = new Dictionary<string, int>();
+        //var generalParagraphLeftBorderColorMap = new Dictionary<string, int>();
+        //var generalParagrahpLeftBorderStyleMap = new Dictionary<string, int>();
+        Dictionary<string, int> generalParagraphRightBorderMap = new Dictionary<string, int>();
+        //var generalParagraphRightBorderColorMap = new Dictionary<string, int>();
+        //var generalParagraphRightBorderStyleMap = new Dictionary<string, int>();
         #endregion
 
         public DetectCoding()
@@ -273,12 +281,6 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Range rngGeneralTemp3 = null;
             Microsoft.Office.Interop.Word.Range rngFirstLetter = word.ActiveDocument.Content;
             Microsoft.Office.Interop.Word.Range rngSecondLetter = word.ActiveDocument.Content;
-            var generalParagraphLeftBorderMap = new Dictionary<string, int>();
-            //var generalParagraphLeftBorderColorMap = new Dictionary<string, int>();
-            //var generalParagrahpLeftBorderStyleMap = new Dictionary<string, int>();
-            var generalParagraphRightBorderMap = new Dictionary<string, int>();
-            //var generalParagraphRightBorderColorMap = new Dictionary<string, int>();
-            //var generalParagraphRightBorderStyleMap = new Dictionary<string, int>();
             
             #region check for paragraph border
             //approach 1: first we check if our concrete algotirtam is used            
@@ -2480,6 +2482,60 @@ namespace WindowsFormsApplication1
             word.Quit();
 
             (new ResultSentenceBorderGeneralScreen(resultValues)).ShowDialog();
+        }
+
+        private void detectParagraphBorderGeneralMethod_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+
+            #region check for paragraph border
+            //approach 2: then we are doing more general check if pargraph border is susposious
+            foreach (Microsoft.Office.Interop.Word.Paragraph aGeneralPar in docs.Paragraphs)
+            {
+                Microsoft.Office.Interop.Word.Range parGeneralRng = aGeneralPar.Range;
+                var leftBorderGeneralParagraph = WdBorderType.wdBorderLeft;
+                var rightBorderGeneralParagraph = WdBorderType.wdBorderRight;
+
+                string leftBordGeneralColor = parGeneralRng.Borders[leftBorderGeneralParagraph].Color.ToString();
+                string leftBordGeneralStyle = parGeneralRng.Borders[leftBorderGeneralParagraph].LineStyle.ToString();
+                //count left border color - left border style occurencies
+                if (generalParagraphLeftBorderMap.ContainsKey(leftBordGeneralColor + "-" + leftBordGeneralStyle))
+                {
+                    int generalLeftBorderColorCount = generalParagraphLeftBorderMap[leftBordGeneralColor + "-" + leftBordGeneralStyle] + 1;
+                    generalParagraphLeftBorderMap[leftBordGeneralColor + "-" + leftBordGeneralStyle] = generalLeftBorderColorCount;
+                }
+                else
+                {
+                    generalParagraphLeftBorderMap.Add(leftBordGeneralColor + "-" + leftBordGeneralStyle, 1);
+                }
+
+                string rightBordGeneralColor = parGeneralRng.Borders[rightBorderGeneralParagraph].Color.ToString();
+                string rightBordGeneralStyle = parGeneralRng.Borders[rightBorderGeneralParagraph].LineStyle.ToString();
+                //count right border color - right border style occurencies
+                if (generalParagraphRightBorderMap.ContainsKey(rightBordGeneralColor + "-" + rightBordGeneralStyle))
+                {
+                    int generalLeftBorderColorCount = generalParagraphRightBorderMap[rightBordGeneralColor + "-" + rightBordGeneralStyle] + 1;
+                    generalParagraphRightBorderMap[rightBordGeneralColor + "-" + rightBordGeneralStyle] = generalLeftBorderColorCount;
+                }
+                else
+                {
+                    generalParagraphRightBorderMap.Add(rightBordGeneralColor + "-" + rightBordGeneralStyle, 1);
+                }
+            }
+            #endregion
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.generalParagraphLeftBorderMap = generalParagraphLeftBorderMap;
+            resultValues.generalParagraphRightBorderMap = generalParagraphRightBorderMap;
+
+            docs.Close();
+            word.Quit();
+
+            (new ResultParagraphBorderGeneralScreen(resultValues)).ShowDialog();
         }
     }
 }

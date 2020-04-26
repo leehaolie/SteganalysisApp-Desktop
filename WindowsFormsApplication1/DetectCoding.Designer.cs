@@ -184,6 +184,7 @@
             this.detectParagraphBorderGeneralMethod.TabIndex = 15;
             this.detectParagraphBorderGeneralMethod.Text = "Detect paragraph border general method";
             this.detectParagraphBorderGeneralMethod.UseVisualStyleBackColor = true;
+            this.detectParagraphBorderGeneralMethod.Click += new System.EventHandler(this.detectParagraphBorderGeneralMethod_Click);
             // 
             // DetectCoding
             // 

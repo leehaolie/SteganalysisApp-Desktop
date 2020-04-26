@@ -96,6 +96,12 @@
     <Compile Include="ResultCharacterScaleGeneralScreen.Designer.cs">
       <DependentUpon>ResultCharacterScaleGeneralScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResultParagraphBorderGeneralScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultParagraphBorderGeneralScreen.Designer.cs">
+      <DependentUpon>ResultParagraphBorderGeneralScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResultSentenceBorderGeneralScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResultCharacterScaleGeneralScreen.resx">
       <DependentUpon>ResultCharacterScaleGeneralScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultParagraphBorderGeneralScreen.resx">
+      <DependentUpon>ResultParagraphBorderGeneralScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultSentenceBorderGeneralScreen.resx">
       <DependentUpon>ResultSentenceBorderGeneralScreen.cs</DependentUpon>
