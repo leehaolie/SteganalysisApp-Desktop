@@ -90,6 +90,9 @@ namespace WindowsFormsApplication1
             {"o006F", 0}, {"o03BF", 0}, {"o1D0F", 0}, {"o043E", 0}
         };
         #endregion
+        #region check for character scaling - general
+        Dictionary<string, int> generalScalingMap = new Dictionary<string, int>();
+        #endregion
 
         public DetectCoding()
         {
@@ -267,8 +270,7 @@ namespace WindowsFormsApplication1
             //var generalParagraphRightBorderStyleMap = new Dictionary<string, int>();
             var generalSentenceLeftBorderMap = new Dictionary<string, int>();
             //var generalSentenceLeftBorderColorMap = new Dictionary<string, int>();
-            //var generalSentenceLeftBorderStyleMap = new Dictionary<string, int>();
-            var generalScalingMap = new Dictionary<string, int>();
+            //var generalSentenceLeftBorderStyleMap = new Dictionary<string, int>();            
             var generalUnderlineMap = new Dictionary<string, int>();
             //var generalUnderlineColorMap = new Dictionary<string, int>();
             //var generalUnderlineStyleMap = new Dictionary<string, int>();
@@ -1625,7 +1627,7 @@ namespace WindowsFormsApplication1
             detectColorQuantizationMethod.Enabled = detectAnyMethod.Enabled;
             detectInvisibleCharactesMethods.Enabled = detectAnyMethod.Enabled;
             detectUnicodesMethod.Enabled = detectAnyMethod.Enabled;
-            detectCharactersScaleMethods.Enabled = detectAnyMethod.Enabled;
+            detectCharactersScaleGeneralMethod.Enabled = detectAnyMethod.Enabled;
             detectUnderlineMethods.Enabled = detectAnyMethod.Enabled;
             detectSentenceBorderMethods.Enabled = detectAnyMethod.Enabled;
             detectParagraphBorderMethods.Enabled = detectAnyMethod.Enabled;
@@ -1744,14 +1746,14 @@ namespace WindowsFormsApplication1
             }
             #endregion
 
-            docs.Close();
-            word.Quit();
-
             ResultValues resultValues = new ResultValues();
             resultValues.wordMappingOption1Total = wordMappingOption1Total;
             resultValues.wordMappingOption1Potential = wordMappingOption1Potential;
             resultValues.wordMappingOption2Total = wordMappingOption2Total;
             resultValues.wordMappingOption2Potential = wordMappingOption2Potential;
+
+            docs.Close();
+            word.Quit();
 
             (new ResultWordMappingScreen(resultValues)).ShowDialog();
         }
@@ -1811,13 +1813,13 @@ namespace WindowsFormsApplication1
             }
             #endregion
 
-            docs.Close();
-            word.Quit();
-
             ResultValues resultValues = new ResultValues();
             resultValues.fontTypeTotal = fontTypeTotal;
             resultValues.fontTypePotential = fontTypePotential;
             resultValues.fontTypeDirectoryCount = fontTypeDirectoryCount;
+
+            docs.Close();
+            word.Quit();
 
             (new ResultFontTypeScreen(resultValues)).ShowDialog();
         }
@@ -1960,15 +1962,16 @@ namespace WindowsFormsApplication1
             }
             #endregion
 
-            docs.Close();
-            word.Quit();
-
             ResultValues resultValues = new ResultValues();
             resultValues.colorQuantizationTotal = colorQuantizationTotal;
             resultValues.colorQuantizationLight = colorQuantizationLight;
             resultValues.colorQuantizationDark = colorQuantizationDark;
             resultValues.colorQuantizationDarkLevels = colorQuantizationDarkLevels;
             resultValues.colorQuantizationLightLevels = colorQuantizationLightLevels;
+
+            docs.Close();
+            word.Quit();
+
             (new ResultColorQuantizationScreen(resultValues)).ShowDialog();            
         }
 
@@ -2065,13 +2068,14 @@ namespace WindowsFormsApplication1
             }            
             #endregion
             
-            docs.Close();
-            word.Quit();
-
             ResultValues resultValues = new ResultValues();
             resultValues.invisibleCharactersThatTakesNoSpaceHexMap = invisibleCharactersThatTakesNoSpaceHexMap;
             resultValues.invisibleCharactersTotal = invisibleCharactersTotal;
             resultValues.invisibleCharactersPotential = invisibleCharactersPotential;
+
+            docs.Close();
+            word.Quit();
+
             (new ResultInvisibleCharactersScreen(resultValues)).ShowDialog();            
         }
 
@@ -2319,13 +2323,60 @@ namespace WindowsFormsApplication1
 
             #endregion
 
-            docs.Close();
-            word.Quit();
-
             ResultValues resultValues = new ResultValues();
             resultValues.unicodeNumberSymbols = unicodeNumberSymbols;
             resultValues.unicodeDirectoryMap = unicodeDirectoryMap;
+
+            docs.Close();
+            word.Quit();
+
             (new ResultUnicodeScreen(resultValues)).ShowDialog();
+        }
+
+        private void detectCharactersScaleMethods_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            // Define a range of 1 character. 
+            object start = 0; object startGeneral = 0; int startGeneralCount = 0;
+            object end = 1; object endGeneral = 3; int endGeneralCount = 3;
+            Microsoft.Office.Interop.Word.Range rngGeneralScaling = docs.Range(ref start, ref end);
+            Microsoft.Office.Interop.Word.Range rngGeneralScalingAll = docs.Range(ref start);
+
+            #region check for character scaling
+            //approach 2: then we are doing more general check if character scaling is susposious
+            int actualSizeGeneralScaling = rngGeneralScalingAll.Text.Length - 1;
+            while ((rngGeneralScaling.End - 1) < actualSizeGeneralScaling)
+            {
+                string scaleStyle = rngGeneralScaling.Font.Scaling.ToString();
+                if (generalScalingMap.ContainsKey(scaleStyle))
+                {
+                    int generalScalingSizeCount = generalScalingMap[scaleStyle] + 1;
+                    generalScalingMap[scaleStyle] = generalScalingSizeCount;
+                }
+                else
+                {
+                    generalScalingMap.Add(scaleStyle, 1);
+                }
+
+                rngGeneralScaling.Select();
+                // Move the start position 1 character.
+                rngGeneralScaling.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                // Move the end position 1 character.
+                rngGeneralScaling.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+            }
+            #endregion
+            
+            ResultValues resultValues = new ResultValues();
+            resultValues.generalScalingMap = generalScalingMap;
+
+            docs.Close();
+            word.Quit();
+
+            (new ResultCharacterScaleGeneralScreen(resultValues)).ShowDialog();
         }
     }
 }

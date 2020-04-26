@@ -90,6 +90,12 @@
     <Compile Include="ResultInvisibleCharactersScreen.Designer.cs">
       <DependentUpon>ResultInvisibleCharactersScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResultCharacterScaleGeneralScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultCharacterScaleGeneralScreen.Designer.cs">
+      <DependentUpon>ResultCharacterScaleGeneralScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResultUnicodeScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResultInvisibleCharactersScreen.resx">
       <DependentUpon>ResultInvisibleCharactersScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultCharacterScaleGeneralScreen.resx">
+      <DependentUpon>ResultCharacterScaleGeneralScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultUnicodeScreen.resx">
       <DependentUpon>ResultUnicodeScreen.cs</DependentUpon>

@@ -37,7 +37,7 @@
             this.detectColorQuantizationMethod = new System.Windows.Forms.Button();
             this.detectInvisibleCharactesMethods = new System.Windows.Forms.Button();
             this.detectUnicodesMethod = new System.Windows.Forms.Button();
-            this.detectCharactersScaleMethods = new System.Windows.Forms.Button();
+            this.detectCharactersScaleGeneralMethod = new System.Windows.Forms.Button();
             this.detectUnderlineMethods = new System.Windows.Forms.Button();
             this.detectSentenceBorderMethods = new System.Windows.Forms.Button();
             this.detectParagraphBorderMethods = new System.Windows.Forms.Button();
@@ -142,15 +142,16 @@
             this.detectUnicodesMethod.UseVisualStyleBackColor = true;
             this.detectUnicodesMethod.Click += new System.EventHandler(this.detectUnicodesMethod_Click);
             // 
-            // detectCharactersScaleMethods
+            // detectCharactersScaleGeneralMethod
             // 
-            this.detectCharactersScaleMethods.Location = new System.Drawing.Point(299, 287);
-            this.detectCharactersScaleMethods.Margin = new System.Windows.Forms.Padding(4);
-            this.detectCharactersScaleMethods.Name = "detectCharactersScaleMethods";
-            this.detectCharactersScaleMethods.Size = new System.Drawing.Size(265, 28);
-            this.detectCharactersScaleMethods.TabIndex = 12;
-            this.detectCharactersScaleMethods.Text = "Detect characters scale methods";
-            this.detectCharactersScaleMethods.UseVisualStyleBackColor = true;
+            this.detectCharactersScaleGeneralMethod.Location = new System.Drawing.Point(299, 287);
+            this.detectCharactersScaleGeneralMethod.Margin = new System.Windows.Forms.Padding(4);
+            this.detectCharactersScaleGeneralMethod.Name = "detectCharactersScaleGeneralMethod";
+            this.detectCharactersScaleGeneralMethod.Size = new System.Drawing.Size(265, 28);
+            this.detectCharactersScaleGeneralMethod.TabIndex = 12;
+            this.detectCharactersScaleGeneralMethod.Text = "Detect characters scale genearal method";
+            this.detectCharactersScaleGeneralMethod.UseVisualStyleBackColor = true;
+            this.detectCharactersScaleGeneralMethod.Click += new System.EventHandler(this.detectCharactersScaleMethods_Click);
             // 
             // detectUnderlineMethods
             // 
@@ -190,7 +191,7 @@
             this.Controls.Add(this.detectParagraphBorderMethods);
             this.Controls.Add(this.detectSentenceBorderMethods);
             this.Controls.Add(this.detectUnderlineMethods);
-            this.Controls.Add(this.detectCharactersScaleMethods);
+            this.Controls.Add(this.detectCharactersScaleGeneralMethod);
             this.Controls.Add(this.detectUnicodesMethod);
             this.Controls.Add(this.detectInvisibleCharactesMethods);
             this.Controls.Add(this.detectColorQuantizationMethod);
@@ -218,7 +219,7 @@
         private System.Windows.Forms.Button detectColorQuantizationMethod;
         private System.Windows.Forms.Button detectInvisibleCharactesMethods;
         private System.Windows.Forms.Button detectUnicodesMethod;
-        private System.Windows.Forms.Button detectCharactersScaleMethods;
+        private System.Windows.Forms.Button detectCharactersScaleGeneralMethod;
         private System.Windows.Forms.Button detectUnderlineMethods;
         private System.Windows.Forms.Button detectSentenceBorderMethods;
         private System.Windows.Forms.Button detectParagraphBorderMethods;
