@@ -107,6 +107,7 @@
             this.detectFontTypeMethod.TabIndex = 8;
             this.detectFontTypeMethod.Text = "Detect font type method";
             this.detectFontTypeMethod.UseVisualStyleBackColor = true;
+            this.detectFontTypeMethod.Click += new System.EventHandler(this.detectFontTypeMethod_Click);
             // 
             // detectColorQuantizationMethod
             // 

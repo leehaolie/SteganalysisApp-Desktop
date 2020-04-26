@@ -72,6 +72,12 @@
     <Compile Include="ResultOpenSpacesScreen.Designer.cs">
       <DependentUpon>ResultOpenSpacesScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResultFontTypeScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultFontTypeScreen.Designer.cs">
+      <DependentUpon>ResultFontTypeScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResultWordMappingScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="ResultValues.cs" />
     <EmbeddedResource Include="ResultOpenSpacesScreen.resx">
       <DependentUpon>ResultOpenSpacesScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultFontTypeScreen.resx">
+      <DependentUpon>ResultFontTypeScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultWordMappingScreen.resx">
       <DependentUpon>ResultWordMappingScreen.cs</DependentUpon>

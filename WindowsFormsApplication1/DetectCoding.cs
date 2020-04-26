@@ -47,6 +47,11 @@ namespace WindowsFormsApplication1
         int wordMappingOption2Potential = 0;
         String[] vowels = new String[] { "a", "e", "i", "o", "u" };
         #endregion
+        #region check for font type
+        int fontTypeTotal = 0;
+        int fontTypePotential = 0;
+        Dictionary<string, int> fontTypeDirectoryCount = new Dictionary<string, int>();
+        #endregion
 
         public DetectCoding()
         {
@@ -263,10 +268,6 @@ namespace WindowsFormsApplication1
                 {"200E", 0},    //Right remark
                 {"200F", 0}     //Left remark
             };
-
-            int fontTypeTotal = 0;
-            int fontTypePotential = 0;
-            var fontTypeDirectoryCount = new Dictionary<string, int>();
 
             #region check for paragraph border
             //approach 1: first we check if our concrete algotirtam is used            
@@ -1747,6 +1748,71 @@ namespace WindowsFormsApplication1
             resultValues.wordMappingOption2Potential = wordMappingOption2Potential;
 
             (new ResultWordMappingScreen(resultValues)).ShowDialog();
+        }
+
+        private void detectFontTypeMethod_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+
+            #region check for font type
+            //get each sequences of each 2 adjective words and check the word mapping technique
+            foreach (Microsoft.Office.Interop.Word.Range r in docs.Words)
+            {
+                //check fpr the font type stegangraphy                
+                if (r.Text.Trim().Length > 0)
+                {
+                    char firstLetter = r.Text.Trim().ToCharArray()[0];
+                    byte[] asciiFirstLetter = Encoding.ASCII.GetBytes(firstLetter.ToString());
+                    //check if the first letter of the words is UPPER letter and if it is, then check the fonts of the first and the second letter in the word
+                    if (asciiFirstLetter[0] >= 65 && asciiFirstLetter[0] <= 90)
+                    {
+                        int wordStartIndex = r.Start;
+                        r.SetRange(wordStartIndex, wordStartIndex + 1);
+                        string fontFamilyFirstLetter = (r.Font).Name;
+                        r.SetRange(wordStartIndex + 1, wordStartIndex + 2);
+                        string fontFamilySecondLetter = null;
+                        if (r.Text.Trim().Length > 0)
+                        {
+                            fontFamilySecondLetter = (r.Font).Name;
+                        }
+
+                        fontTypeTotal++;
+                        //if the first two letters of the word has different fonts, then this is a potential case
+                        if (fontFamilySecondLetter != null && fontFamilyFirstLetter != fontFamilySecondLetter)
+                        {
+                            fontTypePotential++;
+                        }
+
+                        //if the word has one letter OR is the fonts of the two letters are different, then count the occurencies of the font types
+                        if ((fontFamilySecondLetter != null && fontFamilyFirstLetter != fontFamilySecondLetter) || fontFamilySecondLetter == null)
+                        {
+                            if (fontTypeDirectoryCount.ContainsKey(fontFamilyFirstLetter))
+                            {
+                                int value = fontTypeDirectoryCount[fontFamilyFirstLetter] + 1;
+                                fontTypeDirectoryCount[fontFamilyFirstLetter] = value;
+                            }
+                            else
+                            {
+                                fontTypeDirectoryCount.Add(fontFamilyFirstLetter, 1);
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            docs.Close();
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.fontTypeTotal = fontTypeTotal;
+            resultValues.fontTypePotential = fontTypePotential;
+            resultValues.fontTypeDirectoryCount = fontTypeDirectoryCount;
+
+            (new ResultFontTypeScreen(resultValues)).ShowDialog();
         }
     }
 }
