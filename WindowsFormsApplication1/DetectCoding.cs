@@ -52,13 +52,13 @@ namespace WindowsFormsApplication1
         int fontTypePotential = 0;
         Dictionary<string, int> fontTypeDirectoryCount = new Dictionary<string, int>();
         #endregion
+        object startTemp0 = null; object startTemp1 = null; object startTemp2 = null; object startTemp3 = null;
         #region check for color quantization
         int colorQuantizationTotal = 0;
         int colorQuantizationLight = 0;
         int colorQuantizationDark = 0;
         double[] colorQuantizationLightLevels = { 0 };
         double[] colorQuantizationDarkLevels = { 0 };
-        object startTemp0 = null; object startTemp1 = null; object startTemp2 = null; object startTemp3 = null;
         #endregion
         #region check for invisible characters
         int invisibleCharactersTotal = 0;
@@ -70,6 +70,24 @@ namespace WindowsFormsApplication1
             {"200D", 0},    //Zero width joiner
             {"200E", 0},    //Right remark
             {"200F", 0}     //Left remark
+        };
+        #endregion
+        #region check for unicode
+        Dictionary<string, int> unicodeDirectoryMap = new Dictionary<string, int>()
+        {
+            {"A0041", 0}, {"A0391", 0}, {"A0410", 0}, {"A13AA", 0},
+            {"B0042", 0}, {"B0392", 0}, {"B0412", 0}, {"B0181", 0},
+            {"E0045", 0}, {"E0395", 0}, {"E0415", 0}, {"E13AC", 0},
+            {"G0047", 0}, {"G050C", 0}, {"G13C0", 0}, {"G13B6", 0},
+            {"H0048", 0}, {"H0397", 0}, {"H041D", 0}, {"H13BB", 0},
+            {"I0049", 0}, {"I0399", 0}, {"I04C0", 0}, {"I0406", 0},
+            {"M004D", 0}, {"M039C", 0}, {"M041C", 0}, {"M216F", 0},
+            {"O004F", 0}, {"O039F", 0}, {"O041E", 0}, {"O0555", 0},
+            {"P0050", 0}, {"P0420", 0}, {"P03A1", 0}, {"P01A4", 0},
+            {"S0053", 0}, {"S0405", 0}, {"S054F", 0}, {"S13DA", 0},
+            {"T0054", 0}, {"T0422", 0}, {"T03A4", 0}, {"T01AC", 0},
+            {"j006A", 0}, {"j0458", 0}, {"j03F3", 0}, {"j029D", 0},
+            {"o006F", 0}, {"o03BF", 0}, {"o1D0F", 0}, {"o043E", 0}
         };
         #endregion
 
@@ -255,23 +273,6 @@ namespace WindowsFormsApplication1
             //var generalUnderlineColorMap = new Dictionary<string, int>();
             //var generalUnderlineStyleMap = new Dictionary<string, int>();
             String[] excludeUnderlineChars = new String[] { "g", "j", "p", "q", "y" };
-
-            var unicodeDirectoryMap = new Dictionary<string, int>()
-            {
-                {"A0041", 0}, {"A0391", 0}, {"A0410", 0}, {"A13AA", 0},
-                {"B0042", 0}, {"B0392", 0}, {"B0412", 0}, {"B0181", 0},
-                {"E0045", 0}, {"E0395", 0}, {"E0415", 0}, {"E13AC", 0},
-                {"G0047", 0}, {"G050C", 0}, {"G13C0", 0}, {"G13B6", 0},
-                {"H0048", 0}, {"H0397", 0}, {"H041D", 0}, {"H13BB", 0},
-                {"I0049", 0}, {"I0399", 0}, {"I04C0", 0}, {"I0406", 0},
-                {"M004D", 0}, {"M039C", 0}, {"M041C", 0}, {"M216F", 0},
-                {"O004F", 0}, {"O039F", 0}, {"O041E", 0}, {"O0555", 0},
-                {"P0050", 0}, {"P0420", 0}, {"P03A1", 0}, {"P01A4", 0},
-                {"S0053", 0}, {"S0405", 0}, {"S054F", 0}, {"S13DA", 0},
-                {"T0054", 0}, {"T0422", 0}, {"T03A4", 0}, {"T01AC", 0},
-                {"j006A", 0}, {"j0458", 0}, {"j03F3", 0}, {"j029D", 0},
-                {"o006F", 0}, {"o03BF", 0}, {"o1D0F", 0}, {"o043E", 0}
-            };
             
             #region check for paragraph border
             //approach 1: first we check if our concrete algotirtam is used            
@@ -2072,6 +2073,259 @@ namespace WindowsFormsApplication1
             resultValues.invisibleCharactersTotal = invisibleCharactersTotal;
             resultValues.invisibleCharactersPotential = invisibleCharactersPotential;
             (new ResultInvisibleCharactersScreen(resultValues)).ShowDialog();            
+        }
+
+        private void detectUnicodesMethod_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            // Define a range of 1 character. 
+            object start = 0; object startGeneral = 0; int startGeneralCount = 0;
+            object end = 1; object endGeneral = 3; int endGeneralCount = 3;
+            Microsoft.Office.Interop.Word.Range rngGeneral = docs.Range(ref startGeneral, ref endGeneral);
+            Microsoft.Office.Interop.Word.Range rngGeneralAll = docs.Range(ref startGeneral);
+            Microsoft.Office.Interop.Word.Range rngGeneralTemp1 = null;
+            Microsoft.Office.Interop.Word.Range rngGeneralTemp2 = null;
+            Microsoft.Office.Interop.Word.Range rngGeneralTemp3 = null;
+
+            #region check for unicode
+            //get each sequences of each 3 characters and: do the check if the middle character is invisible + on each new sequence check the brigthness
+            //for example: 123456, invisible characters loops throught 123, 234, 234, 456;
+            //                     color quantizations, unicode and MS Word Symbols[9] loops throught every third sequence 123, 456
+            int actualSizeGeneral = rngGeneralAll.Text.Length - 1;
+
+            int checkEachCharacterIndividually = 0;
+
+            while ((rngGeneral.End - 1) < actualSizeGeneral)
+            {
+                rngGeneral.Select();
+
+                startTemp0 = (object)(startGeneralCount);
+                startTemp1 = (object)(startGeneralCount + 1);
+                startTemp2 = (object)(startGeneralCount + 2);
+                startTemp3 = (object)(startGeneralCount + 3);
+                rngGeneralTemp1 = docs.Range(ref startTemp0, ref startTemp1);
+                rngGeneralTemp2 = docs.Range(ref startTemp1, ref startTemp2);
+                rngGeneralTemp3 = docs.Range(ref startTemp2, ref startTemp3);
+                string color1 = rngGeneralTemp1.Font.Color.ToString();
+                string color2 = rngGeneralTemp2.Font.Color.ToString();
+                string color3 = rngGeneralTemp3.Font.Color.ToString();
+                byte[] asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
+                byte[] asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
+                byte[] asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+
+                //for each third sequence, calculate the brigtness based on RGB values 
+                //https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+                //for each third sequence, calculate the UNICODE value for each character + count and update the unicodeDirectoryMap
+                //for each third sequence, check and count the invisible symbols that do not takes space (MS Word Symbols[9])
+                if (checkEachCharacterIndividually == 0 || (checkEachCharacterIndividually) % 3 == 0)
+                {
+                    //convert to unicodes and increase the dictionary where the current character is a key
+                    String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
+                    String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
+                    String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
+
+                    //check and count occrencies for the unicode approach
+                    if (unicodeDirectoryMap.ContainsKey(unicodeVal1))
+                    {
+                        int unicodeCount1 = unicodeDirectoryMap[unicodeVal1] + 1;
+                        unicodeDirectoryMap[unicodeVal1] = unicodeCount1;
+                    }
+                    if (unicodeDirectoryMap.ContainsKey(unicodeVal2))
+                    {
+                        int unicodeCount2 = unicodeDirectoryMap[unicodeVal2] + 1;
+                        unicodeDirectoryMap[unicodeVal2] = unicodeCount2;
+                    }
+                    if (unicodeDirectoryMap.ContainsKey(unicodeVal3))
+                    {
+                        int unicodeCount3 = unicodeDirectoryMap[unicodeVal3] + 1;
+                        unicodeDirectoryMap[unicodeVal3] = unicodeCount3;
+                    }
+                }
+                checkEachCharacterIndividually++;
+
+                // Move the start position 1 character
+                rngGeneral.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                // Move the end position 1 character
+                rngGeneral.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                startGeneralCount++;
+                endGeneralCount++;
+            }
+            //check if there are occurencies for the same character but different encodings and if there are more then 0 occurencies, get a note of this
+            //for example: differentOccurencies_A will hold the cout of how many different encodings for character A are present in the doc
+            int differentOccurencies_A = 0;
+            if (unicodeDirectoryMap["A0041"] > 0)
+                differentOccurencies_A++;
+            if (unicodeDirectoryMap["A0391"] > 0)
+                differentOccurencies_A++;
+            if (unicodeDirectoryMap["A0410"] > 0)
+                differentOccurencies_A++;
+            if (unicodeDirectoryMap["A13AA"] > 0)
+                differentOccurencies_A++;
+
+            int differentOccurencies_B = 0;
+            if (unicodeDirectoryMap["B0042"] > 0)
+                differentOccurencies_B++;
+            if (unicodeDirectoryMap["B0392"] > 0)
+                differentOccurencies_B++;
+            if (unicodeDirectoryMap["B0412"] > 0)
+                differentOccurencies_B++;
+            if (unicodeDirectoryMap["B0181"] > 0)
+                differentOccurencies_B++;
+
+            int differentOccurencies_E = 0;
+            if (unicodeDirectoryMap["E0045"] > 0)
+                differentOccurencies_E++;
+            if (unicodeDirectoryMap["E0395"] > 0)
+                differentOccurencies_E++;
+            if (unicodeDirectoryMap["E0415"] > 0)
+                differentOccurencies_E++;
+            if (unicodeDirectoryMap["E13AC"] > 0)
+                differentOccurencies_E++;
+
+            int differentOccurencies_G = 0;
+            if (unicodeDirectoryMap["G0047"] > 0)
+                differentOccurencies_G++;
+            if (unicodeDirectoryMap["G050C"] > 0)
+                differentOccurencies_G++;
+            if (unicodeDirectoryMap["G13C0"] > 0)
+                differentOccurencies_G++;
+            if (unicodeDirectoryMap["G13B6"] > 0)
+                differentOccurencies_G++;
+
+            int differentOccurencies_H = 0;
+            if (unicodeDirectoryMap["H0048"] > 0)
+                differentOccurencies_H++;
+            if (unicodeDirectoryMap["H0397"] > 0)
+                differentOccurencies_H++;
+            if (unicodeDirectoryMap["H041D"] > 0)
+                differentOccurencies_H++;
+            if (unicodeDirectoryMap["H13BB"] > 0)
+                differentOccurencies_H++;
+
+            int differentOccurencies_I = 0;
+            if (unicodeDirectoryMap["I0049"] > 0)
+                differentOccurencies_I++;
+            if (unicodeDirectoryMap["I0399"] > 0)
+                differentOccurencies_I++;
+            if (unicodeDirectoryMap["I04C0"] > 0)
+                differentOccurencies_I++;
+            if (unicodeDirectoryMap["I0406"] > 0)
+                differentOccurencies_I++;
+
+            int differentOccurencies_M = 0;
+            if (unicodeDirectoryMap["M004D"] > 0)
+                differentOccurencies_M++;
+            if (unicodeDirectoryMap["M039C"] > 0)
+                differentOccurencies_M++;
+            if (unicodeDirectoryMap["M041C"] > 0)
+                differentOccurencies_M++;
+            if (unicodeDirectoryMap["M216F"] > 0)
+                differentOccurencies_M++;
+
+            int differentOccurencies_O = 0;
+            if (unicodeDirectoryMap["O004F"] > 0)
+                differentOccurencies_O++;
+            if (unicodeDirectoryMap["O039F"] > 0)
+                differentOccurencies_O++;
+            if (unicodeDirectoryMap["O041E"] > 0)
+                differentOccurencies_O++;
+            if (unicodeDirectoryMap["O0555"] > 0)
+                differentOccurencies_O++;
+
+            int differentOccurencies_P = 0;
+            if (unicodeDirectoryMap["P0050"] > 0)
+                differentOccurencies_P++;
+            if (unicodeDirectoryMap["P0420"] > 0)
+                differentOccurencies_P++;
+            if (unicodeDirectoryMap["P03A1"] > 0)
+                differentOccurencies_P++;
+            if (unicodeDirectoryMap["P01A4"] > 0)
+                differentOccurencies_P++;
+
+            int differentOccurencies_S = 0;
+            if (unicodeDirectoryMap["S0053"] > 0)
+                differentOccurencies_S++;
+            if (unicodeDirectoryMap["S0405"] > 0)
+                differentOccurencies_S++;
+            if (unicodeDirectoryMap["S054F"] > 0)
+                differentOccurencies_S++;
+            if (unicodeDirectoryMap["S13DA"] > 0)
+                differentOccurencies_S++;
+
+            int differentOccurencies_T = 0;
+            if (unicodeDirectoryMap["T0054"] > 0)
+                differentOccurencies_T++;
+            if (unicodeDirectoryMap["T0422"] > 0)
+                differentOccurencies_T++;
+            if (unicodeDirectoryMap["T03A4"] > 0)
+                differentOccurencies_T++;
+            if (unicodeDirectoryMap["T01AC"] > 0)
+                differentOccurencies_T++;
+
+            int differentOccurencies_j = 0;
+            if (unicodeDirectoryMap["j006A"] > 0)
+                differentOccurencies_j++;
+            if (unicodeDirectoryMap["j0458"] > 0)
+                differentOccurencies_j++;
+            if (unicodeDirectoryMap["j03F3"] > 0)
+                differentOccurencies_j++;
+            if (unicodeDirectoryMap["j029D"] > 0)
+                differentOccurencies_j++;
+
+            int differentOccurencies_o = 0;
+            if (unicodeDirectoryMap["o006F"] > 0)
+                differentOccurencies_o++;
+            if (unicodeDirectoryMap["o03BF"] > 0)
+                differentOccurencies_o++;
+            if (unicodeDirectoryMap["o1D0F"] > 0)
+                differentOccurencies_o++;
+            if (unicodeDirectoryMap["o043E"] > 0)
+                differentOccurencies_o++;
+
+            //there are 13 characters that can be used for this steganography method, so in this case, we need to cound for each of them
+            //how many characters have more then one encodings (for the same character used)
+            //for example: if only A and B are present with different encodings, then unicodeNumberSymbols will hold the value 2
+            int unicodeNumberSymbols = 0;
+            if (differentOccurencies_A > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_B > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_E > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_G > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_H > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_I > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_M > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_O > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_P > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_S > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_T > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_j > 1)
+                unicodeNumberSymbols++;
+            if (differentOccurencies_o > 1)
+                unicodeNumberSymbols++;
+
+            #endregion
+
+            docs.Close();
+            word.Quit();
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.unicodeNumberSymbols = unicodeNumberSymbols;
+            resultValues.unicodeDirectoryMap = unicodeDirectoryMap;
+            (new ResultUnicodeScreen(resultValues)).ShowDialog();
         }
     }
 }

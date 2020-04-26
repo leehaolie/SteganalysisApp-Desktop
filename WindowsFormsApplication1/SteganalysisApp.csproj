@@ -90,6 +90,12 @@
     <Compile Include="ResultInvisibleCharactersScreen.Designer.cs">
       <DependentUpon>ResultInvisibleCharactersScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResultUnicodeScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultUnicodeScreen.Designer.cs">
+      <DependentUpon>ResultUnicodeScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResultWordMappingScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResultInvisibleCharactersScreen.resx">
       <DependentUpon>ResultInvisibleCharactersScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultUnicodeScreen.resx">
+      <DependentUpon>ResultUnicodeScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultWordMappingScreen.resx">
       <DependentUpon>ResultWordMappingScreen.cs</DependentUpon>

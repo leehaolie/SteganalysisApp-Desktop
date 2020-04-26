@@ -140,6 +140,7 @@
             this.detectUnicodesMethod.TabIndex = 11;
             this.detectUnicodesMethod.Text = "Detect unicodes method";
             this.detectUnicodesMethod.UseVisualStyleBackColor = true;
+            this.detectUnicodesMethod.Click += new System.EventHandler(this.detectUnicodesMethod_Click);
             // 
             // detectCharactersScaleMethods
             // 
