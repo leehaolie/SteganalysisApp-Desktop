@@ -118,6 +118,7 @@
             this.detectColorQuantizationMethod.TabIndex = 9;
             this.detectColorQuantizationMethod.Text = "Detect color quantization method";
             this.detectColorQuantizationMethod.UseVisualStyleBackColor = true;
+            this.detectColorQuantizationMethod.Click += new System.EventHandler(this.detectColorQuantizationMethod_Click);
             // 
             // detectInvisibleCharactesMethods
             // 

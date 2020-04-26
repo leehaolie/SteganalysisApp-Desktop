@@ -10,3 +10,4 @@ G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\De
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultOpenSpacesScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultWordMappingScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultFontTypeScreen.resources
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultColorQuantizationScreen.resources
