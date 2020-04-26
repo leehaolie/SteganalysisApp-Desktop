@@ -784,7 +784,7 @@ namespace WindowsFormsApplication1
             int countPotetntialStyles = 0;
             foreach (KeyValuePair<string, int> entry in generalUnderlineStyleMap)
             {
-                if (entry.Key != WdUnderline.wdUnderlineSingle.ToString())
+                if (entry.Key != WdUnderline.wdUnderlineNone.ToString())
                 {
                     if (entry.Value > 10)
                     {

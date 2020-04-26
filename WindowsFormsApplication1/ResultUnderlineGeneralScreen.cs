@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
             foreach (KeyValuePair<string, int> entry in resultValues.generalUnderlineMap)
             {
                 string generalUnderlineMap_combinationName = "";
-                if (entry.Key == (WdColor.wdColorAutomatic.ToString() + "-" + WdUnderline.wdUnderlineSingle.ToString()))
+                if (entry.Key == (WdColor.wdColorAutomatic.ToString() + "-" + WdUnderline.wdUnderlineNone.ToString()))
                 {
                     generalUnderlineMap_combinationName = "default";
                 }
