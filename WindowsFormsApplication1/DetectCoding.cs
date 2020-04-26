@@ -60,6 +60,18 @@ namespace WindowsFormsApplication1
         double[] colorQuantizationDarkLevels = { 0 };
         object startTemp0 = null; object startTemp1 = null; object startTemp2 = null; object startTemp3 = null;
         #endregion
+        #region check for invisible characters
+        int invisibleCharactersTotal = 0;
+        int invisibleCharactersPotential = 0;
+        int[] invisibleCharASCII = new int[] { 9, 13, 32 }; //9 - tab;      //13 - new line     //32 - space
+        Dictionary<string, int> invisibleCharactersThatTakesNoSpaceHexMap = new Dictionary<string, int>()
+        {
+            {"200C", 0},    //Zero width non-joiner
+            {"200D", 0},    //Zero width joiner
+            {"200E", 0},    //Right remark
+            {"200F", 0}     //Left remark
+        };
+        #endregion
 
         public DetectCoding()
         {
@@ -244,9 +256,6 @@ namespace WindowsFormsApplication1
             //var generalUnderlineStyleMap = new Dictionary<string, int>();
             String[] excludeUnderlineChars = new String[] { "g", "j", "p", "q", "y" };
 
-            int invisibleCharactersTotal = 0;
-            int invisibleCharactersPotential = 0;
-            int[] invisibleCharASCII = new int[] { 9, 13, 32 }; //9 - tab;      //13 - new line     //32 - space
             var unicodeDirectoryMap = new Dictionary<string, int>()
             {
                 {"A0041", 0}, {"A0391", 0}, {"A0410", 0}, {"A13AA", 0},
@@ -263,14 +272,7 @@ namespace WindowsFormsApplication1
                 {"j006A", 0}, {"j0458", 0}, {"j03F3", 0}, {"j029D", 0},
                 {"o006F", 0}, {"o03BF", 0}, {"o1D0F", 0}, {"o043E", 0}
             };
-            var invisibleCharactersThatTakesNoSpaceHexMap = new Dictionary<string, int>()
-            {
-                {"200C", 0},    //Zero width non-joiner
-                {"200D", 0},    //Zero width joiner
-                {"200E", 0},    //Right remark
-                {"200F", 0}     //Left remark
-            };
-
+            
             #region check for paragraph border
             //approach 1: first we check if our concrete algotirtam is used            
             int codedParagraphBorder = 0;
@@ -1967,6 +1969,109 @@ namespace WindowsFormsApplication1
             resultValues.colorQuantizationDarkLevels = colorQuantizationDarkLevels;
             resultValues.colorQuantizationLightLevels = colorQuantizationLightLevels;
             (new ResultColorQuantizationScreen(resultValues)).ShowDialog();            
+        }
+
+        private void detectInvisibleCharactesMethods_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            // Define a range of 1 character. 
+            object start = 0; object startGeneral = 0; int startGeneralCount = 0;
+            object end = 1; object endGeneral = 3; int endGeneralCount = 3;
+            Microsoft.Office.Interop.Word.Range rngGeneral = docs.Range(ref startGeneral, ref endGeneral);
+            Microsoft.Office.Interop.Word.Range rngGeneralAll = docs.Range(ref startGeneral);
+            Microsoft.Office.Interop.Word.Range rngGeneralTemp1 = null;
+            Microsoft.Office.Interop.Word.Range rngGeneralTemp2 = null;
+            Microsoft.Office.Interop.Word.Range rngGeneralTemp3 = null;
+
+            #region check for invisible characters and for invisible characters that does not takes space (MS Word Symbols[9])
+            //get each sequences of each 3 characters and: do the check if the middle character is invisible + on each new sequence check the brigthness
+            //for example: 123456, invisible characters loops throught 123, 234, 234, 456;
+            //                     color quantizations, unicode and MS Word Symbols[9] loops throught every third sequence 123, 456
+            int actualSizeGeneral = rngGeneralAll.Text.Length - 1;
+
+            int checkEachCharacterIndividually = 0;
+
+            while ((rngGeneral.End - 1) < actualSizeGeneral)
+            {
+                rngGeneral.Select();
+
+                startTemp0 = (object)(startGeneralCount);
+                startTemp1 = (object)(startGeneralCount + 1);
+                startTemp2 = (object)(startGeneralCount + 2);
+                startTemp3 = (object)(startGeneralCount + 3);
+                rngGeneralTemp1 = docs.Range(ref startTemp0, ref startTemp1);
+                rngGeneralTemp2 = docs.Range(ref startTemp1, ref startTemp2);
+                rngGeneralTemp3 = docs.Range(ref startTemp2, ref startTemp3);
+                string color1 = rngGeneralTemp1.Font.Color.ToString();
+                string color2 = rngGeneralTemp2.Font.Color.ToString();
+                string color3 = rngGeneralTemp3.Font.Color.ToString();
+                byte[] asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
+                byte[] asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
+                byte[] asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+
+                //for each third sequence, calculate the brigtness based on RGB values 
+                //https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+                //for each third sequence, calculate the UNICODE value for each character + count and update the unicodeDirectoryMap
+                //for each third sequence, check and count the invisible symbols that do not takes space (MS Word Symbols[9])
+                if (checkEachCharacterIndividually == 0 || (checkEachCharacterIndividually) % 3 == 0)
+                {
+                    //convert to unicodes and increase the dictionary where the current character is a key
+                    String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
+                    String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
+                    String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
+
+                    //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal1))
+                    {
+                        int wordSymbols1 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] + 1;
+                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] = wordSymbols1;
+                    }
+                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal2))
+                    {
+                        int wordSymbols2 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] + 1;
+                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] = wordSymbols2;
+                    }
+                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal3))
+                    {
+                        int wordSymbols3 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] + 1;
+                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] = wordSymbols3;
+                    }
+                }
+                checkEachCharacterIndividually++;
+
+                //if the middle character is invisible, then count this situation in total cases
+                if (asciiBytes2.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes2[0]) > -1)
+                {
+                    invisibleCharactersTotal++;
+                    //if the 1st and 3th character are with the same color and if
+                    //if the color of the middle character is different then the color of the 1st and 3th character then this is potential case
+                    if (color1 == color3 && color1 != color2)
+                    {
+                        invisibleCharactersPotential++;
+                    }
+                }
+
+                // Move the start position 1 character
+                rngGeneral.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                // Move the end position 1 character
+                rngGeneral.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                startGeneralCount++;
+                endGeneralCount++;
+            }            
+            #endregion
+            
+            docs.Close();
+            word.Quit();
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.invisibleCharactersThatTakesNoSpaceHexMap = invisibleCharactersThatTakesNoSpaceHexMap;
+            resultValues.invisibleCharactersTotal = invisibleCharactersTotal;
+            resultValues.invisibleCharactersPotential = invisibleCharactersPotential;
+            (new ResultInvisibleCharactersScreen(resultValues)).ShowDialog();            
         }
     }
 }

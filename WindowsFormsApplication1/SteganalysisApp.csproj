@@ -84,6 +84,12 @@
     <Compile Include="ResultColorQuantizationScreen.Designer.cs">
       <DependentUpon>ResultColorQuantizationScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResultInvisibleCharactersScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultInvisibleCharactersScreen.Designer.cs">
+      <DependentUpon>ResultInvisibleCharactersScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResultWordMappingScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResultColorQuantizationScreen.resx">
       <DependentUpon>ResultColorQuantizationScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultInvisibleCharactersScreen.resx">
+      <DependentUpon>ResultInvisibleCharactersScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultWordMappingScreen.resx">
       <DependentUpon>ResultWordMappingScreen.cs</DependentUpon>

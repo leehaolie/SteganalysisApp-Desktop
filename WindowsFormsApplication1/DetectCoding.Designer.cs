@@ -129,6 +129,7 @@
             this.detectInvisibleCharactesMethods.TabIndex = 10;
             this.detectInvisibleCharactesMethods.Text = "Detect invisible characters methods";
             this.detectInvisibleCharactesMethods.UseVisualStyleBackColor = true;
+            this.detectInvisibleCharactesMethods.Click += new System.EventHandler(this.detectInvisibleCharactesMethods_Click);
             // 
             // detectUnicodesMethod
             // 
