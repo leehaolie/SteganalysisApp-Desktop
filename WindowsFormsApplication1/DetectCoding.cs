@@ -34,6 +34,19 @@ namespace WindowsFormsApplication1
         public Color[] colorUnderlineStyleMap = new Color[16];    //colorUnderlineStringMap values
         public string[] colorUnderlineStringMap = new string[16];
         #endregion
+        #region check for open spaces
+        int openSpacesWordsTotal = 0;
+        int openSpacesWordsPotential = 0;
+        int openSpacesSentencesTotal = 0;
+        int openSpacesSentencesPotential = 0;
+        #endregion
+        #region check for word mapping
+        int wordMappingOption1Total = 0;
+        int wordMappingOption1Potential = 0;
+        int wordMappingOption2Total = 0;
+        int wordMappingOption2Potential = 0;
+        String[] vowels = new String[] { "a", "e", "i", "o", "u" };
+        #endregion
 
         public DetectCoding()
         {
@@ -217,10 +230,7 @@ namespace WindowsFormsApplication1
             //var generalUnderlineColorMap = new Dictionary<string, int>();
             //var generalUnderlineStyleMap = new Dictionary<string, int>();
             String[] excludeUnderlineChars = new String[] { "g", "j", "p", "q", "y" };
-            int openSpacesWordsTotal = 0;
-            int openSpacesWordsPotential = 0;
-            int openSpacesSentencesTotal = 0;
-            int openSpacesSentencesPotential = 0;
+
             object startTemp0 = null; object startTemp1 = null; object startTemp2 = null; object startTemp3 = null;
             int invisibleCharactersTotal = 0;
             int invisibleCharactersPotential = 0;
@@ -253,11 +263,7 @@ namespace WindowsFormsApplication1
                 {"200E", 0},    //Right remark
                 {"200F", 0}     //Left remark
             };
-            int wordMappingOption1Total = 0;
-            int wordMappingOption1Potential = 0;
-            int wordMappingOption2Total = 0;
-            int wordMappingOption2Potential = 0;
-            String[] vowels = new String[] { "a", "e", "i", "o", "u" };
+
             int fontTypeTotal = 0;
             int fontTypePotential = 0;
             var fontTypeDirectoryCount = new Dictionary<string, int>();
@@ -1628,12 +1634,7 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
             Microsoft.Office.Interop.Word.Range rangeWords = word.ActiveDocument.Content;
             Microsoft.Office.Interop.Word.Range rangeSentences = word.ActiveDocument.Content;
-
-            int openSpacesWordsTotal = 0;
-            int openSpacesWordsPotential = 0;
-            int openSpacesSentencesTotal = 0;
-            int openSpacesSentencesPotential = 0;
-
+            
             #region check for open spaces (words + sentences)
             for (int k = 1; k <= rangeWords.Words.Count; k++)
             {
@@ -1675,6 +1676,77 @@ namespace WindowsFormsApplication1
             word.Quit();
 
             (new ResultOpenSpacesScreen(resultValues)).ShowDialog();
+        }
+
+        private void detectWordMappingsMethods_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+
+            #region check for word mapping
+            //get each sequences of each 2 adjective words and check the word mapping technique
+            int countWord = 1;
+            String word1 = String.Empty;
+            String word2 = String.Empty;
+
+            foreach (Microsoft.Office.Interop.Word.Range r in docs.Words)
+            {
+                if (countWord == 1)
+                {
+                    word1 = r.Text;
+                    word2 = r.Text;
+                    countWord++;
+                }
+                else if (countWord > 1)
+                {
+                    word1 = word2;
+                    word2 = r.Text;
+                    countWord++;
+
+                    string word1Temp = word1.Trim();
+                    string word2Temp = word2.Trim();
+                    //check if the first word is 'a' or 'an' and if that's the case, check the first letter of the second word
+                    if (word1Temp.ToLower() == "a" || word1Temp.ToLower() == "an")
+                    {
+                        wordMappingOption1Total++;
+                        if (word1Temp.ToLower() == "a" && Array.IndexOf(vowels, word2.ToLower().Substring(0, 1)) > -1)
+                        {
+                            wordMappingOption1Potential++;
+                        }
+                        else if (word1Temp.ToLower() == "an" && Array.IndexOf(vowels, word2.ToLower().Substring(0, 1)) == -1)
+                        {
+                            wordMappingOption1Potential++;
+                        }
+                    }
+
+                    //check if the both word have even or odd lengths, and if that's the case, check if there are multiple characters between those words
+                    if (word1Temp.Length > 0 && word2Temp.Length > 0)
+                    {
+                        if ((word1Temp.Length % 2 == 0 && word2Temp.Length % 2 == 0) || (word1Temp.Length % 2 != 0 && word2Temp.Length % 2 != 0))
+                        {
+                            wordMappingOption2Total++;
+                            if (word1.Length - word1Temp.Length > 1)
+                            {
+                                wordMappingOption2Potential++;
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            docs.Close();
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.wordMappingOption1Total = wordMappingOption1Total;
+            resultValues.wordMappingOption1Potential = wordMappingOption1Potential;
+            resultValues.wordMappingOption2Total = wordMappingOption2Total;
+            resultValues.wordMappingOption2Potential = wordMappingOption2Potential;
+
+            (new ResultWordMappingScreen(resultValues)).ShowDialog();
         }
     }
 }

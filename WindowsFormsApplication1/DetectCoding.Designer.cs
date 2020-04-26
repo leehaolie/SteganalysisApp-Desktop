@@ -96,6 +96,7 @@
             this.detectWordMappingsMethods.TabIndex = 7;
             this.detectWordMappingsMethods.Text = "Detect word mappings methods";
             this.detectWordMappingsMethods.UseVisualStyleBackColor = true;
+            this.detectWordMappingsMethods.Click += new System.EventHandler(this.detectWordMappingsMethods_Click);
             // 
             // detectFontTypeMethod
             // 

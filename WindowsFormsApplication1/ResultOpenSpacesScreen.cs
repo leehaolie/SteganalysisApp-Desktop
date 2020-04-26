@@ -32,10 +32,5 @@ namespace WindowsFormsApplication1
             openSpacesWordsTotal_value.Text = resultValues.openSpacesWordsTotal.ToString();
             openSpacesWordsPotential_value.Text = resultValues.openSpacesWordsPotential.ToString();
         }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

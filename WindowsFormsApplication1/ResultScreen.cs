@@ -307,10 +307,5 @@ namespace WindowsFormsApplication1
             invisibleCharactersThatTakesNoSpaceHexMap_table.Height += resultValues.invisibleCharactersThatTakesNoSpaceHexMap.Keys.Count * 16;
             invisible_characters_nospace_group.Height += resultValues.invisibleCharactersThatTakesNoSpaceHexMap.Keys.Count * 16;
         }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
