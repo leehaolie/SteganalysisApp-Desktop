@@ -1618,5 +1618,63 @@ namespace WindowsFormsApplication1
             detectSentenceBorderMethods.Enabled = detectAnyMethod.Enabled;
             detectParagraphBorderMethods.Enabled = detectAnyMethod.Enabled;
         }
+
+        private void detectOpenSpacesMethods_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            object miss = System.Reflection.Missing.Value;
+            object path = documentPath;
+            object readOnly = false;
+            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            Microsoft.Office.Interop.Word.Range rangeWords = word.ActiveDocument.Content;
+            Microsoft.Office.Interop.Word.Range rangeSentences = word.ActiveDocument.Content;
+
+            int openSpacesWordsTotal = 0;
+            int openSpacesWordsPotential = 0;
+            int openSpacesSentencesTotal = 0;
+            int openSpacesSentencesPotential = 0;
+
+            #region check for open spaces (words + sentences)
+            for (int k = 1; k <= rangeWords.Words.Count; k++)
+            {
+                Microsoft.Office.Interop.Word.Range w1 = rangeWords.Words[k];
+                string wordsText = w1.Text.TrimEnd('\r');
+                if (wordsText.Length > 0)
+                {
+                    openSpacesWordsTotal++;
+                    string trimmedWordsText = wordsText.TrimEnd(' ');
+                    if (wordsText.Length - trimmedWordsText.Length > 1)
+                    {
+                        openSpacesWordsPotential++;
+                    }
+                }
+            }
+            for (int k = 1; k <= rangeSentences.Sentences.Count; k++)
+            {
+                Microsoft.Office.Interop.Word.Range s1 = rangeSentences.Sentences[k];
+                string sentencesText = s1.Text.TrimEnd('\r');
+                if (sentencesText.Length > 0)
+                {
+                    openSpacesSentencesTotal++;
+                    string trimmedSentencesText = sentencesText.TrimEnd(' ');
+                    if (sentencesText.Length - trimmedSentencesText.Length > 1)
+                    {
+                        openSpacesSentencesPotential++;
+                    }
+                }
+            }
+            #endregion
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.openSpacesWordsTotal = openSpacesWordsTotal;
+            resultValues.openSpacesWordsPotential = openSpacesWordsPotential;
+            resultValues.openSpacesSentencesTotal = openSpacesSentencesTotal;
+            resultValues.openSpacesSentencesPotential = openSpacesSentencesPotential;
+
+            docs.Close();
+            word.Quit();
+
+            (new ResultOpenSpacesScreen(resultValues)).ShowDialog();
+        }
     }
 }

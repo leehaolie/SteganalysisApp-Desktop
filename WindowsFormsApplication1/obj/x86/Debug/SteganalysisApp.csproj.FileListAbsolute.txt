@@ -7,3 +7,4 @@ G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\De
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\SteganalysisApp.csproj.GenerateResource.Cache
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultOpenSpacesScreen.resources

@@ -85,6 +85,7 @@
             this.detectOpenSpacesMethods.TabIndex = 6;
             this.detectOpenSpacesMethods.Text = "Detect open spaces methods";
             this.detectOpenSpacesMethods.UseVisualStyleBackColor = true;
+            this.detectOpenSpacesMethods.Click += new System.EventHandler(this.detectOpenSpacesMethods_Click);
             // 
             // detectWordMappingsMethods
             // 
