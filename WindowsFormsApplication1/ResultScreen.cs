@@ -159,7 +159,7 @@ namespace WindowsFormsApplication1
             codedScaling_value.Text = (resultValues.codedScaling >= 8) ? "true" : "false";
             generalScalingMap_table.Controls.Clear();
             generalScalingMap_table.Controls.Add(new Label() { Text = "Scale Size", Name = "generalScalingMap_table_col0_header" }, 0, 0);
-            generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalScalingMap_table_col0_header" }, 1, 0);
+            generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
             generalScalingMap_table.RowCount = 1;
             generalScalingMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalScalingMap_table_row = 1;
@@ -219,8 +219,11 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Steganography method is NOT 'Sentence Border'");
             */
             codedSentenceBorder_value.Text = (resultValues.codedSentenceBorder >= 5) ? "true" : "false";
-            generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style" }, 0, 0);
-            generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
+            generalSentenceLeftBorderMap_table.Controls.Clear();
+            generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalSentenceLeftBorderMap_table_col0_header" }, 0, 0);
+            generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            generalSentenceLeftBorderMap_table.RowCount = 1;
+            generalSentenceLeftBorderMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalSentenceLeftBorderMap_table_row = 1;
             int generalSentenceLeftBorderMap_combinationNumber = 1;
             foreach (KeyValuePair<string, int> entry in resultValues.generalSentenceLeftBorderMap)
@@ -236,8 +239,10 @@ namespace WindowsFormsApplication1
                     generalSentenceLeftBorderMap_combinationNumber++;
                 }
 
-                generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = generalSentenceLeftBorderMap_combinationName }, 0, generalSentenceLeftBorderMap_table_row);
-                generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalSentenceLeftBorderMap_table_row);
+                generalSentenceLeftBorderMap_table.RowCount = generalSentenceLeftBorderMap_table.RowCount + 1;
+                generalSentenceLeftBorderMap_table.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+                generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = generalSentenceLeftBorderMap_combinationName, Name = "generalSentenceLeftBorderMap_table_col0_row" + generalSentenceLeftBorderMap_table_row }, 0, generalSentenceLeftBorderMap_table_row);
+                generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalSentenceLeftBorderMap_table_col1_row" + generalSentenceLeftBorderMap_table_row }, 1, generalSentenceLeftBorderMap_table_row);
                 generalSentenceLeftBorderMap_table_row++;
             }
 

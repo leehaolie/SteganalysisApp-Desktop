@@ -26,7 +26,7 @@ namespace WindowsFormsApplication1
 
             generalScalingMap_table.Controls.Clear();
             generalScalingMap_table.Controls.Add(new Label() { Text = "Scale Size", Name = "generalScalingMap_table_col0_header" }, 0, 0);
-            generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalScalingMap_table_col0_header" }, 1, 0);
+            generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
             generalScalingMap_table.RowCount = 1;
             generalScalingMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalScalingMap_table_row = 1;
