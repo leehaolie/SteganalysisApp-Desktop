@@ -635,9 +635,9 @@
             this.character_scale_group.Controls.Add(this.codedScaling_value);
             this.character_scale_group.Controls.Add(this.generalScalingMap_table);
             this.character_scale_group.Controls.Add(this.codedScaling_label);
-            this.character_scale_group.Location = new System.Drawing.Point(1078, 212);
+            this.character_scale_group.Location = new System.Drawing.Point(1078, 224);
             this.character_scale_group.Name = "character_scale_group";
-            this.character_scale_group.Size = new System.Drawing.Size(318, 178);
+            this.character_scale_group.Size = new System.Drawing.Size(318, 208);
             this.character_scale_group.TabIndex = 13;
             this.character_scale_group.TabStop = false;
             this.character_scale_group.Text = "Character Scale:";
@@ -658,11 +658,11 @@
             this.generalScalingMap_table.ColumnCount = 2;
             this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalScalingMap_table.Location = new System.Drawing.Point(10, 57);
+            this.generalScalingMap_table.Location = new System.Drawing.Point(10, 54);
             this.generalScalingMap_table.Name = "generalScalingMap_table";
             this.generalScalingMap_table.RowCount = 1;
             this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.generalScalingMap_table.Size = new System.Drawing.Size(290, 102);
+            this.generalScalingMap_table.Size = new System.Drawing.Size(290, 145);
             this.generalScalingMap_table.TabIndex = 11;
             // 
             // codedScaling_label
@@ -682,7 +682,7 @@
             this.underline_group.Controls.Add(this.codedUnderline_label);
             this.underline_group.Location = new System.Drawing.Point(1078, 12);
             this.underline_group.Name = "underline_group";
-            this.underline_group.Size = new System.Drawing.Size(318, 183);
+            this.underline_group.Size = new System.Drawing.Size(318, 206);
             this.underline_group.TabIndex = 14;
             this.underline_group.TabStop = false;
             this.underline_group.Text = "Underline:";
@@ -693,11 +693,11 @@
             this.generalUnderlineMap_table.ColumnCount = 2;
             this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalUnderlineMap_table.Location = new System.Drawing.Point(10, 57);
+            this.generalUnderlineMap_table.Location = new System.Drawing.Point(10, 54);
             this.generalUnderlineMap_table.Name = "generalUnderlineMap_table";
             this.generalUnderlineMap_table.RowCount = 1;
             this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.generalUnderlineMap_table.Size = new System.Drawing.Size(290, 107);
+            this.generalUnderlineMap_table.Size = new System.Drawing.Size(290, 143);
             this.generalUnderlineMap_table.TabIndex = 12;
             // 
             // codedUnderline_value
@@ -725,7 +725,7 @@
             this.sentence_border_left_group.Controls.Add(this.generalSentenceLeftBorderMap_table);
             this.sentence_border_left_group.Controls.Add(this.codedSentenceBorder_value);
             this.sentence_border_left_group.Controls.Add(this.codedSentenceBorder_label);
-            this.sentence_border_left_group.Location = new System.Drawing.Point(890, 415);
+            this.sentence_border_left_group.Location = new System.Drawing.Point(959, 438);
             this.sentence_border_left_group.Name = "sentence_border_left_group";
             this.sentence_border_left_group.Size = new System.Drawing.Size(282, 212);
             this.sentence_border_left_group.TabIndex = 15;
@@ -773,7 +773,7 @@
             this.paragraph_border_group.Controls.Add(this.generalParagraphLeftBorderMap_table);
             this.paragraph_border_group.Controls.Add(this.codedParagraphBorder_value);
             this.paragraph_border_group.Controls.Add(this.codedParagraphBorder_label);
-            this.paragraph_border_group.Location = new System.Drawing.Point(267, 403);
+            this.paragraph_border_group.Location = new System.Drawing.Point(370, 423);
             this.paragraph_border_group.Name = "paragraph_border_group";
             this.paragraph_border_group.Size = new System.Drawing.Size(576, 224);
             this.paragraph_border_group.TabIndex = 16;
@@ -849,9 +849,9 @@
             // invisible_characters_nospace_group
             // 
             this.invisible_characters_nospace_group.Controls.Add(this.invisibleCharactersThatTakesNoSpaceHexMap_table);
-            this.invisible_characters_nospace_group.Location = new System.Drawing.Point(12, 483);
+            this.invisible_characters_nospace_group.Location = new System.Drawing.Point(12, 472);
             this.invisible_characters_nospace_group.Name = "invisible_characters_nospace_group";
-            this.invisible_characters_nospace_group.Size = new System.Drawing.Size(233, 144);
+            this.invisible_characters_nospace_group.Size = new System.Drawing.Size(339, 155);
             this.invisible_characters_nospace_group.TabIndex = 10;
             this.invisible_characters_nospace_group.TabStop = false;
             this.invisible_characters_nospace_group.Text = "Invisible Characters (No space):";
@@ -866,14 +866,14 @@
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.Name = "invisibleCharactersThatTakesNoSpaceHexMap_table";
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowCount = 1;
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.Size = new System.Drawing.Size(200, 94);
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.Size = new System.Drawing.Size(319, 120);
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.TabIndex = 12;
             // 
             // ResultScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1408, 708);
+            this.ClientSize = new System.Drawing.Size(1408, 663);
             this.Controls.Add(this.invisible_characters_nospace_group);
             this.Controls.Add(this.paragraph_border_group);
             this.Controls.Add(this.sentence_border_left_group);

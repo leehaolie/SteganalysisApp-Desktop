@@ -45,6 +45,7 @@
             // 
             // generalScalingMap_table
             // 
+            this.generalScalingMap_table.AutoScroll = true;
             this.generalScalingMap_table.ColumnCount = 2;
             this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));

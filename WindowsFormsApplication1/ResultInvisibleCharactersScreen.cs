@@ -27,19 +27,22 @@ namespace WindowsFormsApplication1
             //MessageBox.Show("invisibleCharactersTotal = " + resultValues.invisibleCharactersTotal + " / invisibleCharactersPotential = " + resultValues.invisibleCharactersPotential);
             invisibleCharactersTotal_value.Text = resultValues.invisibleCharactersTotal.ToString();
             invisibleCharactersPotential_value.Text = resultValues.invisibleCharactersPotential.ToString();
-            
-            //invisibleCharactersThatTakesNoSpaceHexMap            
-            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Hex Code" }, 0, 0);
-            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
+
+            //invisibleCharactersThatTakesNoSpaceHexMap     
+            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Clear();
+            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Hex Code", Name = "invisibleCharactersThatTakesNoSpaceHexMap_table_col0_header" }, 0, 0);
+            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            invisibleCharactersThatTakesNoSpaceHexMap_table.RowCount = 1;
+            invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int invisibleCharactersThatTakesNoSpaceHexMap_table_row = 1;
             foreach (KeyValuePair<string, int> entry in resultValues.invisibleCharactersThatTakesNoSpaceHexMap)
             {
-                invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = entry.Key }, 0, invisibleCharactersThatTakesNoSpaceHexMap_table_row);
-                invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, invisibleCharactersThatTakesNoSpaceHexMap_table_row);
+                invisibleCharactersThatTakesNoSpaceHexMap_table.RowCount = invisibleCharactersThatTakesNoSpaceHexMap_table.RowCount + 1;
+                invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+                invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = entry.Key, Name = "invisibleCharactersThatTakesNoSpaceHexMap_table_col0_row" + invisibleCharactersThatTakesNoSpaceHexMap_table_row }, 0, invisibleCharactersThatTakesNoSpaceHexMap_table_row);
+                invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "invisibleCharactersThatTakesNoSpaceHexMap_table_col1_row" + invisibleCharactersThatTakesNoSpaceHexMap_table_row }, 1, invisibleCharactersThatTakesNoSpaceHexMap_table_row);
                 invisibleCharactersThatTakesNoSpaceHexMap_table_row++;
             }
-            invisibleCharactersThatTakesNoSpaceHexMap_table.Height += resultValues.invisibleCharactersThatTakesNoSpaceHexMap.Keys.Count * 16;
-            invisible_characters_nospace_group.Height += resultValues.invisibleCharactersThatTakesNoSpaceHexMap.Keys.Count * 16;
         }
     }
 }

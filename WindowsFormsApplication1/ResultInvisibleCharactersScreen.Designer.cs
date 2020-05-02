@@ -97,44 +97,29 @@
             this.invisible_characters_nospace_group.Controls.Add(this.invisibleCharactersThatTakesNoSpaceHexMap_table);
             this.invisible_characters_nospace_group.Location = new System.Drawing.Point(268, 20);
             this.invisible_characters_nospace_group.Name = "invisible_characters_nospace_group";
-            this.invisible_characters_nospace_group.Size = new System.Drawing.Size(233, 68);
+            this.invisible_characters_nospace_group.Size = new System.Drawing.Size(300, 213);
             this.invisible_characters_nospace_group.TabIndex = 10;
             this.invisible_characters_nospace_group.TabStop = false;
             this.invisible_characters_nospace_group.Text = "Invisible Characters (No space):";
             // 
             // invisibleCharactersThatTakesNoSpaceHexMap_table
             // 
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.AutoSize = true;
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnCount = 2;
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.Location = new System.Drawing.Point(10, 29);
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.Name = "invisibleCharactersThatTakesNoSpaceHexMap_table";
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowCount = 1;
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.Size = new System.Drawing.Size(200, 20);
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.Size = new System.Drawing.Size(282, 163);
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.TabIndex = 12;
             // 
             // ResultInvisibleCharactersScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 200);
+            this.ClientSize = new System.Drawing.Size(591, 255);
             this.Controls.Add(this.invisible_characters_nospace_group);
             this.Controls.Add(this.invisible_characters_colors_group);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -143,6 +128,7 @@
             this.invisible_characters_colors_group.ResumeLayout(false);
             this.invisible_characters_colors_group.PerformLayout();
             this.invisible_characters_nospace_group.ResumeLayout(false);
+            this.invisible_characters_nospace_group.PerformLayout();
             this.ResumeLayout(false);
 
         }
