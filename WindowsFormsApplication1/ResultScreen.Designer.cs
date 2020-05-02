@@ -39,6 +39,8 @@
             this.openSpacesSentencesPotential_label = new System.Windows.Forms.Label();
             this.openSpacesSentencesTotal_label = new System.Windows.Forms.Label();
             this.invisible_characters_colors_group = new System.Windows.Forms.GroupBox();
+            this.codedWhiteSpaces_value = new System.Windows.Forms.Label();
+            this.codedWhiteSpaces_label = new System.Windows.Forms.Label();
             this.invisibleCharactersPotential_value = new System.Windows.Forms.Label();
             this.invisibleCharactersTotal_value = new System.Windows.Forms.Label();
             this.invisibleCharactersPotential_label = new System.Windows.Forms.Label();
@@ -86,16 +88,14 @@
             this.codedSentenceBorder_value = new System.Windows.Forms.Label();
             this.codedSentenceBorder_label = new System.Windows.Forms.Label();
             this.paragraph_border_group = new System.Windows.Forms.GroupBox();
+            this.right_border_label = new System.Windows.Forms.Label();
+            this.left_border_label = new System.Windows.Forms.Label();
+            this.generalParagraphRightBorderMap_table = new System.Windows.Forms.TableLayoutPanel();
             this.generalParagraphLeftBorderMap_table = new System.Windows.Forms.TableLayoutPanel();
             this.codedParagraphBorder_value = new System.Windows.Forms.Label();
             this.codedParagraphBorder_label = new System.Windows.Forms.Label();
-            this.generalParagraphRightBorderMap_table = new System.Windows.Forms.TableLayoutPanel();
-            this.left_border_label = new System.Windows.Forms.Label();
-            this.right_border_label = new System.Windows.Forms.Label();
             this.invisible_characters_nospace_group = new System.Windows.Forms.GroupBox();
             this.invisibleCharactersThatTakesNoSpaceHexMap_table = new System.Windows.Forms.TableLayoutPanel();
-            this.codedWhiteSpaces_label = new System.Windows.Forms.Label();
-            this.codedWhiteSpaces_value = new System.Windows.Forms.Label();
             this.open_spaces_words_group.SuspendLayout();
             this.open_spaces_sentences_group.SuspendLayout();
             this.invisible_characters_colors_group.SuspendLayout();
@@ -231,6 +231,26 @@
             this.invisible_characters_colors_group.TabIndex = 9;
             this.invisible_characters_colors_group.TabStop = false;
             this.invisible_characters_colors_group.Text = "Invisible Characters (Colors):";
+            // 
+            // codedWhiteSpaces_value
+            // 
+            this.codedWhiteSpaces_value.AutoSize = true;
+            this.codedWhiteSpaces_value.Location = new System.Drawing.Point(162, 29);
+            this.codedWhiteSpaces_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.codedWhiteSpaces_value.Name = "codedWhiteSpaces_value";
+            this.codedWhiteSpaces_value.Size = new System.Drawing.Size(42, 17);
+            this.codedWhiteSpaces_value.TabIndex = 13;
+            this.codedWhiteSpaces_value.Text = "value";
+            // 
+            // codedWhiteSpaces_label
+            // 
+            this.codedWhiteSpaces_label.AutoSize = true;
+            this.codedWhiteSpaces_label.Location = new System.Drawing.Point(7, 29);
+            this.codedWhiteSpaces_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.codedWhiteSpaces_label.Name = "codedWhiteSpaces_label";
+            this.codedWhiteSpaces_label.Size = new System.Drawing.Size(147, 17);
+            this.codedWhiteSpaces_label.TabIndex = 13;
+            this.codedWhiteSpaces_label.Text = "Concrete white space:";
             // 
             // invisibleCharactersPotential_value
             // 
@@ -615,9 +635,9 @@
             this.character_scale_group.Controls.Add(this.codedScaling_value);
             this.character_scale_group.Controls.Add(this.generalScalingMap_table);
             this.character_scale_group.Controls.Add(this.codedScaling_label);
-            this.character_scale_group.Location = new System.Drawing.Point(865, 387);
+            this.character_scale_group.Location = new System.Drawing.Point(1078, 212);
             this.character_scale_group.Name = "character_scale_group";
-            this.character_scale_group.Size = new System.Drawing.Size(223, 100);
+            this.character_scale_group.Size = new System.Drawing.Size(318, 178);
             this.character_scale_group.TabIndex = 13;
             this.character_scale_group.TabStop = false;
             this.character_scale_group.Text = "Character Scale:";
@@ -634,30 +654,15 @@
             // 
             // generalScalingMap_table
             // 
+            this.generalScalingMap_table.AutoScroll = true;
             this.generalScalingMap_table.ColumnCount = 2;
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.Location = new System.Drawing.Point(10, 64);
+            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalScalingMap_table.Location = new System.Drawing.Point(10, 57);
             this.generalScalingMap_table.Name = "generalScalingMap_table";
             this.generalScalingMap_table.RowCount = 1;
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.Size = new System.Drawing.Size(200, 20);
+            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalScalingMap_table.Size = new System.Drawing.Size(290, 102);
             this.generalScalingMap_table.TabIndex = 11;
             // 
             // codedScaling_label
@@ -675,39 +680,24 @@
             this.underline_group.Controls.Add(this.generalUnderlineMap_table);
             this.underline_group.Controls.Add(this.codedUnderline_value);
             this.underline_group.Controls.Add(this.codedUnderline_label);
-            this.underline_group.Location = new System.Drawing.Point(267, 387);
+            this.underline_group.Location = new System.Drawing.Point(1078, 12);
             this.underline_group.Name = "underline_group";
-            this.underline_group.Size = new System.Drawing.Size(275, 100);
+            this.underline_group.Size = new System.Drawing.Size(318, 183);
             this.underline_group.TabIndex = 14;
             this.underline_group.TabStop = false;
             this.underline_group.Text = "Underline:";
             // 
             // generalUnderlineMap_table
             // 
+            this.generalUnderlineMap_table.AutoScroll = true;
             this.generalUnderlineMap_table.ColumnCount = 2;
-            this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalUnderlineMap_table.Location = new System.Drawing.Point(10, 57);
             this.generalUnderlineMap_table.Name = "generalUnderlineMap_table";
             this.generalUnderlineMap_table.RowCount = 1;
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalUnderlineMap_table.Size = new System.Drawing.Size(250, 20);
+            this.generalUnderlineMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalUnderlineMap_table.Size = new System.Drawing.Size(290, 107);
             this.generalUnderlineMap_table.TabIndex = 12;
             // 
             // codedUnderline_value
@@ -735,39 +725,24 @@
             this.sentence_border_left_group.Controls.Add(this.generalSentenceLeftBorderMap_table);
             this.sentence_border_left_group.Controls.Add(this.codedSentenceBorder_value);
             this.sentence_border_left_group.Controls.Add(this.codedSentenceBorder_label);
-            this.sentence_border_left_group.Location = new System.Drawing.Point(561, 387);
+            this.sentence_border_left_group.Location = new System.Drawing.Point(890, 415);
             this.sentence_border_left_group.Name = "sentence_border_left_group";
-            this.sentence_border_left_group.Size = new System.Drawing.Size(282, 100);
+            this.sentence_border_left_group.Size = new System.Drawing.Size(282, 212);
             this.sentence_border_left_group.TabIndex = 15;
             this.sentence_border_left_group.TabStop = false;
             this.sentence_border_left_group.Text = "Sentence Border (Left)";
             // 
             // generalSentenceLeftBorderMap_table
             // 
+            this.generalSentenceLeftBorderMap_table.AutoScroll = true;
             this.generalSentenceLeftBorderMap_table.ColumnCount = 2;
-            this.generalSentenceLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalSentenceLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalSentenceLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalSentenceLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalSentenceLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.generalSentenceLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalSentenceLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalSentenceLeftBorderMap_table.Location = new System.Drawing.Point(10, 57);
             this.generalSentenceLeftBorderMap_table.Name = "generalSentenceLeftBorderMap_table";
             this.generalSentenceLeftBorderMap_table.RowCount = 1;
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalSentenceLeftBorderMap_table.Size = new System.Drawing.Size(250, 20);
+            this.generalSentenceLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalSentenceLeftBorderMap_table.Size = new System.Drawing.Size(250, 134);
             this.generalSentenceLeftBorderMap_table.TabIndex = 12;
             // 
             // codedSentenceBorder_value
@@ -798,39 +773,57 @@
             this.paragraph_border_group.Controls.Add(this.generalParagraphLeftBorderMap_table);
             this.paragraph_border_group.Controls.Add(this.codedParagraphBorder_value);
             this.paragraph_border_group.Controls.Add(this.codedParagraphBorder_label);
-            this.paragraph_border_group.Location = new System.Drawing.Point(267, 508);
+            this.paragraph_border_group.Location = new System.Drawing.Point(267, 403);
             this.paragraph_border_group.Name = "paragraph_border_group";
-            this.paragraph_border_group.Size = new System.Drawing.Size(576, 125);
+            this.paragraph_border_group.Size = new System.Drawing.Size(576, 224);
             this.paragraph_border_group.TabIndex = 16;
             this.paragraph_border_group.TabStop = false;
             this.paragraph_border_group.Text = "Paragraph Border (Left + Right)";
             // 
+            // right_border_label
+            // 
+            this.right_border_label.AutoSize = true;
+            this.right_border_label.Location = new System.Drawing.Point(301, 50);
+            this.right_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.right_border_label.Name = "right_border_label";
+            this.right_border_label.Size = new System.Drawing.Size(87, 17);
+            this.right_border_label.TabIndex = 15;
+            this.right_border_label.Text = "Right border";
+            // 
+            // left_border_label
+            // 
+            this.left_border_label.AutoSize = true;
+            this.left_border_label.Location = new System.Drawing.Point(7, 50);
+            this.left_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.left_border_label.Name = "left_border_label";
+            this.left_border_label.Size = new System.Drawing.Size(78, 17);
+            this.left_border_label.TabIndex = 14;
+            this.left_border_label.Text = "Left border";
+            // 
+            // generalParagraphRightBorderMap_table
+            // 
+            this.generalParagraphRightBorderMap_table.AutoScroll = true;
+            this.generalParagraphRightBorderMap_table.ColumnCount = 2;
+            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalParagraphRightBorderMap_table.Location = new System.Drawing.Point(304, 77);
+            this.generalParagraphRightBorderMap_table.Name = "generalParagraphRightBorderMap_table";
+            this.generalParagraphRightBorderMap_table.RowCount = 1;
+            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalParagraphRightBorderMap_table.Size = new System.Drawing.Size(250, 126);
+            this.generalParagraphRightBorderMap_table.TabIndex = 13;
+            // 
             // generalParagraphLeftBorderMap_table
             // 
+            this.generalParagraphLeftBorderMap_table.AutoScroll = true;
             this.generalParagraphLeftBorderMap_table.ColumnCount = 2;
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalParagraphLeftBorderMap_table.Location = new System.Drawing.Point(10, 77);
             this.generalParagraphLeftBorderMap_table.Name = "generalParagraphLeftBorderMap_table";
             this.generalParagraphLeftBorderMap_table.RowCount = 1;
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.Size = new System.Drawing.Size(250, 20);
+            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalParagraphLeftBorderMap_table.Size = new System.Drawing.Size(250, 126);
             this.generalParagraphLeftBorderMap_table.TabIndex = 12;
             // 
             // codedParagraphBorder_value
@@ -853,117 +846,34 @@
             this.codedParagraphBorder_label.TabIndex = 9;
             this.codedParagraphBorder_label.Text = "Concrete paragraph border method:";
             // 
-            // generalParagraphRightBorderMap_table
-            // 
-            this.generalParagraphRightBorderMap_table.ColumnCount = 2;
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.Location = new System.Drawing.Point(304, 77);
-            this.generalParagraphRightBorderMap_table.Name = "generalParagraphRightBorderMap_table";
-            this.generalParagraphRightBorderMap_table.RowCount = 1;
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.Size = new System.Drawing.Size(250, 20);
-            this.generalParagraphRightBorderMap_table.TabIndex = 13;
-            // 
-            // left_border_label
-            // 
-            this.left_border_label.AutoSize = true;
-            this.left_border_label.Location = new System.Drawing.Point(7, 50);
-            this.left_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.left_border_label.Name = "left_border_label";
-            this.left_border_label.Size = new System.Drawing.Size(78, 17);
-            this.left_border_label.TabIndex = 14;
-            this.left_border_label.Text = "Left border";
-            // 
-            // right_border_label
-            // 
-            this.right_border_label.AutoSize = true;
-            this.right_border_label.Location = new System.Drawing.Point(301, 50);
-            this.right_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.right_border_label.Name = "right_border_label";
-            this.right_border_label.Size = new System.Drawing.Size(87, 17);
-            this.right_border_label.TabIndex = 15;
-            this.right_border_label.Text = "Right border";
-            // 
             // invisible_characters_nospace_group
             // 
             this.invisible_characters_nospace_group.Controls.Add(this.invisibleCharactersThatTakesNoSpaceHexMap_table);
             this.invisible_characters_nospace_group.Location = new System.Drawing.Point(12, 483);
             this.invisible_characters_nospace_group.Name = "invisible_characters_nospace_group";
-            this.invisible_characters_nospace_group.Size = new System.Drawing.Size(233, 68);
+            this.invisible_characters_nospace_group.Size = new System.Drawing.Size(233, 144);
             this.invisible_characters_nospace_group.TabIndex = 10;
             this.invisible_characters_nospace_group.TabStop = false;
             this.invisible_characters_nospace_group.Text = "Invisible Characters (No space):";
             // 
             // invisibleCharactersThatTakesNoSpaceHexMap_table
             // 
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.AutoScroll = true;
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnCount = 2;
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.Location = new System.Drawing.Point(10, 29);
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.Name = "invisibleCharactersThatTakesNoSpaceHexMap_table";
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowCount = 1;
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.invisibleCharactersThatTakesNoSpaceHexMap_table.Size = new System.Drawing.Size(200, 20);
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.invisibleCharactersThatTakesNoSpaceHexMap_table.Size = new System.Drawing.Size(200, 94);
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.TabIndex = 12;
-            // 
-            // codedWhiteSpaces_label
-            // 
-            this.codedWhiteSpaces_label.AutoSize = true;
-            this.codedWhiteSpaces_label.Location = new System.Drawing.Point(7, 29);
-            this.codedWhiteSpaces_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.codedWhiteSpaces_label.Name = "codedWhiteSpaces_label";
-            this.codedWhiteSpaces_label.Size = new System.Drawing.Size(147, 17);
-            this.codedWhiteSpaces_label.TabIndex = 13;
-            this.codedWhiteSpaces_label.Text = "Concrete white space:";
-            // 
-            // codedWhiteSpaces_value
-            // 
-            this.codedWhiteSpaces_value.AutoSize = true;
-            this.codedWhiteSpaces_value.Location = new System.Drawing.Point(162, 29);
-            this.codedWhiteSpaces_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.codedWhiteSpaces_value.Name = "codedWhiteSpaces_value";
-            this.codedWhiteSpaces_value.Size = new System.Drawing.Size(42, 17);
-            this.codedWhiteSpaces_value.TabIndex = 13;
-            this.codedWhiteSpaces_value.Text = "value";
             // 
             // ResultScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1100, 708);
+            this.ClientSize = new System.Drawing.Size(1408, 708);
             this.Controls.Add(this.invisible_characters_nospace_group);
             this.Controls.Add(this.paragraph_border_group);
             this.Controls.Add(this.sentence_border_left_group);

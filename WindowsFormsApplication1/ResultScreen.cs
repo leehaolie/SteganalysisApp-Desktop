@@ -172,8 +172,6 @@ namespace WindowsFormsApplication1
                 generalScalingMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalScalingMap_table_row);
                 generalScalingMap_table_row++;
             }
-            generalScalingMap_table.Height += resultValues.generalScalingMap.Keys.Count * 16;
-            character_scale_group.Height += resultValues.generalScalingMap.Keys.Count * 16;
 
             /*
             if (resultValues.codedUnderline > 0)
@@ -182,7 +180,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Steganography method is NOT 'Underline Character'");
             */
             codedUnderline_value.Text = (resultValues.codedUnderline >= 5) ? "true" : "false";
-            generalUnderlineMap_table.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
+            generalUnderlineMap_table.Controls.Clear();
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Underline Style", Name = "generalUnderlineMap_table_col0_header" }, 0, 0);
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
             generalUnderlineMap_table.RowCount = 1;
@@ -208,7 +206,6 @@ namespace WindowsFormsApplication1
                 generalUnderlineMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalUnderlineMap_table_col1_row" + generalUnderlineMap_table_row }, 1, generalUnderlineMap_table_row);
                 generalUnderlineMap_table_row++;
             }
-            generalUnderlineMap_table.AutoScroll = true;
 
             /*
             if (resultValues.codedSentenceBorder > 0)
@@ -238,8 +235,6 @@ namespace WindowsFormsApplication1
                 generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalSentenceLeftBorderMap_table_row);
                 generalSentenceLeftBorderMap_table_row++;
             }
-            generalSentenceLeftBorderMap_table.Height += resultValues.generalSentenceLeftBorderMap.Keys.Count * 16;
-            sentence_border_left_group.Height += resultValues.generalSentenceLeftBorderMap.Keys.Count * 16;
 
             /*
             if (resultValues.codedParagraphBorder > 0)
@@ -270,7 +265,6 @@ namespace WindowsFormsApplication1
                 generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalParagraphLeftBorderMap_table_row);
                 generalParagraphLeftBorderMap_table_row++;
             }
-            generalParagraphLeftBorderMap_table.Height += resultValues.generalParagraphLeftBorderMap.Keys.Count * 16;
 
             generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = "Border Style" }, 0, 0);
             generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
@@ -293,10 +287,6 @@ namespace WindowsFormsApplication1
                 generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalParagraphRightBorderMap_table_row);
                 generalParagraphRightBorderMap_table_row++;
             }
-            generalParagraphRightBorderMap_table.Height += resultValues.generalParagraphRightBorderMap.Keys.Count * 16;
-
-            paragraph_border_group.Height += Math.Max(resultValues.generalParagraphLeftBorderMap.Keys.Count, resultValues.generalParagraphRightBorderMap.Keys.Count) * 16;
-            paragraph_border_group.Top = Math.Max(underline_group.Bottom, sentence_border_left_group.Bottom) + 20;
 
             //invisibleCharactersThatTakesNoSpaceHexMap            
             invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Hex Code" }, 0, 0);
@@ -308,8 +298,6 @@ namespace WindowsFormsApplication1
                 invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, invisibleCharactersThatTakesNoSpaceHexMap_table_row);
                 invisibleCharactersThatTakesNoSpaceHexMap_table_row++;
             }
-            invisibleCharactersThatTakesNoSpaceHexMap_table.Height += resultValues.invisibleCharactersThatTakesNoSpaceHexMap.Keys.Count * 16;
-            invisible_characters_nospace_group.Height += resultValues.invisibleCharactersThatTakesNoSpaceHexMap.Keys.Count * 16;
         }
     }
 }
