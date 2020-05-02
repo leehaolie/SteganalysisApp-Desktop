@@ -2614,8 +2614,51 @@ namespace WindowsFormsApplication1
             object readOnly = false;
             Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
             Microsoft.Office.Interop.Word.Range rangeSentenceGeneralBorderCountSentences = word.ActiveDocument.Content;
+            Microsoft.Office.Interop.Word.Range rangeSentenceBorderCountSentences = word.ActiveDocument.Content;
 
             #region check for sentence border
+            //approach 1: first we check if our concrete algotirtam is used    
+            var leftBorderSentenceBorder = WdBorderType.wdBorderLeft;
+            int codedSentenceBorder = 0;
+            for (int k = 1; k <= rangeSentenceBorderCountSentences.Sentences.Count; k++)
+            {
+                //if after 5 sentences a code is still not detected, then skip this coding check
+                if (k == 6)
+                    break;
+
+                bool leftBorderSentenceBorderC = false;
+                bool leftBorderSentenceBorderS = false;
+
+                Microsoft.Office.Interop.Word.Range s1 = rangeSentenceBorderCountSentences.Sentences[k];
+                string bordColor = s1.Borders[leftBorderSentenceBorder].Color.ToString();
+                //decode border colors
+                for (int countColo = 0; countColo < colorSentenceBorderStringMap.Length; countColo++)
+                {
+                    if (colorSentenceBorderStringMap[countColo] == bordColor)
+                    {
+                        leftBorderSentenceBorderC = true;
+                    }
+                }
+
+                string bordStyle = s1.Borders[leftBorderSentenceBorder].LineStyle.ToString();
+                //decode border styles                
+                for (int countStyl = 0; countStyl < lineSentenceBorderStyleMap.Length; countStyl++)
+                {
+                    if (lineSentenceBorderStyleMap[countStyl].ToString() == bordStyle)
+                    {
+                        leftBorderSentenceBorderS = true;
+                    }
+                }
+
+                //[4 bis for BorderColor][3 bits for BorderStyle]
+                //ascii to char conversion (binary vo decimal vo ascii)
+
+                if (leftBorderSentenceBorderC == true && leftBorderSentenceBorderS == true)
+                {
+                    codedSentenceBorder++;
+                    break;
+                }
+            }
             //approach 2: then we are doing more general check if sentence border is susposious
             var leftBorderGeneralSentenceBorder = WdBorderType.wdBorderLeft;
             for (int k = 1; k <= rangeSentenceGeneralBorderCountSentences.Sentences.Count; k++)
@@ -2637,6 +2680,7 @@ namespace WindowsFormsApplication1
             #endregion
 
             ResultValues resultValues = new ResultValues();
+            resultValues.codedSentenceBorder = codedSentenceBorder;
             resultValues.generalSentenceLeftBorderMap = generalSentenceLeftBorderMap;
 
             docs.Close();
