@@ -44,7 +44,7 @@
             this.paragraph_border_group.Controls.Add(this.generalParagraphLeftBorderMap_table);
             this.paragraph_border_group.Location = new System.Drawing.Point(21, 22);
             this.paragraph_border_group.Name = "paragraph_border_group";
-            this.paragraph_border_group.Size = new System.Drawing.Size(576, 95);
+            this.paragraph_border_group.Size = new System.Drawing.Size(580, 530);
             this.paragraph_border_group.TabIndex = 16;
             this.paragraph_border_group.TabStop = false;
             this.paragraph_border_group.Text = "Paragraph Border (Left + Right)";
@@ -72,64 +72,32 @@
             // generalParagraphRightBorderMap_table
             // 
             this.generalParagraphRightBorderMap_table.ColumnCount = 2;
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalParagraphRightBorderMap_table.Location = new System.Drawing.Point(306, 54);
             this.generalParagraphRightBorderMap_table.Name = "generalParagraphRightBorderMap_table";
             this.generalParagraphRightBorderMap_table.RowCount = 1;
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphRightBorderMap_table.Size = new System.Drawing.Size(250, 20);
+            this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalParagraphRightBorderMap_table.Size = new System.Drawing.Size(250, 470);
             this.generalParagraphRightBorderMap_table.TabIndex = 13;
             // 
             // generalParagraphLeftBorderMap_table
             // 
             this.generalParagraphLeftBorderMap_table.ColumnCount = 2;
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalParagraphLeftBorderMap_table.Location = new System.Drawing.Point(12, 54);
             this.generalParagraphLeftBorderMap_table.Name = "generalParagraphLeftBorderMap_table";
             this.generalParagraphLeftBorderMap_table.RowCount = 1;
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalParagraphLeftBorderMap_table.Size = new System.Drawing.Size(250, 20);
+            this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalParagraphLeftBorderMap_table.Size = new System.Drawing.Size(250, 470);
             this.generalParagraphLeftBorderMap_table.TabIndex = 12;
             // 
             // ResultParagraphBorderGeneralScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 320);
+            this.ClientSize = new System.Drawing.Size(682, 583);
             this.Controls.Add(this.paragraph_border_group);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultParagraphBorderGeneralScreen";

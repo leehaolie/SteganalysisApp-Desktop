@@ -159,7 +159,7 @@ namespace WindowsFormsApplication1
             codedScaling_value.Text = (resultValues.codedScaling >= 8) ? "true" : "false";
             generalScalingMap_table.Controls.Clear();
             generalScalingMap_table.Controls.Add(new Label() { Text = "Scale Size", Name = "generalScalingMap_table_col0_header" }, 0, 0);
-            generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalScalingMap_table_col1_header" }, 1, 0);
             generalScalingMap_table.RowCount = 1;
             generalScalingMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalScalingMap_table_row = 1;
@@ -187,7 +187,7 @@ namespace WindowsFormsApplication1
             codedUnderline_value.Text = (resultValues.codedUnderline >= 5) ? "true" : "false";
             generalUnderlineMap_table.Controls.Clear();
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Underline Style", Name = "generalUnderlineMap_table_col0_header" }, 0, 0);
-            generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalUnderlineMap_table_col1_header" }, 1, 0);
             generalUnderlineMap_table.RowCount = 1;
             generalUnderlineMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalUnderlineMap_table_row = 1;
@@ -221,7 +221,7 @@ namespace WindowsFormsApplication1
             codedSentenceBorder_value.Text = (resultValues.codedSentenceBorder >= 5) ? "true" : "false";
             generalSentenceLeftBorderMap_table.Controls.Clear();
             generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalSentenceLeftBorderMap_table_col0_header" }, 0, 0);
-            generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalSentenceLeftBorderMap_table_col1_header" }, 1, 0);
             generalSentenceLeftBorderMap_table.RowCount = 1;
             generalSentenceLeftBorderMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalSentenceLeftBorderMap_table_row = 1;
@@ -301,7 +301,7 @@ namespace WindowsFormsApplication1
             //invisibleCharactersThatTakesNoSpaceHexMap            
             invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Clear();
             invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Hex Code", Name = "invisibleCharactersThatTakesNoSpaceHexMap_table_col0_header" }, 0, 0);
-            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "invisibleCharactersThatTakesNoSpaceHexMap_table_col1_header" }, 1, 0);
             invisibleCharactersThatTakesNoSpaceHexMap_table.RowCount = 1;
             invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int invisibleCharactersThatTakesNoSpaceHexMap_table_row = 1;

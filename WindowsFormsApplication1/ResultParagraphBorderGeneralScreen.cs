@@ -24,8 +24,11 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-            generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style" }, 0, 0);
-            generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
+            generalParagraphLeftBorderMap_table.Controls.Clear();
+            generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalParagraphLeftBorderMap_table_col0_header" }, 0, 0);
+            generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalParagraphLeftBorderMap_table_col1_header" }, 1, 0);
+            generalParagraphLeftBorderMap_table.RowCount = 1;
+            generalParagraphLeftBorderMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalParagraphLeftBorderMap_table_row = 1;
             int generalParagraphLeftBorderMap_table_row_combinationNumber = 1;
             foreach (KeyValuePair<string, int> entry in resultValues.generalParagraphLeftBorderMap)
@@ -41,14 +44,18 @@ namespace WindowsFormsApplication1
                     generalParagraphLeftBorderMap_table_row_combinationNumber++;
                 }
 
-                generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = generalParagraphLeftBorderMap_combinationName }, 0, generalParagraphLeftBorderMap_table_row);
-                generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalParagraphLeftBorderMap_table_row);
+                generalParagraphLeftBorderMap_table.RowCount = generalParagraphLeftBorderMap_table.RowCount + 1;
+                generalParagraphLeftBorderMap_table.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+                generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = generalParagraphLeftBorderMap_combinationName, Name = "generalParagraphLeftBorderMap_table_col0_row" + generalParagraphLeftBorderMap_table_row }, 0, generalParagraphLeftBorderMap_table_row);
+                generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalParagraphLeftBorderMap_table_col1_row" + generalParagraphLeftBorderMap_table_row }, 1, generalParagraphLeftBorderMap_table_row);
                 generalParagraphLeftBorderMap_table_row++;
             }
-            generalParagraphLeftBorderMap_table.Height += resultValues.generalParagraphLeftBorderMap.Keys.Count * 16;
 
-            generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = "Border Style" }, 0, 0);
-            generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
+            generalParagraphRightBorderMap_table.Controls.Clear();
+            generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalParagraphRightBorderMap_table_col0_header" }, 0, 0);
+            generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalParagraphRightBorderMap_table_col1_header" }, 1, 0);
+            generalParagraphRightBorderMap_table.RowCount = 1;
+            generalParagraphRightBorderMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalParagraphRightBorderMap_table_row = 1;
             int generalParagraphRightBorderMap_table_row_combinationNumber = 1;
             foreach (KeyValuePair<string, int> entry in resultValues.generalParagraphRightBorderMap)
@@ -64,13 +71,12 @@ namespace WindowsFormsApplication1
                     generalParagraphRightBorderMap_table_row_combinationNumber++;
                 }
 
-                generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = generalParagraphRightBorderMap_combinationName }, 0, generalParagraphRightBorderMap_table_row);
-                generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalParagraphRightBorderMap_table_row);
+                generalParagraphRightBorderMap_table.RowCount = generalParagraphRightBorderMap_table.RowCount + 1;
+                generalParagraphRightBorderMap_table.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+                generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = generalParagraphRightBorderMap_combinationName, Name = "generalParagraphRightBorderMap_table_col0_row" + generalParagraphRightBorderMap_table_row }, 0, generalParagraphRightBorderMap_table_row);
+                generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalParagraphRightBorderMap_table_col1_row" + generalParagraphRightBorderMap_table_row }, 1, generalParagraphRightBorderMap_table_row);
                 generalParagraphRightBorderMap_table_row++;
             }
-            generalParagraphRightBorderMap_table.Height += resultValues.generalParagraphRightBorderMap.Keys.Count * 16;
-
-            paragraph_border_group.Height += Math.Max(resultValues.generalParagraphLeftBorderMap.Keys.Count, resultValues.generalParagraphRightBorderMap.Keys.Count) * 16;
         }
     }
 }

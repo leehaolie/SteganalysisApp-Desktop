@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
             //invisibleCharactersThatTakesNoSpaceHexMap     
             invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Clear();
             invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Hex Code", Name = "invisibleCharactersThatTakesNoSpaceHexMap_table_col0_header" }, 0, 0);
-            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "invisibleCharactersThatTakesNoSpaceHexMap_table_col1_header" }, 1, 0);
             invisibleCharactersThatTakesNoSpaceHexMap_table.RowCount = 1;
             invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int invisibleCharactersThatTakesNoSpaceHexMap_table_row = 1;

@@ -26,7 +26,7 @@ namespace WindowsFormsApplication1
 
             generalUnderlineMap_table.Controls.Clear();
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Underline Style", Name = "generalUnderlineMap_table_col0_header" }, 0, 0);
-            generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalUnderlineMap_table_col1_header" }, 1, 0);
             generalUnderlineMap_table.RowCount = 1;
             generalUnderlineMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalUnderlineMap_table_row = 1;

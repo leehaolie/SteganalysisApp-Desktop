@@ -26,7 +26,7 @@ namespace WindowsFormsApplication1
 
             generalSentenceLeftBorderMap_table.Controls.Clear();
             generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalSentenceLeftBorderMap_table_col0_header" }, 0, 0);
-            generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalSentenceLeftBorderMap_table_col1_header" }, 1, 0);
             generalSentenceLeftBorderMap_table.RowCount = 1;
             generalSentenceLeftBorderMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalSentenceLeftBorderMap_table_row = 1;
