@@ -2655,6 +2655,65 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
 
             #region check for paragraph border
+            //approach 1: first we check if our concrete algotirtam is used            
+            int codedParagraphBorder = 0;
+            int numCheckParagraphBorder = 0;
+            foreach (Microsoft.Office.Interop.Word.Paragraph aPar in docs.Paragraphs)
+            {
+                //if after 5 paragraphs a code is still not detected, then skip this coding check
+                numCheckParagraphBorder++;
+                if (numCheckParagraphBorder == 5)
+                    break;
+
+                bool leftBorderParagraphBorderC = false;
+                bool leftBorderParagraphBorderS = false;
+                bool rightBorderParagraphBorderC = false;
+                bool rightBorderParagraphBorderS = false;
+
+                Microsoft.Office.Interop.Word.Range parRng = aPar.Range;
+                var leftBorderParagraph = WdBorderType.wdBorderLeft;
+                var rightBorderParagraph = WdBorderType.wdBorderRight;
+
+                string leftBordColor = parRng.Borders[leftBorderParagraph].Color.ToString();
+                string rightBordColor = parRng.Borders[rightBorderParagraph].Color.ToString();
+                //check if border colors are coded
+                for (int countColo = 0; countColo < colorParagraphBorderStringMap.Length; countColo++)
+                {
+                    if (colorParagraphBorderStringMap[countColo] == leftBordColor)
+                    {
+                        leftBorderParagraphBorderC = true;
+                    }
+                    if (colorParagraphBorderStringMap[countColo] == rightBordColor)
+                    {
+                        rightBorderParagraphBorderC = true;
+                    }
+                }
+
+                string leftBordStyle = parRng.Borders[leftBorderParagraph].LineStyle.ToString();
+                string rightBordStyle = parRng.Borders[rightBorderParagraph].LineStyle.ToString();
+                //check if border styles are coded
+                for (int countStyl = 0; countStyl < lineParagraphBorderStyleMap.Length; countStyl++)
+                {
+                    if (lineParagraphBorderStyleMap[countStyl].ToString() == leftBordStyle)
+                    {
+                        leftBorderParagraphBorderS = true;
+                    }
+                    if (lineParagraphBorderStyleMap[countStyl].ToString() == rightBordStyle)
+                    {
+                        rightBorderParagraphBorderS = true;
+                    }
+                }
+
+                //[4 bis for leftBorderColor][4 bits for leftBorderStyle][4 bis for rightBorderColor][4 bits for rightBorderStyle]
+                //ascii to char conversion (binary vo decimal vo ascii)
+
+                if (leftBorderParagraphBorderC == true && leftBorderParagraphBorderS == true &&
+                    rightBorderParagraphBorderC == true && rightBorderParagraphBorderS == true)
+                {
+                    codedParagraphBorder++;
+                    break;
+                }
+            }
             //approach 2: then we are doing more general check if pargraph border is susposious
             foreach (Microsoft.Office.Interop.Word.Paragraph aGeneralPar in docs.Paragraphs)
             {
@@ -2691,6 +2750,7 @@ namespace WindowsFormsApplication1
             #endregion
 
             ResultValues resultValues = new ResultValues();
+            resultValues.codedParagraphBorder = codedParagraphBorder;
             resultValues.generalParagraphLeftBorderMap = generalParagraphLeftBorderMap;
             resultValues.generalParagraphRightBorderMap = generalParagraphRightBorderMap;
 

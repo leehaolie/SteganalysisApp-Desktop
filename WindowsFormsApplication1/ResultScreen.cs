@@ -253,7 +253,6 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Steganography method is NOT 'Paragraph Border'");
             */
             codedParagraphBorder_value.Text = (resultValues.codedParagraphBorder >= 5) ? "true" : "false";
-
             generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style" }, 0, 0);
             generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
             int generalParagraphLeftBorderMap_table_row = 1;

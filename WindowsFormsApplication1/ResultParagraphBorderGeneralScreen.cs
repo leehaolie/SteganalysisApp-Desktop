@@ -24,6 +24,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
+            codedParagraphBorder_value.Text = (resultValues.codedParagraphBorder >= 5) ? "true" : "false";
             generalParagraphLeftBorderMap_table.Controls.Clear();
             generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalParagraphLeftBorderMap_table_col0_header" }, 0, 0);
             generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalParagraphLeftBorderMap_table_col1_header" }, 1, 0);
