@@ -38,7 +38,7 @@
             this.character_scale_group.Controls.Add(this.generalScalingMap_table);
             this.character_scale_group.Location = new System.Drawing.Point(22, 22);
             this.character_scale_group.Name = "character_scale_group";
-            this.character_scale_group.Size = new System.Drawing.Size(223, 77);
+            this.character_scale_group.Size = new System.Drawing.Size(280, 530);
             this.character_scale_group.TabIndex = 13;
             this.character_scale_group.TabStop = false;
             this.character_scale_group.Text = "Character Scale:";
@@ -46,36 +46,20 @@
             // generalScalingMap_table
             // 
             this.generalScalingMap_table.ColumnCount = 2;
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalScalingMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalScalingMap_table.Location = new System.Drawing.Point(6, 34);
             this.generalScalingMap_table.Name = "generalScalingMap_table";
             this.generalScalingMap_table.RowCount = 1;
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.generalScalingMap_table.Size = new System.Drawing.Size(200, 20);
+            this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalScalingMap_table.Size = new System.Drawing.Size(250, 470);
             this.generalScalingMap_table.TabIndex = 11;
             // 
             // ResultCharacterScaleGeneralScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 269);
+            this.ClientSize = new System.Drawing.Size(482, 583);
             this.Controls.Add(this.character_scale_group);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultCharacterScaleGeneralScreen";

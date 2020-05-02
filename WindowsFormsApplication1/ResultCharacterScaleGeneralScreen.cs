@@ -24,8 +24,11 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-            generalScalingMap_table.Controls.Add(new Label() { Text = "Scale Size" }, 0, 0);
-            generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
+            generalScalingMap_table.Controls.Clear();
+            generalScalingMap_table.Controls.Add(new Label() { Text = "Scale Size", Name = "generalScalingMap_table_col0_header" }, 0, 0);
+            generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalScalingMap_table_col0_header" }, 1, 0);
+            generalScalingMap_table.RowCount = 1;
+            generalScalingMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalScalingMap_table_row = 1;
             foreach (KeyValuePair<string, int> entry in resultValues.generalScalingMap)
             {
@@ -35,12 +38,12 @@ namespace WindowsFormsApplication1
                     scaleSize = "default";
                 }
 
-                generalScalingMap_table.Controls.Add(new Label() { Text = scaleSize }, 0, generalScalingMap_table_row);
-                generalScalingMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalScalingMap_table_row);
+                generalScalingMap_table.RowCount = generalScalingMap_table.RowCount + 1;
+                generalScalingMap_table.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+                generalScalingMap_table.Controls.Add(new Label() { Text = scaleSize, Name = "generalScalingMap_table_col0_row" + generalScalingMap_table_row }, 0, generalScalingMap_table_row);
+                generalScalingMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalScalingMap_table_col1_row" + generalScalingMap_table_row }, 1, generalScalingMap_table_row);
                 generalScalingMap_table_row++;
             }
-            generalScalingMap_table.Height += resultValues.generalScalingMap.Keys.Count * 16;
-            character_scale_group.Height += resultValues.generalScalingMap.Keys.Count * 16;
         }
     }
 }
