@@ -45,6 +45,7 @@
             // 
             // generalUnderlineMap_table
             // 
+            this.generalUnderlineMap_table.AutoScroll = true;
             this.generalUnderlineMap_table.ColumnCount = 2;
             this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalUnderlineMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));

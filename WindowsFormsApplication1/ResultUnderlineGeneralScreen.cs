@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-            generalUnderlineMap_table.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
+            generalUnderlineMap_table.Controls.Clear();
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Underline Style", Name = "generalUnderlineMap_table_col0_header" }, 0, 0);
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
             generalUnderlineMap_table.RowCount = 1;
@@ -50,7 +50,6 @@ namespace WindowsFormsApplication1
                 generalUnderlineMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalUnderlineMap_table_col1_row" + generalUnderlineMap_table_row }, 1, generalUnderlineMap_table_row);
                 generalUnderlineMap_table_row++;
             }
-            generalUnderlineMap_table.AutoScroll = true;
         }
     }
 }
