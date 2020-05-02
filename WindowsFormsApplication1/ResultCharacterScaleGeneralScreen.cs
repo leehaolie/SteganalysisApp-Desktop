@@ -24,6 +24,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
+            codedScaling_value.Text = (resultValues.codedScaling >= 8) ? "true" : "false";
             generalScalingMap_table.Controls.Clear();
             generalScalingMap_table.Controls.Add(new Label() { Text = "Scale Size", Name = "generalScalingMap_table_col0_header" }, 0, 0);
             generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);

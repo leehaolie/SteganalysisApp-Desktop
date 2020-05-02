@@ -2413,8 +2413,43 @@ namespace WindowsFormsApplication1
             object end = 1; object endGeneral = 3; int endGeneralCount = 3;
             Microsoft.Office.Interop.Word.Range rngGeneralScaling = docs.Range(ref start, ref end);
             Microsoft.Office.Interop.Word.Range rngGeneralScalingAll = docs.Range(ref start);
+            Microsoft.Office.Interop.Word.Range rngScaling = docs.Range(ref start, ref end);
+            Microsoft.Office.Interop.Word.Range rngScalingAll = docs.Range(ref start);
 
             #region check for character scaling
+            //approach 1: first we check if our concrete algotirtam is used
+            int codedScaling = 0;
+            int actualSizeScaling = rngScalingAll.Text.Length - 1;
+            int numCheckScaling = 0;
+            while ((rngScaling.End - 1) < actualSizeScaling)
+            {
+                //if after 8 characters a code is still not detected, then skip this coding check
+                numCheckScaling++;
+                if (numCheckScaling == 9)
+                    break;
+
+                string scaleStyle = rngScaling.Font.Scaling.ToString();
+                if (scaleStyle == "99")
+                {
+                    codedScaling++;
+                }
+                else if (scaleStyle == "101")
+                {
+                    codedScaling++;
+                }
+
+                //[scale = 99% if bit is 1, scale = 101% if bit is 0]
+                //ascii to char conversion (binary vo decimal vo ascii)
+
+                if (codedScaling == 8)
+                    break;
+
+                rngScaling.Select();
+                // Move the start position 1 character.
+                rngScaling.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                // Move the end position 1 character.
+                rngScaling.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+            }
             //approach 2: then we are doing more general check if character scaling is susposious
             int actualSizeGeneralScaling = rngGeneralScalingAll.Text.Length - 1;
             while ((rngGeneralScaling.End - 1) < actualSizeGeneralScaling)
@@ -2439,6 +2474,7 @@ namespace WindowsFormsApplication1
             #endregion
             
             ResultValues resultValues = new ResultValues();
+            resultValues.codedScaling = codedScaling;
             resultValues.generalScalingMap = generalScalingMap;
 
             docs.Close();
