@@ -24,8 +24,11 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-            generalUnderlineMap_table.Controls.Add(new Label() { Text = "Underline Style" }, 0, 0);
-            generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
+            generalUnderlineMap_table.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
+            generalUnderlineMap_table.Controls.Add(new Label() { Text = "Underline Style", Name = "generalUnderlineMap_table_col0_header" }, 0, 0);
+            generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
+            generalUnderlineMap_table.RowCount = 1;
+            generalUnderlineMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
             int generalUnderlineMap_table_row = 1;
             int generalUnderlineMap_combinationNumber = 1;
             foreach (KeyValuePair<string, int> entry in resultValues.generalUnderlineMap)
@@ -40,13 +43,14 @@ namespace WindowsFormsApplication1
                     generalUnderlineMap_combinationName = "comb " + generalUnderlineMap_combinationNumber;
                     generalUnderlineMap_combinationNumber++;
                 }
-                
-                generalUnderlineMap_table.Controls.Add(new Label() { Text = generalUnderlineMap_combinationName }, 0, generalUnderlineMap_table_row);
-                generalUnderlineMap_table.Controls.Add(new Label() { Text = entry.Value.ToString() }, 1, generalUnderlineMap_table_row);
+
+                generalUnderlineMap_table.RowCount = generalUnderlineMap_table.RowCount + 1;
+                generalUnderlineMap_table.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+                generalUnderlineMap_table.Controls.Add(new Label() { Text = generalUnderlineMap_combinationName, Name = "generalUnderlineMap_table_col0_row" + generalUnderlineMap_table_row }, 0, generalUnderlineMap_table_row);
+                generalUnderlineMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalUnderlineMap_table_col1_row" + generalUnderlineMap_table_row }, 1, generalUnderlineMap_table_row);
                 generalUnderlineMap_table_row++;
             }
-            generalUnderlineMap_table.Height += resultValues.generalUnderlineMap.Keys.Count * 16;
-            underline_group.Height += resultValues.generalUnderlineMap.Keys.Count * 16;
+            generalUnderlineMap_table.AutoScroll = true;
         }
     }
 }
