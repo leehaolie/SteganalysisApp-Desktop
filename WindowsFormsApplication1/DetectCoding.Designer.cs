@@ -149,7 +149,7 @@
             this.detectCharactersScaleGeneralMethod.Name = "detectCharactersScaleGeneralMethod";
             this.detectCharactersScaleGeneralMethod.Size = new System.Drawing.Size(265, 28);
             this.detectCharactersScaleGeneralMethod.TabIndex = 12;
-            this.detectCharactersScaleGeneralMethod.Text = "Detect characters scale genearal method";
+            this.detectCharactersScaleGeneralMethod.Text = "Detect characters scale methods";
             this.detectCharactersScaleGeneralMethod.UseVisualStyleBackColor = true;
             this.detectCharactersScaleGeneralMethod.Click += new System.EventHandler(this.detectCharactersScaleMethods_Click);
             // 
@@ -160,7 +160,7 @@
             this.detectUnderlineGeneralMethod.Name = "detectUnderlineGeneralMethod";
             this.detectUnderlineGeneralMethod.Size = new System.Drawing.Size(265, 28);
             this.detectUnderlineGeneralMethod.TabIndex = 13;
-            this.detectUnderlineGeneralMethod.Text = "Detect underline general method";
+            this.detectUnderlineGeneralMethod.Text = "Detect underline methods";
             this.detectUnderlineGeneralMethod.UseVisualStyleBackColor = true;
             this.detectUnderlineGeneralMethod.Click += new System.EventHandler(this.detectUnderlineMethods_Click);
             // 
@@ -171,7 +171,7 @@
             this.detectSentenceBorderGeneralMethod.Name = "detectSentenceBorderGeneralMethod";
             this.detectSentenceBorderGeneralMethod.Size = new System.Drawing.Size(265, 28);
             this.detectSentenceBorderGeneralMethod.TabIndex = 14;
-            this.detectSentenceBorderGeneralMethod.Text = "Detect sentence border general method";
+            this.detectSentenceBorderGeneralMethod.Text = "Detect sentence border methods";
             this.detectSentenceBorderGeneralMethod.UseVisualStyleBackColor = true;
             this.detectSentenceBorderGeneralMethod.Click += new System.EventHandler(this.detectSentenceBorderMethods_Click);
             // 
@@ -182,7 +182,7 @@
             this.detectParagraphBorderGeneralMethod.Name = "detectParagraphBorderGeneralMethod";
             this.detectParagraphBorderGeneralMethod.Size = new System.Drawing.Size(265, 28);
             this.detectParagraphBorderGeneralMethod.TabIndex = 15;
-            this.detectParagraphBorderGeneralMethod.Text = "Detect paragraph border general method";
+            this.detectParagraphBorderGeneralMethod.Text = "Detect paragraph border methods";
             this.detectParagraphBorderGeneralMethod.UseVisualStyleBackColor = true;
             this.detectParagraphBorderGeneralMethod.Click += new System.EventHandler(this.detectParagraphBorderGeneralMethod_Click);
             // 
