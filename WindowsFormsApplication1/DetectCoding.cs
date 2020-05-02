@@ -73,6 +73,7 @@ namespace WindowsFormsApplication1
         };
         #endregion
         #region check for unicode
+        int unicodeNumberSymbols = 0;
         Dictionary<string, int> unicodeDirectoryMap = new Dictionary<string, int>()
         {
             {"A0041", 0}, {"A0391", 0}, {"A0410", 0}, {"A13AA", 0},
@@ -1419,7 +1420,6 @@ namespace WindowsFormsApplication1
             //there are 13 characters that can be used for this steganography method, so in this case, we need to cound for each of them
             //how many characters have more then one encodings (for the same character used)
             //for example: if only A and B are present with different encodings, then unicodeNumberSymbols will hold the value 2
-            int unicodeNumberSymbols = 0;
             if (differentOccurencies_A > 1)
                 unicodeNumberSymbols++;
             if (differentOccurencies_B > 1)
@@ -1622,6 +1622,55 @@ namespace WindowsFormsApplication1
                     chosenDocumentLabel.Text = documentName;
                     detectAnyMethod.Enabled = true;
                 }
+
+                //reset default values
+                openSpacesWordsTotal = 0;
+                openSpacesWordsPotential = 0;
+                openSpacesSentencesTotal = 0;
+                openSpacesSentencesPotential = 0;
+                unicodeNumberSymbols = 0;
+                unicodeDirectoryMap = new Dictionary<string, int>()
+                {
+                    {"A0041", 0}, {"A0391", 0}, {"A0410", 0}, {"A13AA", 0},
+                    {"B0042", 0}, {"B0392", 0}, {"B0412", 0}, {"B0181", 0},
+                    {"E0045", 0}, {"E0395", 0}, {"E0415", 0}, {"E13AC", 0},
+                    {"G0047", 0}, {"G050C", 0}, {"G13C0", 0}, {"G13B6", 0},
+                    {"H0048", 0}, {"H0397", 0}, {"H041D", 0}, {"H13BB", 0},
+                    {"I0049", 0}, {"I0399", 0}, {"I04C0", 0}, {"I0406", 0},
+                    {"M004D", 0}, {"M039C", 0}, {"M041C", 0}, {"M216F", 0},
+                    {"O004F", 0}, {"O039F", 0}, {"O041E", 0}, {"O0555", 0},
+                    {"P0050", 0}, {"P0420", 0}, {"P03A1", 0}, {"P01A4", 0},
+                    {"S0053", 0}, {"S0405", 0}, {"S054F", 0}, {"S13DA", 0},
+                    {"T0054", 0}, {"T0422", 0}, {"T03A4", 0}, {"T01AC", 0},
+                    {"j006A", 0}, {"j0458", 0}, {"j03F3", 0}, {"j029D", 0},
+                    {"o006F", 0}, {"o03BF", 0}, {"o1D0F", 0}, {"o043E", 0}
+                };
+                invisibleCharactersThatTakesNoSpaceHexMap = new Dictionary<string, int>()
+                {
+                    {"200C", 0},    //Zero width non-joiner
+                    {"200D", 0},    //Zero width joiner
+                    {"200E", 0},    //Right remark
+                    {"200F", 0}     //Left remark
+                };
+                fontTypeTotal = 0;
+                fontTypePotential = 0;
+                fontTypeDirectoryCount = new Dictionary<string, int>();
+                invisibleCharactersTotal = 0;
+                invisibleCharactersPotential = 0;
+                colorQuantizationTotal = 0;
+                colorQuantizationLight = 0;
+                colorQuantizationDark = 0;
+                colorQuantizationLightLevels = new double[] { 0 };
+                colorQuantizationDarkLevels = new double[] { 0 };
+                wordMappingOption1Total = 0;
+                wordMappingOption1Potential = 0;
+                wordMappingOption2Total = 0;
+                wordMappingOption2Potential = 0;
+                generalParagraphLeftBorderMap = new Dictionary<string, int>();
+                generalParagraphRightBorderMap = new Dictionary<string, int>();
+                generalSentenceLeftBorderMap = new Dictionary<string, int>();
+                generalScalingMap = new Dictionary<string, int>();
+                generalUnderlineMap = new Dictionary<string, int>();
             }
         }
 
@@ -2299,7 +2348,6 @@ namespace WindowsFormsApplication1
             //there are 13 characters that can be used for this steganography method, so in this case, we need to cound for each of them
             //how many characters have more then one encodings (for the same character used)
             //for example: if only A and B are present with different encodings, then unicodeNumberSymbols will hold the value 2
-            int unicodeNumberSymbols = 0;
             if (differentOccurencies_A > 1)
                 unicodeNumberSymbols++;
             if (differentOccurencies_B > 1)
