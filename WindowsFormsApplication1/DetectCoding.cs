@@ -2464,6 +2464,66 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Range rngUnderlineAll = docs.Range(ref start);
 
             #region check for underline
+            //approach 1: first we check if our concrete algotirtam is used
+            int codedUnderline = 0;
+            int actualSizeUnderline = rngUnderlineAll.Text.Length - 1;
+            int numCheckUnderline = 0;
+
+            while ((rngUnderline.End - 1) < actualSizeUnderline)
+            {
+                if (Array.IndexOf(excludeUnderlineChars, rngUnderline.Text.Trim().ToLower()) > -1)
+                {
+                    rngUnderline.Select();
+                    // Move the start position 1 character
+                    rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                    // Move the end position 1 character
+                    rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                    continue;
+                }
+
+                //if after 5 characters a code is still not detected, then skip this coding check
+                numCheckUnderline++;
+                if (numCheckUnderline == 6)
+                    break;
+
+                bool underlineC = false;
+                bool underlineS = false;
+
+                string underColor = rngUnderline.Font.UnderlineColor.ToString();
+                //decode underline color
+                for (int countColo = 0; countColo < colorUnderlineStringMap.Length; countColo++)
+                {
+                    if (colorUnderlineStringMap[countColo] == underColor)
+                    {
+                        underlineC = true;
+                    }
+                }
+
+                string underStyle = rngUnderline.Font.Underline.ToString();
+                //decode underline styles                
+                for (int countStyl = 0; countStyl < lineUnderlineStyleMap.Length; countStyl++)
+                {
+                    if (lineUnderlineStyleMap[countStyl].ToString() == underStyle)
+                    {
+                        underlineS = true;
+                    }
+                }
+
+                //[4 bis for UnderlineColor][4 bits for UnderlineStyle]
+                //ascii to char conversion (binary vo decimal vo ascii)
+
+                if (underlineC == true && underlineS == true)
+                {
+                    codedUnderline++;
+                    //break;
+                }
+
+                rngUnderline.Select();
+                // Move the start position 1 character
+                rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                // Move the end position 1 character
+                rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+            }
             //approach 2: then we are doing more general check if character underline is susposious
             int actualSizeGeneralUnderline = rngGeneralUnderlineAll.Text.Length - 1;
 
@@ -2500,6 +2560,7 @@ namespace WindowsFormsApplication1
             #endregion
 
             ResultValues resultValues = new ResultValues();
+            resultValues.codedUnderline = codedUnderline;
             resultValues.generalUnderlineMap = generalUnderlineMap;
 
             docs.Close();
