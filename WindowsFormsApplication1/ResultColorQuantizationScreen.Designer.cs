@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultColorQuantizationScreen));
             this.color_quantization_group = new System.Windows.Forms.GroupBox();
             this.colorQuantizationDark_levels_value = new System.Windows.Forms.Label();
             this.colorQuantizationLight_levels_value = new System.Windows.Forms.Label();
@@ -143,6 +144,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 162);
             this.Controls.Add(this.color_quantization_group);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultColorQuantizationScreen";
             this.Text = "Steganalysis Result (Color Quantization)";

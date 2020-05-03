@@ -1,6 +1,5 @@
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
-G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\SteganalysisApp.csprojResolveAssemblyReference.cache
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.DetectCoding.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
@@ -17,3 +16,4 @@ G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\De
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultUnderlineGeneralScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultSentenceBorderGeneralScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.ResultParagraphBorderGeneralScreen.resources
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Debug\SteganalysisApp.csprojResolveAssemblyReference.cache

@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultCharacterScaleGeneralScreen));
             this.character_scale_group = new System.Windows.Forms.GroupBox();
-            this.generalScalingMap_table = new System.Windows.Forms.TableLayoutPanel();
             this.codedScaling_value = new System.Windows.Forms.Label();
+            this.generalScalingMap_table = new System.Windows.Forms.TableLayoutPanel();
             this.codedScaling_label = new System.Windows.Forms.Label();
             this.character_scale_group.SuspendLayout();
             this.SuspendLayout();
@@ -47,6 +48,16 @@
             this.character_scale_group.TabStop = false;
             this.character_scale_group.Text = "Character Scale:";
             // 
+            // codedScaling_value
+            // 
+            this.codedScaling_value.AutoSize = true;
+            this.codedScaling_value.Location = new System.Drawing.Point(176, 22);
+            this.codedScaling_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.codedScaling_value.Name = "codedScaling_value";
+            this.codedScaling_value.Size = new System.Drawing.Size(42, 17);
+            this.codedScaling_value.TabIndex = 15;
+            this.codedScaling_value.Text = "value";
+            // 
             // generalScalingMap_table
             // 
             this.generalScalingMap_table.AutoScroll = true;
@@ -59,16 +70,6 @@
             this.generalScalingMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.generalScalingMap_table.Size = new System.Drawing.Size(250, 470);
             this.generalScalingMap_table.TabIndex = 11;
-            // 
-            // codedScaling_value
-            // 
-            this.codedScaling_value.AutoSize = true;
-            this.codedScaling_value.Location = new System.Drawing.Point(176, 22);
-            this.codedScaling_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.codedScaling_value.Name = "codedScaling_value";
-            this.codedScaling_value.Size = new System.Drawing.Size(42, 17);
-            this.codedScaling_value.TabIndex = 15;
-            this.codedScaling_value.Text = "value";
             // 
             // codedScaling_label
             // 
@@ -86,6 +87,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 583);
             this.Controls.Add(this.character_scale_group);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultCharacterScaleGeneralScreen";
             this.Text = "Steganalysis Result (Character Scale - General)";

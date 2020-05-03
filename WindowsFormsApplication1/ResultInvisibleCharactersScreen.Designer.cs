@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultInvisibleCharactersScreen));
             this.invisible_characters_colors_group = new System.Windows.Forms.GroupBox();
             this.invisibleCharactersPotential_value = new System.Windows.Forms.Label();
             this.invisibleCharactersTotal_value = new System.Windows.Forms.Label();
@@ -122,6 +123,7 @@
             this.ClientSize = new System.Drawing.Size(591, 255);
             this.Controls.Add(this.invisible_characters_nospace_group);
             this.Controls.Add(this.invisible_characters_colors_group);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultInvisibleCharactersScreen";
             this.Text = "Steganalysis Result (Invisible Characters)";

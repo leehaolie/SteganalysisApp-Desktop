@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultWordMappingScreen));
             this.word_mapping_2_group = new System.Windows.Forms.GroupBox();
             this.wordMappingOption2Potential_value = new System.Windows.Forms.Label();
             this.wordMappingOption2Total_value = new System.Windows.Forms.Label();
@@ -155,6 +156,7 @@
             this.ClientSize = new System.Drawing.Size(532, 130);
             this.Controls.Add(this.word_mapping_1_group);
             this.Controls.Add(this.word_mapping_2_group);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultWordMappingScreen";
             this.Text = "Steganalysis Result (Word Mapping)";

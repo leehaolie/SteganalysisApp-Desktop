@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteganalysisApp", "WindowsFormsApplication1\SteganalysisApp.csproj", "{91BF1182-EB1F-4E63-B64D-A0D0A9616502}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{C449E425-EA34-4AC1-B703-4ED0DCAA651F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,8 @@ Global
 		{91BF1182-EB1F-4E63-B64D-A0D0A9616502}.Debug|x86.Build.0 = Debug|x86
 		{91BF1182-EB1F-4E63-B64D-A0D0A9616502}.Release|x86.ActiveCfg = Release|x86
 		{91BF1182-EB1F-4E63-B64D-A0D0A9616502}.Release|x86.Build.0 = Release|x86
+		{C449E425-EA34-4AC1-B703-4ED0DCAA651F}.Debug|x86.ActiveCfg = Debug
+		{C449E425-EA34-4AC1-B703-4ED0DCAA651F}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

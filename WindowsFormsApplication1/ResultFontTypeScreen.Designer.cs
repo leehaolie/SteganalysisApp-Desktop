@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultFontTypeScreen));
             this.font_types_group = new System.Windows.Forms.GroupBox();
             this.fontTypeDirectoryCount_value = new System.Windows.Forms.Label();
             this.fontTypeDirectoryCount_label = new System.Windows.Forms.Label();
@@ -119,6 +120,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 144);
             this.Controls.Add(this.font_types_group);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultFontTypeScreen";
             this.Text = "Steganalysis Result (Font Types)";

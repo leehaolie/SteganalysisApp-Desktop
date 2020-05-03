@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultOpenSpacesScreen));
             this.openSpacesWordsTotal_label = new System.Windows.Forms.Label();
             this.open_spaces_words_group = new System.Windows.Forms.GroupBox();
             this.openSpacesWordsPotential_value = new System.Windows.Forms.Label();
@@ -155,6 +156,7 @@
             this.ClientSize = new System.Drawing.Size(541, 124);
             this.Controls.Add(this.open_spaces_sentences_group);
             this.Controls.Add(this.open_spaces_words_group);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultOpenSpacesScreen";
             this.Text = "Steganalysis Result (Open Spaces)";

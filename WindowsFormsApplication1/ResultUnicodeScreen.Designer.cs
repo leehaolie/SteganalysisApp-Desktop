@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultUnicodeScreen));
             this.unicodeNumberSymbols_table = new System.Windows.Forms.TableLayoutPanel();
             this.unicodes_group = new System.Windows.Forms.GroupBox();
             this.unicodeNumberSymbols_value = new System.Windows.Forms.Label();
@@ -101,6 +102,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 408);
             this.Controls.Add(this.unicodes_group);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultUnicodeScreen";
             this.Text = "Steganalysis Result (Unicode)";

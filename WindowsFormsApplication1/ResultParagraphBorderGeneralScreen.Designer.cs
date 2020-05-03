@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResultParagraphBorderGeneralScreen));
             this.paragraph_border_group = new System.Windows.Forms.GroupBox();
+            this.codedParagraphBorder_value = new System.Windows.Forms.Label();
+            this.codedParagraphBorder_label = new System.Windows.Forms.Label();
             this.right_border_label = new System.Windows.Forms.Label();
             this.left_border_label = new System.Windows.Forms.Label();
             this.generalParagraphRightBorderMap_table = new System.Windows.Forms.TableLayoutPanel();
             this.generalParagraphLeftBorderMap_table = new System.Windows.Forms.TableLayoutPanel();
-            this.codedParagraphBorder_value = new System.Windows.Forms.Label();
-            this.codedParagraphBorder_label = new System.Windows.Forms.Label();
             this.paragraph_border_group.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,26 @@
             this.paragraph_border_group.TabIndex = 16;
             this.paragraph_border_group.TabStop = false;
             this.paragraph_border_group.Text = "Paragraph Border (Left + Right)";
+            // 
+            // codedParagraphBorder_value
+            // 
+            this.codedParagraphBorder_value.AutoSize = true;
+            this.codedParagraphBorder_value.Location = new System.Drawing.Point(258, 22);
+            this.codedParagraphBorder_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.codedParagraphBorder_value.Name = "codedParagraphBorder_value";
+            this.codedParagraphBorder_value.Size = new System.Drawing.Size(42, 17);
+            this.codedParagraphBorder_value.TabIndex = 17;
+            this.codedParagraphBorder_value.Text = "value";
+            // 
+            // codedParagraphBorder_label
+            // 
+            this.codedParagraphBorder_label.AutoSize = true;
+            this.codedParagraphBorder_label.Location = new System.Drawing.Point(9, 22);
+            this.codedParagraphBorder_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.codedParagraphBorder_label.Name = "codedParagraphBorder_label";
+            this.codedParagraphBorder_label.Size = new System.Drawing.Size(236, 17);
+            this.codedParagraphBorder_label.TabIndex = 16;
+            this.codedParagraphBorder_label.Text = "Concrete paragraph border method:";
             // 
             // right_border_label
             // 
@@ -97,32 +118,13 @@
             this.generalParagraphLeftBorderMap_table.Size = new System.Drawing.Size(250, 470);
             this.generalParagraphLeftBorderMap_table.TabIndex = 12;
             // 
-            // codedParagraphBorder_value
-            // 
-            this.codedParagraphBorder_value.AutoSize = true;
-            this.codedParagraphBorder_value.Location = new System.Drawing.Point(258, 22);
-            this.codedParagraphBorder_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.codedParagraphBorder_value.Name = "codedParagraphBorder_value";
-            this.codedParagraphBorder_value.Size = new System.Drawing.Size(42, 17);
-            this.codedParagraphBorder_value.TabIndex = 17;
-            this.codedParagraphBorder_value.Text = "value";
-            // 
-            // codedParagraphBorder_label
-            // 
-            this.codedParagraphBorder_label.AutoSize = true;
-            this.codedParagraphBorder_label.Location = new System.Drawing.Point(9, 22);
-            this.codedParagraphBorder_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.codedParagraphBorder_label.Name = "codedParagraphBorder_label";
-            this.codedParagraphBorder_label.Size = new System.Drawing.Size(236, 17);
-            this.codedParagraphBorder_label.TabIndex = 16;
-            this.codedParagraphBorder_label.Text = "Concrete paragraph border method:";
-            // 
             // ResultParagraphBorderGeneralScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 583);
             this.Controls.Add(this.paragraph_border_group);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultParagraphBorderGeneralScreen";
             this.Text = "Steganalysis Result (Paragraph Border - General)";
