@@ -289,8 +289,8 @@ namespace WindowsFormsApplication1
             colorQuantizationTotal = 0;
             colorQuantizationLight = 0;
             colorQuantizationDark = 0;
-            colorQuantizationLightLevels = new double[] { 0 };
-            colorQuantizationDarkLevels = new double[] { 0 };
+            colorQuantizationLightLevels = new double[] { -1 };
+            colorQuantizationDarkLevels = new double[] { -1 };
             wordMappingOption1Total = 0;
             wordMappingOption1Potential = 0;
             wordMappingOption2Total = 0;
