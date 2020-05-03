@@ -220,14 +220,14 @@
             // invisible_characters_colors_group
             // 
             this.invisible_characters_colors_group.Controls.Add(this.codedWhiteSpaces_value);
-            this.invisible_characters_colors_group.Controls.Add(this.codedWhiteSpaces_label);
             this.invisible_characters_colors_group.Controls.Add(this.invisibleCharactersPotential_value);
             this.invisible_characters_colors_group.Controls.Add(this.invisibleCharactersTotal_value);
+            this.invisible_characters_colors_group.Controls.Add(this.codedWhiteSpaces_label);
             this.invisible_characters_colors_group.Controls.Add(this.invisibleCharactersPotential_label);
             this.invisible_characters_colors_group.Controls.Add(this.invisibleCharactersTotal_label);
             this.invisible_characters_colors_group.Location = new System.Drawing.Point(12, 344);
             this.invisible_characters_colors_group.Name = "invisible_characters_colors_group";
-            this.invisible_characters_colors_group.Size = new System.Drawing.Size(233, 120);
+            this.invisible_characters_colors_group.Size = new System.Drawing.Size(233, 108);
             this.invisible_characters_colors_group.TabIndex = 9;
             this.invisible_characters_colors_group.TabStop = false;
             this.invisible_characters_colors_group.Text = "Invisible Characters (Colors):";
@@ -235,27 +235,29 @@
             // codedWhiteSpaces_value
             // 
             this.codedWhiteSpaces_value.AutoSize = true;
-            this.codedWhiteSpaces_value.Location = new System.Drawing.Point(162, 29);
+            this.codedWhiteSpaces_value.Location = new System.Drawing.Point(166, 79);
             this.codedWhiteSpaces_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.codedWhiteSpaces_value.Name = "codedWhiteSpaces_value";
             this.codedWhiteSpaces_value.Size = new System.Drawing.Size(42, 17);
             this.codedWhiteSpaces_value.TabIndex = 13;
             this.codedWhiteSpaces_value.Text = "value";
+            this.codedWhiteSpaces_value.Visible = false;
             // 
             // codedWhiteSpaces_label
             // 
             this.codedWhiteSpaces_label.AutoSize = true;
-            this.codedWhiteSpaces_label.Location = new System.Drawing.Point(7, 29);
+            this.codedWhiteSpaces_label.Location = new System.Drawing.Point(11, 79);
             this.codedWhiteSpaces_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.codedWhiteSpaces_label.Name = "codedWhiteSpaces_label";
             this.codedWhiteSpaces_label.Size = new System.Drawing.Size(147, 17);
             this.codedWhiteSpaces_label.TabIndex = 13;
             this.codedWhiteSpaces_label.Text = "Concrete white space:";
+            this.codedWhiteSpaces_label.Visible = false;
             // 
             // invisibleCharactersPotential_value
             // 
             this.invisibleCharactersPotential_value.AutoSize = true;
-            this.invisibleCharactersPotential_value.Location = new System.Drawing.Point(78, 88);
+            this.invisibleCharactersPotential_value.Location = new System.Drawing.Point(82, 52);
             this.invisibleCharactersPotential_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.invisibleCharactersPotential_value.Name = "invisibleCharactersPotential_value";
             this.invisibleCharactersPotential_value.Size = new System.Drawing.Size(42, 17);
@@ -265,7 +267,7 @@
             // invisibleCharactersTotal_value
             // 
             this.invisibleCharactersTotal_value.AutoSize = true;
-            this.invisibleCharactersTotal_value.Location = new System.Drawing.Point(78, 59);
+            this.invisibleCharactersTotal_value.Location = new System.Drawing.Point(82, 23);
             this.invisibleCharactersTotal_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.invisibleCharactersTotal_value.Name = "invisibleCharactersTotal_value";
             this.invisibleCharactersTotal_value.Size = new System.Drawing.Size(42, 17);
@@ -275,7 +277,7 @@
             // invisibleCharactersPotential_label
             // 
             this.invisibleCharactersPotential_label.AutoSize = true;
-            this.invisibleCharactersPotential_label.Location = new System.Drawing.Point(7, 88);
+            this.invisibleCharactersPotential_label.Location = new System.Drawing.Point(11, 52);
             this.invisibleCharactersPotential_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.invisibleCharactersPotential_label.Name = "invisibleCharactersPotential_label";
             this.invisibleCharactersPotential_label.Size = new System.Drawing.Size(67, 17);
@@ -285,7 +287,7 @@
             // invisibleCharactersTotal_label
             // 
             this.invisibleCharactersTotal_label.AutoSize = true;
-            this.invisibleCharactersTotal_label.Location = new System.Drawing.Point(7, 59);
+            this.invisibleCharactersTotal_label.Location = new System.Drawing.Point(11, 23);
             this.invisibleCharactersTotal_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.invisibleCharactersTotal_label.Name = "invisibleCharactersTotal_label";
             this.invisibleCharactersTotal_label.Size = new System.Drawing.Size(48, 17);

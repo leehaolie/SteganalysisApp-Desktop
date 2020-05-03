@@ -49,7 +49,7 @@ namespace WindowsFormsApplication1
             else
                 MessageBox.Show("Steganography method is NOT 'Word Spacing'");
             */
-            codedWhiteSpaces_value.Text = (resultValues.codedWhiteSpaces > 0) ? "true" : "false";
+            //codedWhiteSpaces_value.Text = (resultValues.codedWhiteSpaces > 0) ? "true" : "false";
 
             //MessageBox.Show("colorQuantizationTotal = " + resultValues.colorQuantizationTotal + " / colorQuantizationLight = " + resultValues.colorQuantizationLight + " / colorQuantizationDark = " + resultValues.colorQuantizationDark);
             colorQuantizationTotal_value.Text = resultValues.colorQuantizationTotal.ToString();

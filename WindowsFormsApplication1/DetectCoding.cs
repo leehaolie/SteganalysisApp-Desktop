@@ -849,293 +849,293 @@ namespace WindowsFormsApplication1
             }*/
             #endregion
             #region check for white spaces
-            int codedWhiteSpaces = 0;
-            int[] arrayNulls = new int[rngWhiteSpaces.End]; int countNulls = 0;
-            int[] arrayOnes = new int[rngWhiteSpaces.End]; int countOnes = 0;
-            bool foundDigitZeroes = false;
-            bool foundDigitOnes = false;
+            //int codedWhiteSpaces = 0;
+            //int[] arrayNulls = new int[rngWhiteSpaces.End]; int countNulls = 0;
+            //int[] arrayOnes = new int[rngWhiteSpaces.End]; int countOnes = 0;
+            //bool foundDigitZeroes = false;
+            //bool foundDigitOnes = false;
 
-            //poziciite na sekoi prazni mesta so sina pozadina ke se zacuvuvaat vo nizata arrayNulls
-            Microsoft.Office.Interop.Word.Range rangeNulls = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNulls = rangeNulls.Find;
-            findNulls.ClearFormatting();
-            findNulls.Font.Color = WdColor.wdColorBlack;
-            findNulls.Text = " ";
-            rangeNulls.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            while (rangeNulls.Find.Found)
-            {
-                arrayNulls[countNulls] = rangeNulls.Start;
-                countNulls++;
-                rangeNulls.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            }
+            ////poziciite na sekoi prazni mesta so sina pozadina ke se zacuvuvaat vo nizata arrayNulls
+            //Microsoft.Office.Interop.Word.Range rangeNulls = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNulls = rangeNulls.Find;
+            //findNulls.ClearFormatting();
+            //findNulls.Font.Color = WdColor.wdColorBlack;
+            //findNulls.Text = " ";
+            //rangeNulls.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //while (rangeNulls.Find.Found)
+            //{
+            //    arrayNulls[countNulls] = rangeNulls.Start;
+            //    countNulls++;
+            //    rangeNulls.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //}
 
-            //poziciite na sekoi prazni mesta so crvena pozadina ke se zacuvuvaat vo nizata arrayOnes
-            Microsoft.Office.Interop.Word.Range rangeOnes = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findOnes = rangeOnes.Find;
-            findOnes.ClearFormatting();
-            findOnes.Font.Color = WdColor.wdColorGray90;
-            findOnes.Text = " ";
-            rangeOnes.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            while (rangeOnes.Find.Found)
-            {
-                arrayOnes[countOnes] = rangeOnes.Start;
-                countOnes++;
-                rangeOnes.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            }
+            ////poziciite na sekoi prazni mesta so crvena pozadina ke se zacuvuvaat vo nizata arrayOnes
+            //Microsoft.Office.Interop.Word.Range rangeOnes = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findOnes = rangeOnes.Find;
+            //findOnes.ClearFormatting();
+            //findOnes.Font.Color = WdColor.wdColorGray90;
+            //findOnes.Text = " ";
+            //rangeOnes.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //while (rangeOnes.Find.Found)
+            //{
+            //    arrayOnes[countOnes] = rangeOnes.Start;
+            //    countOnes++;
+            //    rangeOnes.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //}
 
-            //ke se formira soedineta niza (array) on 1-ovi i 0-li vo zavisnost od poziciite
-            int count0 = 0;
-            int count1 = 0;
-            int count = 0;
-            int[] array = new int[countNulls + countOnes];
-            while ((count0 < countNulls) && (count1 < countOnes))
-            {
-                if (arrayNulls[count0] < arrayOnes[count1])
-                {
-                    array[count] = 0;
-                    count++;
-                    count0++;
-                }
-                else if (arrayNulls[count0] > arrayOnes[count1])
-                {
-                    array[count] = 1;
-                    count++;
-                    count1++;
-                }
-            }
-            while (count0 < countNulls)
-            {
-                array[count] = 0;
-                count++;
-                count0++;
-            }
-            while (count1 < countOnes)
-            {
-                array[count] = 1;
-                count++;
-                count1++;
-            }
+            ////ke se formira soedineta niza (array) on 1-ovi i 0-li vo zavisnost od poziciite
+            //int count0 = 0;
+            //int count1 = 0;
+            //int count = 0;
+            //int[] array = new int[countNulls + countOnes];
+            //while ((count0 < countNulls) && (count1 < countOnes))
+            //{
+            //    if (arrayNulls[count0] < arrayOnes[count1])
+            //    {
+            //        array[count] = 0;
+            //        count++;
+            //        count0++;
+            //    }
+            //    else if (arrayNulls[count0] > arrayOnes[count1])
+            //    {
+            //        array[count] = 1;
+            //        count++;
+            //        count1++;
+            //    }
+            //}
+            //while (count0 < countNulls)
+            //{
+            //    array[count] = 0;
+            //    count++;
+            //    count0++;
+            //}
+            //while (count1 < countOnes)
+            //{
+            //    array[count] = 1;
+            //    count++;
+            //    count1++;
+            //}
 
-            string niza = "";
-            for (int brojac = 0; brojac < array.Length; brojac++)
-            {
-                niza = niza + array[brojac].ToString();
-            }
-            //stringot da se podeli na po 8 karakteri i dobienite broevi da se pretvorat od ascii vo karakteri
-            int dolzinaKrajnaNiza0i1 = niza.Length;
-            int kolkuZnaciIma = dolzinaKrajnaNiza0i1 / 8;
-            string dekodiranaNiza = "";
-            string konkretnaVrednostBinarna;
-            int odBinarnoVoDecimalno;
+            //string niza = "";
+            //for (int brojac = 0; brojac < array.Length; brojac++)
+            //{
+            //    niza = niza + array[brojac].ToString();
+            //}
+            ////stringot da se podeli na po 8 karakteri i dobienite broevi da se pretvorat od ascii vo karakteri
+            //int dolzinaKrajnaNiza0i1 = niza.Length;
+            //int kolkuZnaciIma = dolzinaKrajnaNiza0i1 / 8;
+            //string dekodiranaNiza = "";
+            //string konkretnaVrednostBinarna;
+            //int odBinarnoVoDecimalno;
 
-            for (int brojacZemajOsumZnaci = 0; brojacZemajOsumZnaci < kolkuZnaciIma; brojacZemajOsumZnaci++)
-            {
-                konkretnaVrednostBinarna = niza.Substring(brojacZemajOsumZnaci * 8, 8);
-                //  odBinarnoVoDecimalno = Convert.ToInt32(konkretnaVrednostBinarna, 2); decimalna vrednost na ascii kodot
-                dekodiranaNiza = dekodiranaNiza + Char.ConvertFromUtf32(Convert.ToInt32(konkretnaVrednostBinarna, 2));
-            }
+            //for (int brojacZemajOsumZnaci = 0; brojacZemajOsumZnaci < kolkuZnaciIma; brojacZemajOsumZnaci++)
+            //{
+            //    konkretnaVrednostBinarna = niza.Substring(brojacZemajOsumZnaci * 8, 8);
+            //    //  odBinarnoVoDecimalno = Convert.ToInt32(konkretnaVrednostBinarna, 2); decimalna vrednost na ascii kodot
+            //    dekodiranaNiza = dekodiranaNiza + Char.ConvertFromUtf32(Convert.ToInt32(konkretnaVrednostBinarna, 2));
+            //}
 
-            //proverka dali brojot na znaci odgovara so brojot na znaci vnesen na krajot vo zigot           
-            //boite i poziciite na sekoi prazni mesta so odredena boja na pozadina ke se zacuvuvaat vo nizite arrayColor i arrayPos
-            Microsoft.Office.Interop.Word.Range rangeNums0 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums0 = rangeNums0.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums1 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums1 = rangeNums1.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums2 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums2 = rangeNums2.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums3 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums3 = rangeNums3.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums4 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums4 = rangeNums4.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums5 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums5 = rangeNums5.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums6 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums6 = rangeNums6.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums7 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums7 = rangeNums7.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums8 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums8 = rangeNums8.Find;
-            Microsoft.Office.Interop.Word.Range rangeNums9 = word.ActiveDocument.Content;
-            Microsoft.Office.Interop.Word.Find findNums9 = rangeNums9.Find;
+            ////proverka dali brojot na znaci odgovara so brojot na znaci vnesen na krajot vo zigot           
+            ////boite i poziciite na sekoi prazni mesta so odredena boja na pozadina ke se zacuvuvaat vo nizite arrayColor i arrayPos
+            //Microsoft.Office.Interop.Word.Range rangeNums0 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums0 = rangeNums0.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums1 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums1 = rangeNums1.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums2 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums2 = rangeNums2.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums3 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums3 = rangeNums3.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums4 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums4 = rangeNums4.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums5 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums5 = rangeNums5.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums6 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums6 = rangeNums6.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums7 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums7 = rangeNums7.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums8 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums8 = rangeNums8.Find;
+            //Microsoft.Office.Interop.Word.Range rangeNums9 = word.ActiveDocument.Content;
+            //Microsoft.Office.Interop.Word.Find findNums9 = rangeNums9.Find;
 
-            int[] arrayPos = new int[6]; int countNums = 0;
-            int[] arrayColor = new int[6];
+            //int[] arrayPos = new int[6]; int countNums = 0;
+            //int[] arrayColor = new int[6];
 
-            int brojac6 = 6; //
-                             // while (brojac6 > 0)
-            {
-                findNums0.ClearFormatting();
-                findNums0.Font.Color = WdColor.wdColorGray05;
-                findNums0.Text = " ";
-                rangeNums0.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums0.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums0.Start;
-                    arrayColor[countNums] = 0;
-                    countNums++;
-                    rangeNums0.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums1.ClearFormatting();
-                findNums1.Font.Color = WdColor.wdColorGray15;
-                findNums1.Text = " ";
-                rangeNums1.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums1.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums1.Start;
-                    arrayColor[countNums] = 1;
-                    countNums++;
-                    rangeNums1.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums2.ClearFormatting();
-                findNums2.Font.Color = WdColor.wdColorGray25;
-                findNums2.Text = " ";
-                rangeNums2.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums2.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums2.Start;
-                    arrayColor[countNums] = 2;
-                    countNums++;
-                    rangeNums2.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums3.ClearFormatting();
-                findNums3.Font.Color = WdColor.wdColorGray35;
-                findNums3.Text = " ";
-                rangeNums3.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums3.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums3.Start;
-                    arrayColor[countNums] = 3;
-                    countNums++;
-                    rangeNums3.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums4.ClearFormatting();
-                findNums4.Font.Color = WdColor.wdColorGray45;
-                findNums4.Text = " ";
-                rangeNums4.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums4.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums4.Start;
-                    arrayColor[countNums] = 4;
-                    countNums++;
-                    rangeNums4.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums5.ClearFormatting();
-                findNums5.Font.Color = WdColor.wdColorGray55;
-                findNums5.Text = " ";
-                rangeNums5.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums5.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums5.Start;
-                    arrayColor[countNums] = 5;
-                    countNums++;
-                    rangeNums5.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums6.ClearFormatting();
-                findNums6.Font.Color = WdColor.wdColorGray65;
-                findNums6.Text = " ";
-                rangeNums6.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums6.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums6.Start;
-                    arrayColor[countNums] = 6;
-                    countNums++;
-                    rangeNums6.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums7.ClearFormatting();
-                findNums7.Font.Color = WdColor.wdColorGray75;
-                findNums7.Text = " ";
-                rangeNums7.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums7.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums7.Start;
-                    arrayColor[countNums] = 7;
-                    countNums++;
-                    rangeNums7.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums8.ClearFormatting();
-                findNums8.Font.Color = WdColor.wdColorGray85;
-                findNums8.Text = " ";
-                rangeNums8.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums8.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums8.Start;
-                    arrayColor[countNums] = 8;
-                    countNums++;
-                    rangeNums8.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
-                findNums9.ClearFormatting();
-                findNums9.Font.Color = WdColor.wdColorGray95;
-                findNums9.Text = " ";
-                rangeNums9.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                while (rangeNums9.Find.Found)
-                {
-                    arrayPos[countNums] = rangeNums9.Start;
-                    arrayColor[countNums] = 9;
-                    countNums++;
-                    rangeNums9.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                }
+            //int brojac6 = 6; //
+            //                 // while (brojac6 > 0)
+            //{
+            //    findNums0.ClearFormatting();
+            //    findNums0.Font.Color = WdColor.wdColorGray05;
+            //    findNums0.Text = " ";
+            //    rangeNums0.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums0.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums0.Start;
+            //        arrayColor[countNums] = 0;
+            //        countNums++;
+            //        rangeNums0.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums1.ClearFormatting();
+            //    findNums1.Font.Color = WdColor.wdColorGray15;
+            //    findNums1.Text = " ";
+            //    rangeNums1.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums1.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums1.Start;
+            //        arrayColor[countNums] = 1;
+            //        countNums++;
+            //        rangeNums1.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums2.ClearFormatting();
+            //    findNums2.Font.Color = WdColor.wdColorGray25;
+            //    findNums2.Text = " ";
+            //    rangeNums2.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums2.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums2.Start;
+            //        arrayColor[countNums] = 2;
+            //        countNums++;
+            //        rangeNums2.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums3.ClearFormatting();
+            //    findNums3.Font.Color = WdColor.wdColorGray35;
+            //    findNums3.Text = " ";
+            //    rangeNums3.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums3.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums3.Start;
+            //        arrayColor[countNums] = 3;
+            //        countNums++;
+            //        rangeNums3.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums4.ClearFormatting();
+            //    findNums4.Font.Color = WdColor.wdColorGray45;
+            //    findNums4.Text = " ";
+            //    rangeNums4.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums4.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums4.Start;
+            //        arrayColor[countNums] = 4;
+            //        countNums++;
+            //        rangeNums4.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums5.ClearFormatting();
+            //    findNums5.Font.Color = WdColor.wdColorGray55;
+            //    findNums5.Text = " ";
+            //    rangeNums5.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums5.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums5.Start;
+            //        arrayColor[countNums] = 5;
+            //        countNums++;
+            //        rangeNums5.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums6.ClearFormatting();
+            //    findNums6.Font.Color = WdColor.wdColorGray65;
+            //    findNums6.Text = " ";
+            //    rangeNums6.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums6.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums6.Start;
+            //        arrayColor[countNums] = 6;
+            //        countNums++;
+            //        rangeNums6.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums7.ClearFormatting();
+            //    findNums7.Font.Color = WdColor.wdColorGray75;
+            //    findNums7.Text = " ";
+            //    rangeNums7.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums7.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums7.Start;
+            //        arrayColor[countNums] = 7;
+            //        countNums++;
+            //        rangeNums7.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums8.ClearFormatting();
+            //    findNums8.Font.Color = WdColor.wdColorGray85;
+            //    findNums8.Text = " ";
+            //    rangeNums8.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums8.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums8.Start;
+            //        arrayColor[countNums] = 8;
+            //        countNums++;
+            //        rangeNums8.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
+            //    findNums9.ClearFormatting();
+            //    findNums9.Font.Color = WdColor.wdColorGray95;
+            //    findNums9.Text = " ";
+            //    rangeNums9.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    while (rangeNums9.Find.Found)
+            //    {
+            //        arrayPos[countNums] = rangeNums9.Start;
+            //        arrayColor[countNums] = 9;
+            //        countNums++;
+            //        rangeNums9.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+            //    }
 
-                brojac6--;
-            }
-            /*
-                        string test1 = "";
-                        for (int index = 0; index < arrayPos.Length; index++)
-                        {
-                            test1 = test1 + " pozicija: " + arrayPos[index].ToString() + " boja: " + arrayColor[index].ToString() + "\n";
-                        }
-                        MessageBox.Show(test1);
-            */
-            //sortiranje na nizite
-            int i, j, vrednostPos, vrednostCol, numLength = arrayPos.Length;
-            for (j = 1; j < numLength; j++)
-            {
-                vrednostPos = arrayPos[j];
-                vrednostCol = arrayColor[j];
-                for (i = j - 1; (i >= 0) && (arrayPos[i] > vrednostPos); i--)
-                {
-                    arrayPos[i + 1] = arrayPos[i];
-                    arrayColor[i + 1] = arrayColor[i];
-                }
-                arrayPos[i + 1] = vrednostPos;
-                arrayColor[i + 1] = vrednostCol;
-            }
-            /*
-                        string test = "";
-                        for (int index = 0; index < arrayPos.Length; index++)
-                        {
-                            test = test + " pozicija: " + arrayPos[index].ToString() + " boja: " + arrayColor[index].ToString() + "\n";
-                        } 
-                        MessageBox.Show(test);
-            */
-            string kodiranBroj = "";
-            //nizata arrayColor go sodrzi kodiraniot broj na znaci
-            for (int index = 0; index < arrayColor.Length; index++)
-            {
-                kodiranBroj = kodiranBroj + arrayColor[index].ToString();
-            }
+            //    brojac6--;
+            //}
+            ///*
+            //            string test1 = "";
+            //            for (int index = 0; index < arrayPos.Length; index++)
+            //            {
+            //                test1 = test1 + " pozicija: " + arrayPos[index].ToString() + " boja: " + arrayColor[index].ToString() + "\n";
+            //            }
+            //            MessageBox.Show(test1);
+            //*/
+            ////sortiranje na nizite
+            //int i, j, vrednostPos, vrednostCol, numLength = arrayPos.Length;
+            //for (j = 1; j < numLength; j++)
+            //{
+            //    vrednostPos = arrayPos[j];
+            //    vrednostCol = arrayColor[j];
+            //    for (i = j - 1; (i >= 0) && (arrayPos[i] > vrednostPos); i--)
+            //    {
+            //        arrayPos[i + 1] = arrayPos[i];
+            //        arrayColor[i + 1] = arrayColor[i];
+            //    }
+            //    arrayPos[i + 1] = vrednostPos;
+            //    arrayColor[i + 1] = vrednostCol;
+            //}
+            ///*
+            //            string test = "";
+            //            for (int index = 0; index < arrayPos.Length; index++)
+            //            {
+            //                test = test + " pozicija: " + arrayPos[index].ToString() + " boja: " + arrayColor[index].ToString() + "\n";
+            //            } 
+            //            MessageBox.Show(test);
+            //*/
+            //string kodiranBroj = "";
+            ////nizata arrayColor go sodrzi kodiraniot broj na znaci
+            //for (int index = 0; index < arrayColor.Length; index++)
+            //{
+            //    kodiranBroj = kodiranBroj + arrayColor[index].ToString();
+            //}
 
-            //ureduvanje na formatot na kodiranBroj da se sovpaga so formatot sto e na krajot od zigot
-            int countElements = countNulls + countOnes;
-            string countElementsSting = countElements.ToString();
-            int kolkuNuliPlusElements = 0;
-            int proverkaElements = countElements;
-            while (proverkaElements > 0)
-            {
-                kolkuNuliPlusElements++;
-                proverkaElements = proverkaElements / 10;
-            }
-            int brojNaNenultiCifriElements = kolkuNuliPlusElements; //primer za 1234, brojNaNenultiCifriElements = 4 cifri
-            kolkuNuliPlusElements = 6 - kolkuNuliPlusElements;      //primer za 1234 treba da se dodade 001234, pa = 2
-            while (kolkuNuliPlusElements > 0)
-            {
-                countElementsSting = "0" + countElementsSting;
-                kolkuNuliPlusElements--;
-            }
+            ////ureduvanje na formatot na kodiranBroj da se sovpaga so formatot sto e na krajot od zigot
+            //int countElements = countNulls + countOnes;
+            //string countElementsSting = countElements.ToString();
+            //int kolkuNuliPlusElements = 0;
+            //int proverkaElements = countElements;
+            //while (proverkaElements > 0)
+            //{
+            //    kolkuNuliPlusElements++;
+            //    proverkaElements = proverkaElements / 10;
+            //}
+            //int brojNaNenultiCifriElements = kolkuNuliPlusElements; //primer za 1234, brojNaNenultiCifriElements = 4 cifri
+            //kolkuNuliPlusElements = 6 - kolkuNuliPlusElements;      //primer za 1234 treba da se dodade 001234, pa = 2
+            //while (kolkuNuliPlusElements > 0)
+            //{
+            //    countElementsSting = "0" + countElementsSting;
+            //    kolkuNuliPlusElements--;
+            //}
 
-            if (niza != "" && countElementsSting == kodiranBroj)
-            {
-                codedWhiteSpaces++;
-            }
+            //if (niza != "" && countElementsSting == kodiranBroj)
+            //{
+            //    codedWhiteSpaces++;
+            //}
 
             #endregion
             #region check for open spaces (words + sentences)
@@ -1634,7 +1634,7 @@ namespace WindowsFormsApplication1
             resultValues.generalUnderlineMap = generalUnderlineMap;
             //resultValues.generalUnderlineColorMap = generalUnderlineColorMap;
             //resultValues.generalUnderlineStyleMap = generalUnderlineStyleMap;
-            resultValues.codedWhiteSpaces = codedWhiteSpaces;
+            //resultValues.codedWhiteSpaces = codedWhiteSpaces;
 
             docs.Close();
             word.Quit();
