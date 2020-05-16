@@ -25,6 +25,12 @@ namespace WindowsFormsApplication1
             InitializeComponent();
 
             codedParagraphBorder_value.Text = (resultValues.codedParagraphBorder >= 5) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedParagraphBorder_label.Visible = false;
+                codedParagraphBorder_value.Visible = false;
+            }
+
             generalParagraphLeftBorderMap_table.Controls.Clear();
             generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalParagraphLeftBorderMap_table_col0_header" }, 0, 0);
             generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalParagraphLeftBorderMap_table_col1_header" }, 1, 0);
@@ -78,6 +84,11 @@ namespace WindowsFormsApplication1
                 generalParagraphRightBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalParagraphRightBorderMap_table_col1_row" + generalParagraphRightBorderMap_table_row }, 1, generalParagraphRightBorderMap_table_row);
                 generalParagraphRightBorderMap_table_row++;
             }
+        }
+
+        private void ResultParagraphBorderGeneralScreen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

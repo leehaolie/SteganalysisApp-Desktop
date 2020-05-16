@@ -8,6 +8,7 @@ namespace WindowsFormsApplication1
     public class ResultValues
     {
         public string test;
+        public bool enableConreteMethodsCheck;
         public int countPotetntialScaleSizes;
         public int openSpacesWordsTotal;
         public int openSpacesWordsPotential;

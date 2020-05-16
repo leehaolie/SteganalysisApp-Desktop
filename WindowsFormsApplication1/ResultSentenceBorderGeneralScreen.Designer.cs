@@ -91,6 +91,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultSentenceBorderGeneralScreen";
             this.Text = "Steganalysis Result (Sentence Border - General)";
+            this.Load += new System.EventHandler(this.ResultSentenceBorderGeneralScreen_Load);
             this.sentence_border_left_group.ResumeLayout(false);
             this.sentence_border_left_group.PerformLayout();
             this.ResumeLayout(false);

@@ -25,6 +25,12 @@ namespace WindowsFormsApplication1
             InitializeComponent();
 
             codedScaling_value.Text = (resultValues.codedScaling >= 8) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedScaling_label.Visible = false;
+                codedScaling_value.Visible = false;
+            }
+
             generalScalingMap_table.Controls.Clear();
             generalScalingMap_table.Controls.Add(new Label() { Text = "Scale Size", Name = "generalScalingMap_table_col0_header" }, 0, 0);
             generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "Frequency_col1_header" }, 1, 0);
@@ -45,6 +51,11 @@ namespace WindowsFormsApplication1
                 generalScalingMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalScalingMap_table_col1_row" + generalScalingMap_table_row }, 1, generalScalingMap_table_row);
                 generalScalingMap_table_row++;
             }
+        }
+
+        private void ResultCharacterScaleGeneralScreen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

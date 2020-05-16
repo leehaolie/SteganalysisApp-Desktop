@@ -91,6 +91,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultCharacterScaleGeneralScreen";
             this.Text = "Steganalysis Result (Character Scale - General)";
+            this.Load += new System.EventHandler(this.ResultCharacterScaleGeneralScreen_Load);
             this.character_scale_group.ResumeLayout(false);
             this.character_scale_group.PerformLayout();
             this.ResumeLayout(false);

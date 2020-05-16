@@ -128,6 +128,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultParagraphBorderGeneralScreen";
             this.Text = "Steganalysis Result (Paragraph Border - General)";
+            this.Load += new System.EventHandler(this.ResultParagraphBorderGeneralScreen_Load);
             this.paragraph_border_group.ResumeLayout(false);
             this.paragraph_border_group.PerformLayout();
             this.ResumeLayout(false);

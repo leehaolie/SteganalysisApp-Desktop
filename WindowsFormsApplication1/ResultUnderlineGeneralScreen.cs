@@ -25,6 +25,12 @@ namespace WindowsFormsApplication1
             InitializeComponent();
 
             codedUnderline_value.Text = (resultValues.codedUnderline >= 5) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedUnderline_label.Visible = false;
+                codedUnderline_value.Visible = false;
+            }
+
             generalUnderlineMap_table.Controls.Clear();
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Underline Style", Name = "generalUnderlineMap_table_col0_header" }, 0, 0);
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalUnderlineMap_table_col1_header" }, 1, 0);
@@ -51,6 +57,11 @@ namespace WindowsFormsApplication1
                 generalUnderlineMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalUnderlineMap_table_col1_row" + generalUnderlineMap_table_row }, 1, generalUnderlineMap_table_row);
                 generalUnderlineMap_table_row++;
             }
+        }
+
+        private void ResultUnderlineGeneralScreen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -209,6 +209,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DetectCoding";
             this.Text = "Detect the method of steganography used in the document (Word)";
+            this.Load += new System.EventHandler(this.DetectCoding_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

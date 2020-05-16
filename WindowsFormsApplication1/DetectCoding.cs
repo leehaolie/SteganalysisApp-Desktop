@@ -18,6 +18,11 @@ namespace WindowsFormsApplication1
         public bool canChange;
         public string documentName = "No document chosen!";
         public string documentPath = "";
+        public string fileTimeLogsName                                        = "Execution Time Logs.txt";
+        public string documentTimeLogsPath = Directory.GetCurrentDirectory() + "/Execution Time Logs.txt";
+
+        public bool enableConreteMethodsCheck = false;
+        public bool enableTimeExecutionLog = true;
 
         #region check for paragraph border
         public WdLineStyle[] lineParagraphBorderStyleMap = new WdLineStyle[16];
@@ -341,60 +346,63 @@ namespace WindowsFormsApplication1
             //approach 1: first we check if our concrete algotirtam is used            
             int codedParagraphBorder = 0;
             int numCheckParagraphBorder = 0;
-            foreach (Microsoft.Office.Interop.Word.Paragraph aPar in docs.Paragraphs)
+            if (enableConreteMethodsCheck == true)
             {
-                //if after 5 paragraphs a code is still not detected, then skip this coding check
-                numCheckParagraphBorder++;
-                if (numCheckParagraphBorder == 5)
-                    break;
-
-                bool leftBorderParagraphBorderC = false;
-                bool leftBorderParagraphBorderS = false;
-                bool rightBorderParagraphBorderC = false;
-                bool rightBorderParagraphBorderS = false;
-
-                Microsoft.Office.Interop.Word.Range parRng = aPar.Range;
-                var leftBorderParagraph = WdBorderType.wdBorderLeft;
-                var rightBorderParagraph = WdBorderType.wdBorderRight;
-
-                string leftBordColor = parRng.Borders[leftBorderParagraph].Color.ToString();
-                string rightBordColor = parRng.Borders[rightBorderParagraph].Color.ToString();
-                //check if border colors are coded
-                for (int countColo = 0; countColo < colorParagraphBorderStringMap.Length; countColo++)
+                foreach (Microsoft.Office.Interop.Word.Paragraph aPar in docs.Paragraphs)
                 {
-                    if (colorParagraphBorderStringMap[countColo] == leftBordColor)
-                    {
-                        leftBorderParagraphBorderC = true;
-                    }
-                    if (colorParagraphBorderStringMap[countColo] == rightBordColor)
-                    {
-                        rightBorderParagraphBorderC = true;
-                    }
-                }
+                    //if after 5 paragraphs a code is still not detected, then skip this coding check
+                    numCheckParagraphBorder++;
+                    if (numCheckParagraphBorder == 5)
+                        break;
 
-                string leftBordStyle = parRng.Borders[leftBorderParagraph].LineStyle.ToString();
-                string rightBordStyle = parRng.Borders[rightBorderParagraph].LineStyle.ToString();
-                //check if border styles are coded
-                for (int countStyl = 0; countStyl < lineParagraphBorderStyleMap.Length; countStyl++)
-                {
-                    if (lineParagraphBorderStyleMap[countStyl].ToString() == leftBordStyle)
-                    {
-                        leftBorderParagraphBorderS = true;
-                    }
-                    if (lineParagraphBorderStyleMap[countStyl].ToString() == rightBordStyle)
-                    {
-                        rightBorderParagraphBorderS = true;
-                    }
-                }
+                    bool leftBorderParagraphBorderC = false;
+                    bool leftBorderParagraphBorderS = false;
+                    bool rightBorderParagraphBorderC = false;
+                    bool rightBorderParagraphBorderS = false;
 
-                //[4 bis for leftBorderColor][4 bits for leftBorderStyle][4 bis for rightBorderColor][4 bits for rightBorderStyle]
-                //ascii to char conversion (binary vo decimal vo ascii)
+                    Microsoft.Office.Interop.Word.Range parRng = aPar.Range;
+                    var leftBorderParagraph = WdBorderType.wdBorderLeft;
+                    var rightBorderParagraph = WdBorderType.wdBorderRight;
 
-                if (leftBorderParagraphBorderC == true && leftBorderParagraphBorderS == true &&
-                    rightBorderParagraphBorderC == true && rightBorderParagraphBorderS == true)
-                {
-                    codedParagraphBorder++;
-                    break;
+                    string leftBordColor = parRng.Borders[leftBorderParagraph].Color.ToString();
+                    string rightBordColor = parRng.Borders[rightBorderParagraph].Color.ToString();
+                    //check if border colors are coded
+                    for (int countColo = 0; countColo < colorParagraphBorderStringMap.Length; countColo++)
+                    {
+                        if (colorParagraphBorderStringMap[countColo] == leftBordColor)
+                        {
+                            leftBorderParagraphBorderC = true;
+                        }
+                        if (colorParagraphBorderStringMap[countColo] == rightBordColor)
+                        {
+                            rightBorderParagraphBorderC = true;
+                        }
+                    }
+
+                    string leftBordStyle = parRng.Borders[leftBorderParagraph].LineStyle.ToString();
+                    string rightBordStyle = parRng.Borders[rightBorderParagraph].LineStyle.ToString();
+                    //check if border styles are coded
+                    for (int countStyl = 0; countStyl < lineParagraphBorderStyleMap.Length; countStyl++)
+                    {
+                        if (lineParagraphBorderStyleMap[countStyl].ToString() == leftBordStyle)
+                        {
+                            leftBorderParagraphBorderS = true;
+                        }
+                        if (lineParagraphBorderStyleMap[countStyl].ToString() == rightBordStyle)
+                        {
+                            rightBorderParagraphBorderS = true;
+                        }
+                    }
+
+                    //[4 bis for leftBorderColor][4 bits for leftBorderStyle][4 bis for rightBorderColor][4 bits for rightBorderStyle]
+                    //ascii to char conversion (binary vo decimal vo ascii)
+
+                    if (leftBorderParagraphBorderC == true && leftBorderParagraphBorderS == true &&
+                        rightBorderParagraphBorderC == true && rightBorderParagraphBorderS == true)
+                    {
+                        codedParagraphBorder++;
+                        break;
+                    }
                 }
             }
             //approach 2: then we are doing more general check if pargraph border is susposious
@@ -532,43 +540,46 @@ namespace WindowsFormsApplication1
             //approach 1: first we check if our concrete algotirtam is used    
             var leftBorderSentenceBorder = WdBorderType.wdBorderLeft;
             int codedSentenceBorder = 0;
-            for (int k = 1; k <= rangeSentenceBorderCountSentences.Sentences.Count; k++)
+            if (enableConreteMethodsCheck == true)
             {
-                //if after 5 sentences a code is still not detected, then skip this coding check
-                if (k == 6)
-                    break;
-
-                bool leftBorderSentenceBorderC = false;
-                bool leftBorderSentenceBorderS = false;
-
-                Microsoft.Office.Interop.Word.Range s1 = rangeSentenceBorderCountSentences.Sentences[k];
-                string bordColor = s1.Borders[leftBorderSentenceBorder].Color.ToString();
-                //decode border colors
-                for (int countColo = 0; countColo < colorSentenceBorderStringMap.Length; countColo++)
+                for (int k = 1; k <= rangeSentenceBorderCountSentences.Sentences.Count; k++)
                 {
-                    if (colorSentenceBorderStringMap[countColo] == bordColor)
+                    //if after 5 sentences a code is still not detected, then skip this coding check
+                    if (k == 6)
+                        break;
+
+                    bool leftBorderSentenceBorderC = false;
+                    bool leftBorderSentenceBorderS = false;
+
+                    Microsoft.Office.Interop.Word.Range s1 = rangeSentenceBorderCountSentences.Sentences[k];
+                    string bordColor = s1.Borders[leftBorderSentenceBorder].Color.ToString();
+                    //decode border colors
+                    for (int countColo = 0; countColo < colorSentenceBorderStringMap.Length; countColo++)
                     {
-                        leftBorderSentenceBorderC = true;
+                        if (colorSentenceBorderStringMap[countColo] == bordColor)
+                        {
+                            leftBorderSentenceBorderC = true;
+                        }
                     }
-                }
 
-                string bordStyle = s1.Borders[leftBorderSentenceBorder].LineStyle.ToString();
-                //decode border styles                
-                for (int countStyl = 0; countStyl < lineSentenceBorderStyleMap.Length; countStyl++)
-                {
-                    if (lineSentenceBorderStyleMap[countStyl].ToString() == bordStyle)
+                    string bordStyle = s1.Borders[leftBorderSentenceBorder].LineStyle.ToString();
+                    //decode border styles                
+                    for (int countStyl = 0; countStyl < lineSentenceBorderStyleMap.Length; countStyl++)
                     {
-                        leftBorderSentenceBorderS = true;
+                        if (lineSentenceBorderStyleMap[countStyl].ToString() == bordStyle)
+                        {
+                            leftBorderSentenceBorderS = true;
+                        }
                     }
-                }
 
-                //[4 bis for BorderColor][3 bits for BorderStyle]
-                //ascii to char conversion (binary vo decimal vo ascii)
+                    //[4 bis for BorderColor][3 bits for BorderStyle]
+                    //ascii to char conversion (binary vo decimal vo ascii)
 
-                if (leftBorderSentenceBorderC == true && leftBorderSentenceBorderS == true)
-                {
-                    codedSentenceBorder++;
-                    break;
+                    if (leftBorderSentenceBorderC == true && leftBorderSentenceBorderS == true)
+                    {
+                        codedSentenceBorder++;
+                        break;
+                    }
                 }
             }
             //approach 2: then we are doing more general check if sentence border is susposious
@@ -645,34 +656,38 @@ namespace WindowsFormsApplication1
             int codedScaling = 0;
             int actualSizeScaling = rngScalingAll.Text.Length - 1;
             int numCheckScaling = 0;
-            while ((rngScaling.End - 1) < actualSizeScaling)
+
+            if (enableConreteMethodsCheck == true)
             {
-                //if after 8 characters a code is still not detected, then skip this coding check
-                numCheckScaling++;
-                if (numCheckScaling == 9)
-                    break;
-
-                string scaleStyle = rngScaling.Font.Scaling.ToString();
-                if (scaleStyle == "99")
+                while ((rngScaling.End - 1) < actualSizeScaling)
                 {
-                    codedScaling++;
+                    //if after 8 characters a code is still not detected, then skip this coding check
+                    numCheckScaling++;
+                    if (numCheckScaling == 9)
+                        break;
+
+                    string scaleStyle = rngScaling.Font.Scaling.ToString();
+                    if (scaleStyle == "99")
+                    {
+                        codedScaling++;
+                    }
+                    else if (scaleStyle == "101")
+                    {
+                        codedScaling++;
+                    }
+
+                    //[scale = 99% if bit is 1, scale = 101% if bit is 0]
+                    //ascii to char conversion (binary vo decimal vo ascii)
+
+                    if (codedScaling == 8)
+                        break;
+
+                    rngScaling.Select();
+                    // Move the start position 1 character.
+                    rngScaling.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                    // Move the end position 1 character.
+                    rngScaling.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
                 }
-                else if (scaleStyle == "101")
-                {
-                    codedScaling++;
-                }
-
-                //[scale = 99% if bit is 1, scale = 101% if bit is 0]
-                //ascii to char conversion (binary vo decimal vo ascii)
-
-                if (codedScaling == 8)
-                    break;
-
-                rngScaling.Select();
-                // Move the start position 1 character.
-                rngScaling.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
-                // Move the end position 1 character.
-                rngScaling.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
             }
             //approach 2: then we are doing more general check if character scaling is susposious
             int actualSizeGeneralScaling = rngGeneralScalingAll.Text.Length - 1;
@@ -713,60 +728,63 @@ namespace WindowsFormsApplication1
             int actualSizeUnderline = rngUnderlineAll.Text.Length - 1;
             int numCheckUnderline = 0;
 
-            while ((rngUnderline.End - 1) < actualSizeUnderline)
+            if (enableConreteMethodsCheck == true)
             {
-                if (Array.IndexOf(excludeUnderlineChars, rngUnderline.Text.Trim().ToLower()) > -1)
+                while ((rngUnderline.End - 1) < actualSizeUnderline)
                 {
+                    if (Array.IndexOf(excludeUnderlineChars, rngUnderline.Text.Trim().ToLower()) > -1)
+                    {
+                        rngUnderline.Select();
+                        // Move the start position 1 character
+                        rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                        // Move the end position 1 character
+                        rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                        continue;
+                    }
+
+                    //if after 5 characters a code is still not detected, then skip this coding check
+                    numCheckUnderline++;
+                    if (numCheckUnderline == 6)
+                        break;
+
+                    bool underlineC = false;
+                    bool underlineS = false;
+
+                    string underColor = rngUnderline.Font.UnderlineColor.ToString();
+                    //decode underline color
+                    for (int countColo = 0; countColo < colorUnderlineStringMap.Length; countColo++)
+                    {
+                        if (colorUnderlineStringMap[countColo] == underColor)
+                        {
+                            underlineC = true;
+                        }
+                    }
+
+                    string underStyle = rngUnderline.Font.Underline.ToString();
+                    //decode underline styles                
+                    for (int countStyl = 0; countStyl < lineUnderlineStyleMap.Length; countStyl++)
+                    {
+                        if (lineUnderlineStyleMap[countStyl].ToString() == underStyle)
+                        {
+                            underlineS = true;
+                        }
+                    }
+
+                    //[4 bis for UnderlineColor][4 bits for UnderlineStyle]
+                    //ascii to char conversion (binary vo decimal vo ascii)
+
+                    if (underlineC == true && underlineS == true)
+                    {
+                        codedUnderline++;
+                        //break;
+                    }
+
                     rngUnderline.Select();
                     // Move the start position 1 character
                     rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
                     // Move the end position 1 character
                     rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
-                    continue;
-                }                    
-
-                //if after 5 characters a code is still not detected, then skip this coding check
-                numCheckUnderline++;
-                if (numCheckUnderline == 6)
-                    break;
-
-                bool underlineC = false;
-                bool underlineS = false;
-
-                string underColor = rngUnderline.Font.UnderlineColor.ToString();
-                //decode underline color
-                for (int countColo = 0; countColo < colorUnderlineStringMap.Length; countColo++)
-                {
-                    if (colorUnderlineStringMap[countColo] == underColor)
-                    {
-                        underlineC = true;
-                    }
                 }
-
-                string underStyle = rngUnderline.Font.Underline.ToString();
-                //decode underline styles                
-                for (int countStyl = 0; countStyl < lineUnderlineStyleMap.Length; countStyl++)
-                {
-                    if (lineUnderlineStyleMap[countStyl].ToString() == underStyle)
-                    {
-                        underlineS = true;
-                    }
-                }
-
-                //[4 bis for UnderlineColor][4 bits for UnderlineStyle]
-                //ascii to char conversion (binary vo decimal vo ascii)
-
-                if (underlineC == true && underlineS == true)
-                {
-                    codedUnderline++;
-                    //break;
-                }
-
-                rngUnderline.Select();
-                // Move the start position 1 character
-                rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
-                // Move the end position 1 character
-                rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
             }
             //approach 2: then we are doing more general check if character underline is susposious
             int actualSizeGeneralUnderline = rngGeneralUnderlineAll.Text.Length - 1;
@@ -849,294 +867,297 @@ namespace WindowsFormsApplication1
             }*/
             #endregion
             #region check for white spaces
-            //int codedWhiteSpaces = 0;
-            //int[] arrayNulls = new int[rngWhiteSpaces.End]; int countNulls = 0;
-            //int[] arrayOnes = new int[rngWhiteSpaces.End]; int countOnes = 0;
-            //bool foundDigitZeroes = false;
-            //bool foundDigitOnes = false;
+            int codedWhiteSpaces = 0;
+            if (enableConreteMethodsCheck == true)
+            {
+                //not sure if works well
+                int[] arrayNulls = new int[rngWhiteSpaces.End]; int countNulls = 0;
+                int[] arrayOnes = new int[rngWhiteSpaces.End]; int countOnes = 0;
+                bool foundDigitZeroes = false;
+                bool foundDigitOnes = false;
 
-            ////poziciite na sekoi prazni mesta so sina pozadina ke se zacuvuvaat vo nizata arrayNulls
-            //Microsoft.Office.Interop.Word.Range rangeNulls = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNulls = rangeNulls.Find;
-            //findNulls.ClearFormatting();
-            //findNulls.Font.Color = WdColor.wdColorBlack;
-            //findNulls.Text = " ";
-            //rangeNulls.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //while (rangeNulls.Find.Found)
-            //{
-            //    arrayNulls[countNulls] = rangeNulls.Start;
-            //    countNulls++;
-            //    rangeNulls.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //}
+                //poziciite na sekoi prazni mesta so sina pozadina ke se zacuvuvaat vo nizata arrayNulls
+                Microsoft.Office.Interop.Word.Range rangeNulls = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNulls = rangeNulls.Find;
+                findNulls.ClearFormatting();
+                findNulls.Font.Color = WdColor.wdColorBlack;
+                findNulls.Text = " ";
+                rangeNulls.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                while (rangeNulls.Find.Found)
+                {
+                    arrayNulls[countNulls] = rangeNulls.Start;
+                    countNulls++;
+                    rangeNulls.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                }
 
-            ////poziciite na sekoi prazni mesta so crvena pozadina ke se zacuvuvaat vo nizata arrayOnes
-            //Microsoft.Office.Interop.Word.Range rangeOnes = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findOnes = rangeOnes.Find;
-            //findOnes.ClearFormatting();
-            //findOnes.Font.Color = WdColor.wdColorGray90;
-            //findOnes.Text = " ";
-            //rangeOnes.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //while (rangeOnes.Find.Found)
-            //{
-            //    arrayOnes[countOnes] = rangeOnes.Start;
-            //    countOnes++;
-            //    rangeOnes.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //}
+                //poziciite na sekoi prazni mesta so crvena pozadina ke se zacuvuvaat vo nizata arrayOnes
+                Microsoft.Office.Interop.Word.Range rangeOnes = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findOnes = rangeOnes.Find;
+                findOnes.ClearFormatting();
+                findOnes.Font.Color = WdColor.wdColorGray90;
+                findOnes.Text = " ";
+                rangeOnes.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                while (rangeOnes.Find.Found)
+                {
+                    arrayOnes[countOnes] = rangeOnes.Start;
+                    countOnes++;
+                    rangeOnes.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                }
 
-            ////ke se formira soedineta niza (array) on 1-ovi i 0-li vo zavisnost od poziciite
-            //int count0 = 0;
-            //int count1 = 0;
-            //int count = 0;
-            //int[] array = new int[countNulls + countOnes];
-            //while ((count0 < countNulls) && (count1 < countOnes))
-            //{
-            //    if (arrayNulls[count0] < arrayOnes[count1])
-            //    {
-            //        array[count] = 0;
-            //        count++;
-            //        count0++;
-            //    }
-            //    else if (arrayNulls[count0] > arrayOnes[count1])
-            //    {
-            //        array[count] = 1;
-            //        count++;
-            //        count1++;
-            //    }
-            //}
-            //while (count0 < countNulls)
-            //{
-            //    array[count] = 0;
-            //    count++;
-            //    count0++;
-            //}
-            //while (count1 < countOnes)
-            //{
-            //    array[count] = 1;
-            //    count++;
-            //    count1++;
-            //}
+                //ke se formira soedineta niza (array) on 1-ovi i 0-li vo zavisnost od poziciite
+                int count0 = 0;
+                int count1 = 0;
+                int count = 0;
+                int[] array = new int[countNulls + countOnes];
+                while ((count0 < countNulls) && (count1 < countOnes))
+                {
+                    if (arrayNulls[count0] < arrayOnes[count1])
+                    {
+                        array[count] = 0;
+                        count++;
+                        count0++;
+                    }
+                    else if (arrayNulls[count0] > arrayOnes[count1])
+                    {
+                        array[count] = 1;
+                        count++;
+                        count1++;
+                    }
+                }
+                while (count0 < countNulls)
+                {
+                    array[count] = 0;
+                    count++;
+                    count0++;
+                }
+                while (count1 < countOnes)
+                {
+                    array[count] = 1;
+                    count++;
+                    count1++;
+                }
 
-            //string niza = "";
-            //for (int brojac = 0; brojac < array.Length; brojac++)
-            //{
-            //    niza = niza + array[brojac].ToString();
-            //}
-            ////stringot da se podeli na po 8 karakteri i dobienite broevi da se pretvorat od ascii vo karakteri
-            //int dolzinaKrajnaNiza0i1 = niza.Length;
-            //int kolkuZnaciIma = dolzinaKrajnaNiza0i1 / 8;
-            //string dekodiranaNiza = "";
-            //string konkretnaVrednostBinarna;
-            //int odBinarnoVoDecimalno;
+                string niza = "";
+                for (int brojac = 0; brojac < array.Length; brojac++)
+                {
+                    niza = niza + array[brojac].ToString();
+                }
+                //stringot da se podeli na po 8 karakteri i dobienite broevi da se pretvorat od ascii vo karakteri
+                int dolzinaKrajnaNiza0i1 = niza.Length;
+                int kolkuZnaciIma = dolzinaKrajnaNiza0i1 / 8;
+                string dekodiranaNiza = "";
+                string konkretnaVrednostBinarna;
+                int odBinarnoVoDecimalno;
 
-            //for (int brojacZemajOsumZnaci = 0; brojacZemajOsumZnaci < kolkuZnaciIma; brojacZemajOsumZnaci++)
-            //{
-            //    konkretnaVrednostBinarna = niza.Substring(brojacZemajOsumZnaci * 8, 8);
-            //    //  odBinarnoVoDecimalno = Convert.ToInt32(konkretnaVrednostBinarna, 2); decimalna vrednost na ascii kodot
-            //    dekodiranaNiza = dekodiranaNiza + Char.ConvertFromUtf32(Convert.ToInt32(konkretnaVrednostBinarna, 2));
-            //}
+                for (int brojacZemajOsumZnaci = 0; brojacZemajOsumZnaci < kolkuZnaciIma; brojacZemajOsumZnaci++)
+                {
+                    konkretnaVrednostBinarna = niza.Substring(brojacZemajOsumZnaci * 8, 8);
+                    //  odBinarnoVoDecimalno = Convert.ToInt32(konkretnaVrednostBinarna, 2); decimalna vrednost na ascii kodot
+                    dekodiranaNiza = dekodiranaNiza + Char.ConvertFromUtf32(Convert.ToInt32(konkretnaVrednostBinarna, 2));
+                }
 
-            ////proverka dali brojot na znaci odgovara so brojot na znaci vnesen na krajot vo zigot           
-            ////boite i poziciite na sekoi prazni mesta so odredena boja na pozadina ke se zacuvuvaat vo nizite arrayColor i arrayPos
-            //Microsoft.Office.Interop.Word.Range rangeNums0 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums0 = rangeNums0.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums1 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums1 = rangeNums1.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums2 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums2 = rangeNums2.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums3 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums3 = rangeNums3.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums4 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums4 = rangeNums4.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums5 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums5 = rangeNums5.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums6 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums6 = rangeNums6.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums7 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums7 = rangeNums7.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums8 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums8 = rangeNums8.Find;
-            //Microsoft.Office.Interop.Word.Range rangeNums9 = word.ActiveDocument.Content;
-            //Microsoft.Office.Interop.Word.Find findNums9 = rangeNums9.Find;
+                //proverka dali brojot na znaci odgovara so brojot na znaci vnesen na krajot vo zigot           
+                //boite i poziciite na sekoi prazni mesta so odredena boja na pozadina ke se zacuvuvaat vo nizite arrayColor i arrayPos
+                Microsoft.Office.Interop.Word.Range rangeNums0 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums0 = rangeNums0.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums1 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums1 = rangeNums1.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums2 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums2 = rangeNums2.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums3 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums3 = rangeNums3.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums4 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums4 = rangeNums4.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums5 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums5 = rangeNums5.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums6 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums6 = rangeNums6.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums7 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums7 = rangeNums7.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums8 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums8 = rangeNums8.Find;
+                Microsoft.Office.Interop.Word.Range rangeNums9 = word.ActiveDocument.Content;
+                Microsoft.Office.Interop.Word.Find findNums9 = rangeNums9.Find;
 
-            //int[] arrayPos = new int[6]; int countNums = 0;
-            //int[] arrayColor = new int[6];
+                int[] arrayPos = new int[6]; int countNums = 0;
+                int[] arrayColor = new int[6];
 
-            //int brojac6 = 6; //
-            //                 // while (brojac6 > 0)
-            //{
-            //    findNums0.ClearFormatting();
-            //    findNums0.Font.Color = WdColor.wdColorGray05;
-            //    findNums0.Text = " ";
-            //    rangeNums0.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums0.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums0.Start;
-            //        arrayColor[countNums] = 0;
-            //        countNums++;
-            //        rangeNums0.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums1.ClearFormatting();
-            //    findNums1.Font.Color = WdColor.wdColorGray15;
-            //    findNums1.Text = " ";
-            //    rangeNums1.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums1.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums1.Start;
-            //        arrayColor[countNums] = 1;
-            //        countNums++;
-            //        rangeNums1.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums2.ClearFormatting();
-            //    findNums2.Font.Color = WdColor.wdColorGray25;
-            //    findNums2.Text = " ";
-            //    rangeNums2.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums2.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums2.Start;
-            //        arrayColor[countNums] = 2;
-            //        countNums++;
-            //        rangeNums2.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums3.ClearFormatting();
-            //    findNums3.Font.Color = WdColor.wdColorGray35;
-            //    findNums3.Text = " ";
-            //    rangeNums3.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums3.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums3.Start;
-            //        arrayColor[countNums] = 3;
-            //        countNums++;
-            //        rangeNums3.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums4.ClearFormatting();
-            //    findNums4.Font.Color = WdColor.wdColorGray45;
-            //    findNums4.Text = " ";
-            //    rangeNums4.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums4.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums4.Start;
-            //        arrayColor[countNums] = 4;
-            //        countNums++;
-            //        rangeNums4.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums5.ClearFormatting();
-            //    findNums5.Font.Color = WdColor.wdColorGray55;
-            //    findNums5.Text = " ";
-            //    rangeNums5.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums5.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums5.Start;
-            //        arrayColor[countNums] = 5;
-            //        countNums++;
-            //        rangeNums5.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums6.ClearFormatting();
-            //    findNums6.Font.Color = WdColor.wdColorGray65;
-            //    findNums6.Text = " ";
-            //    rangeNums6.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums6.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums6.Start;
-            //        arrayColor[countNums] = 6;
-            //        countNums++;
-            //        rangeNums6.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums7.ClearFormatting();
-            //    findNums7.Font.Color = WdColor.wdColorGray75;
-            //    findNums7.Text = " ";
-            //    rangeNums7.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums7.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums7.Start;
-            //        arrayColor[countNums] = 7;
-            //        countNums++;
-            //        rangeNums7.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums8.ClearFormatting();
-            //    findNums8.Font.Color = WdColor.wdColorGray85;
-            //    findNums8.Text = " ";
-            //    rangeNums8.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums8.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums8.Start;
-            //        arrayColor[countNums] = 8;
-            //        countNums++;
-            //        rangeNums8.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
-            //    findNums9.ClearFormatting();
-            //    findNums9.Font.Color = WdColor.wdColorGray95;
-            //    findNums9.Text = " ";
-            //    rangeNums9.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    while (rangeNums9.Find.Found)
-            //    {
-            //        arrayPos[countNums] = rangeNums9.Start;
-            //        arrayColor[countNums] = 9;
-            //        countNums++;
-            //        rangeNums9.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            //    }
+                int brojac6 = 6; //
+                                 // while (brojac6 > 0)
+                {
+                    findNums0.ClearFormatting();
+                    findNums0.Font.Color = WdColor.wdColorGray05;
+                    findNums0.Text = " ";
+                    rangeNums0.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums0.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums0.Start;
+                        arrayColor[countNums] = 0;
+                        countNums++;
+                        rangeNums0.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums1.ClearFormatting();
+                    findNums1.Font.Color = WdColor.wdColorGray15;
+                    findNums1.Text = " ";
+                    rangeNums1.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums1.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums1.Start;
+                        arrayColor[countNums] = 1;
+                        countNums++;
+                        rangeNums1.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums2.ClearFormatting();
+                    findNums2.Font.Color = WdColor.wdColorGray25;
+                    findNums2.Text = " ";
+                    rangeNums2.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums2.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums2.Start;
+                        arrayColor[countNums] = 2;
+                        countNums++;
+                        rangeNums2.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums3.ClearFormatting();
+                    findNums3.Font.Color = WdColor.wdColorGray35;
+                    findNums3.Text = " ";
+                    rangeNums3.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums3.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums3.Start;
+                        arrayColor[countNums] = 3;
+                        countNums++;
+                        rangeNums3.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums4.ClearFormatting();
+                    findNums4.Font.Color = WdColor.wdColorGray45;
+                    findNums4.Text = " ";
+                    rangeNums4.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums4.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums4.Start;
+                        arrayColor[countNums] = 4;
+                        countNums++;
+                        rangeNums4.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums5.ClearFormatting();
+                    findNums5.Font.Color = WdColor.wdColorGray55;
+                    findNums5.Text = " ";
+                    rangeNums5.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums5.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums5.Start;
+                        arrayColor[countNums] = 5;
+                        countNums++;
+                        rangeNums5.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums6.ClearFormatting();
+                    findNums6.Font.Color = WdColor.wdColorGray65;
+                    findNums6.Text = " ";
+                    rangeNums6.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums6.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums6.Start;
+                        arrayColor[countNums] = 6;
+                        countNums++;
+                        rangeNums6.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums7.ClearFormatting();
+                    findNums7.Font.Color = WdColor.wdColorGray75;
+                    findNums7.Text = " ";
+                    rangeNums7.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums7.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums7.Start;
+                        arrayColor[countNums] = 7;
+                        countNums++;
+                        rangeNums7.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums8.ClearFormatting();
+                    findNums8.Font.Color = WdColor.wdColorGray85;
+                    findNums8.Text = " ";
+                    rangeNums8.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums8.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums8.Start;
+                        arrayColor[countNums] = 8;
+                        countNums++;
+                        rangeNums8.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
+                    findNums9.ClearFormatting();
+                    findNums9.Font.Color = WdColor.wdColorGray95;
+                    findNums9.Text = " ";
+                    rangeNums9.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    while (rangeNums9.Find.Found)
+                    {
+                        arrayPos[countNums] = rangeNums9.Start;
+                        arrayColor[countNums] = 9;
+                        countNums++;
+                        rangeNums9.Find.Execute(ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                    }
 
-            //    brojac6--;
-            //}
-            ///*
-            //            string test1 = "";
-            //            for (int index = 0; index < arrayPos.Length; index++)
-            //            {
-            //                test1 = test1 + " pozicija: " + arrayPos[index].ToString() + " boja: " + arrayColor[index].ToString() + "\n";
-            //            }
-            //            MessageBox.Show(test1);
-            //*/
-            ////sortiranje na nizite
-            //int i, j, vrednostPos, vrednostCol, numLength = arrayPos.Length;
-            //for (j = 1; j < numLength; j++)
-            //{
-            //    vrednostPos = arrayPos[j];
-            //    vrednostCol = arrayColor[j];
-            //    for (i = j - 1; (i >= 0) && (arrayPos[i] > vrednostPos); i--)
-            //    {
-            //        arrayPos[i + 1] = arrayPos[i];
-            //        arrayColor[i + 1] = arrayColor[i];
-            //    }
-            //    arrayPos[i + 1] = vrednostPos;
-            //    arrayColor[i + 1] = vrednostCol;
-            //}
-            ///*
-            //            string test = "";
-            //            for (int index = 0; index < arrayPos.Length; index++)
-            //            {
-            //                test = test + " pozicija: " + arrayPos[index].ToString() + " boja: " + arrayColor[index].ToString() + "\n";
-            //            } 
-            //            MessageBox.Show(test);
-            //*/
-            //string kodiranBroj = "";
-            ////nizata arrayColor go sodrzi kodiraniot broj na znaci
-            //for (int index = 0; index < arrayColor.Length; index++)
-            //{
-            //    kodiranBroj = kodiranBroj + arrayColor[index].ToString();
-            //}
+                    brojac6--;
+                }
+                /*
+                            string test1 = "";
+                            for (int index = 0; index < arrayPos.Length; index++)
+                            {
+                                test1 = test1 + " pozicija: " + arrayPos[index].ToString() + " boja: " + arrayColor[index].ToString() + "\n";
+                            }
+                            MessageBox.Show(test1);
+                */
+                //sortiranje na nizite
+                int i, j, vrednostPos, vrednostCol, numLength = arrayPos.Length;
+                for (j = 1; j < numLength; j++)
+                {
+                    vrednostPos = arrayPos[j];
+                    vrednostCol = arrayColor[j];
+                    for (i = j - 1; (i >= 0) && (arrayPos[i] > vrednostPos); i--)
+                    {
+                        arrayPos[i + 1] = arrayPos[i];
+                        arrayColor[i + 1] = arrayColor[i];
+                    }
+                    arrayPos[i + 1] = vrednostPos;
+                    arrayColor[i + 1] = vrednostCol;
+                }
+                /*
+                            string test = "";
+                            for (int index = 0; index < arrayPos.Length; index++)
+                            {
+                                test = test + " pozicija: " + arrayPos[index].ToString() + " boja: " + arrayColor[index].ToString() + "\n";
+                            } 
+                            MessageBox.Show(test);
+                */
+                string kodiranBroj = "";
+                //nizata arrayColor go sodrzi kodiraniot broj na znaci
+                for (int index = 0; index < arrayColor.Length; index++)
+                {
+                    kodiranBroj = kodiranBroj + arrayColor[index].ToString();
+                }
 
-            ////ureduvanje na formatot na kodiranBroj da se sovpaga so formatot sto e na krajot od zigot
-            //int countElements = countNulls + countOnes;
-            //string countElementsSting = countElements.ToString();
-            //int kolkuNuliPlusElements = 0;
-            //int proverkaElements = countElements;
-            //while (proverkaElements > 0)
-            //{
-            //    kolkuNuliPlusElements++;
-            //    proverkaElements = proverkaElements / 10;
-            //}
-            //int brojNaNenultiCifriElements = kolkuNuliPlusElements; //primer za 1234, brojNaNenultiCifriElements = 4 cifri
-            //kolkuNuliPlusElements = 6 - kolkuNuliPlusElements;      //primer za 1234 treba da se dodade 001234, pa = 2
-            //while (kolkuNuliPlusElements > 0)
-            //{
-            //    countElementsSting = "0" + countElementsSting;
-            //    kolkuNuliPlusElements--;
-            //}
+                //ureduvanje na formatot na kodiranBroj da se sovpaga so formatot sto e na krajot od zigot
+                int countElements = countNulls + countOnes;
+                string countElementsSting = countElements.ToString();
+                int kolkuNuliPlusElements = 0;
+                int proverkaElements = countElements;
+                while (proverkaElements > 0)
+                {
+                    kolkuNuliPlusElements++;
+                    proverkaElements = proverkaElements / 10;
+                }
+                int brojNaNenultiCifriElements = kolkuNuliPlusElements; //primer za 1234, brojNaNenultiCifriElements = 4 cifri
+                kolkuNuliPlusElements = 6 - kolkuNuliPlusElements;      //primer za 1234 treba da se dodade 001234, pa = 2
+                while (kolkuNuliPlusElements > 0)
+                {
+                    countElementsSting = "0" + countElementsSting;
+                    kolkuNuliPlusElements--;
+                }
 
-            //if (niza != "" && countElementsSting == kodiranBroj)
-            //{
-            //    codedWhiteSpaces++;
-            //}
-
+                if (niza != "" && countElementsSting == kodiranBroj)
+                {
+                    codedWhiteSpaces++;
+                }
+            }
             #endregion
             #region check for open spaces (words + sentences)
             for (int k = 1; k <= rangeWords.Words.Count; k++)
@@ -1634,7 +1655,8 @@ namespace WindowsFormsApplication1
             resultValues.generalUnderlineMap = generalUnderlineMap;
             //resultValues.generalUnderlineColorMap = generalUnderlineColorMap;
             //resultValues.generalUnderlineStyleMap = generalUnderlineStyleMap;
-            //resultValues.codedWhiteSpaces = codedWhiteSpaces;
+            resultValues.codedWhiteSpaces = codedWhiteSpaces;
+            resultValues.enableConreteMethodsCheck = enableConreteMethodsCheck;
 
             docs.Close();
             word.Quit();
@@ -1705,8 +1727,10 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
             Microsoft.Office.Interop.Word.Range rangeWords = word.ActiveDocument.Content;
             Microsoft.Office.Interop.Word.Range rangeSentences = word.ActiveDocument.Content;
-            
+
             #region check for open spaces (words + sentences)
+            var watchOpenSpacesWords = new System.Diagnostics.Stopwatch();
+            watchOpenSpacesWords.Start();
             for (int k = 1; k <= rangeWords.Words.Count; k++)
             {
                 Microsoft.Office.Interop.Word.Range w1 = rangeWords.Words[k];
@@ -1721,6 +1745,11 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
+            watchOpenSpacesWords.Stop();
+            LogExecutionTime("OpenSpacesWords", watchOpenSpacesWords);
+
+            var watchOpenSpacesSentences = new System.Diagnostics.Stopwatch();
+            watchOpenSpacesSentences.Start();
             for (int k = 1; k <= rangeSentences.Sentences.Count; k++)
             {
                 Microsoft.Office.Interop.Word.Range s1 = rangeSentences.Sentences[k];
@@ -1735,6 +1764,8 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
+            watchOpenSpacesSentences.Stop();
+            LogExecutionTime("OpenSpacesSentences", watchOpenSpacesSentences);
             #endregion
 
             ResultValues resultValues = new ResultValues();
@@ -1764,6 +1795,10 @@ namespace WindowsFormsApplication1
             String word1 = String.Empty;
             String word2 = String.Empty;
 
+            var watchWordMappingA_AN = new System.Diagnostics.Stopwatch();
+            watchWordMappingA_AN.Start();
+            var watchWordMappingInvChars = new System.Diagnostics.Stopwatch();
+            watchWordMappingInvChars.Start();
             foreach (Microsoft.Office.Interop.Word.Range r in docs.Words)
             {
                 if (countWord == 1)
@@ -1780,6 +1815,11 @@ namespace WindowsFormsApplication1
 
                     string word1Temp = word1.Trim();
                     string word2Temp = word2.Trim();
+
+                    if (!watchWordMappingA_AN.IsRunning)
+                        watchWordMappingA_AN.Start();
+                    if (watchWordMappingInvChars.IsRunning)
+                        watchWordMappingInvChars.Stop();
                     //check if the first word is 'a' or 'an' and if that's the case, check the first letter of the second word
                     if (word1Temp.ToLower() == "a" || word1Temp.ToLower() == "an")
                     {
@@ -1794,6 +1834,10 @@ namespace WindowsFormsApplication1
                         }
                     }
 
+                    if (!watchWordMappingInvChars.IsRunning)
+                        watchWordMappingInvChars.Start();
+                    if (watchWordMappingA_AN.IsRunning)
+                        watchWordMappingA_AN.Stop();
                     //check if the both word have even or odd lengths, and if that's the case, check if there are multiple characters between those words
                     if (word1Temp.Length > 0 && word2Temp.Length > 0)
                     {
@@ -1808,6 +1852,13 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
+
+            if (watchWordMappingA_AN.IsRunning)
+                watchWordMappingA_AN.Stop();
+            LogExecutionTime("WordMapping A / AN", watchWordMappingA_AN);
+            if (watchWordMappingInvChars.IsRunning)
+                watchWordMappingInvChars.Stop();
+            LogExecutionTime("WordMapping Inv. Chars.", watchWordMappingInvChars);
             #endregion
 
             ResultValues resultValues = new ResultValues();
@@ -1832,6 +1883,8 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
 
             #region check for font type
+            var watchFontTypes = new System.Diagnostics.Stopwatch();
+            watchFontTypes.Start();
             //get each sequences of each 2 adjective words and check the word mapping technique
             foreach (Microsoft.Office.Interop.Word.Range r in docs.Words)
             {
@@ -1876,6 +1929,8 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
+            watchFontTypes.Stop();
+            LogExecutionTime("FontTypes", watchFontTypes);
             #endregion
 
             ResultValues resultValues = new ResultValues();
@@ -1914,6 +1969,8 @@ namespace WindowsFormsApplication1
 
             int checkEachCharacterIndividually = 0;
 
+            var watchColorQuantization = new System.Diagnostics.Stopwatch();
+            watchColorQuantization.Start();
             while ((rngGeneral.End - 1) < actualSizeGeneral)
             {
                 rngGeneral.Select();
@@ -2026,6 +2083,8 @@ namespace WindowsFormsApplication1
                 startGeneralCount++;
                 endGeneralCount++;
             }
+            watchColorQuantization.Stop();
+            LogExecutionTime("ColorQuantization", watchColorQuantization);
             #endregion
 
             ResultValues resultValues = new ResultValues();
@@ -2066,6 +2125,10 @@ namespace WindowsFormsApplication1
 
             int checkEachCharacterIndividually = 0;
 
+            var watchInvCharsNoSpace = new System.Diagnostics.Stopwatch();
+            watchInvCharsNoSpace.Start();
+            var watchInvCharsColors = new System.Diagnostics.Stopwatch();
+            watchInvCharsColors.Start();
             while ((rngGeneral.End - 1) < actualSizeGeneral)
             {
                 rngGeneral.Select();
@@ -2084,6 +2147,10 @@ namespace WindowsFormsApplication1
                 byte[] asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
                 byte[] asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
 
+                if (!watchInvCharsNoSpace.IsRunning)
+                    watchInvCharsNoSpace.Start();
+                if (watchInvCharsColors.IsRunning)
+                    watchInvCharsColors.Stop();
                 //for each third sequence, calculate the brigtness based on RGB values 
                 //https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
                 //for each third sequence, calculate the UNICODE value for each character + count and update the unicodeDirectoryMap
@@ -2114,6 +2181,10 @@ namespace WindowsFormsApplication1
                 }
                 checkEachCharacterIndividually++;
 
+                if (!watchInvCharsColors.IsRunning)
+                    watchInvCharsColors.Start();
+                if (watchInvCharsNoSpace.IsRunning)
+                    watchInvCharsNoSpace.Stop();
                 //if the middle character is invisible, then count this situation in total cases
                 if (asciiBytes2.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes2[0]) > -1)
                 {
@@ -2132,9 +2203,16 @@ namespace WindowsFormsApplication1
                 rngGeneral.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
                 startGeneralCount++;
                 endGeneralCount++;
-            }            
+            }
+
+            if (watchInvCharsNoSpace.IsRunning)
+                watchInvCharsNoSpace.Stop();
+            LogExecutionTime("InvisibleCharactersNoSpace", watchInvCharsNoSpace);
+            if (watchInvCharsColors.IsRunning)
+                watchInvCharsColors.Stop();
+            LogExecutionTime("InvisibleCharactersColors", watchInvCharsColors);
             #endregion
-            
+
             ResultValues resultValues = new ResultValues();
             resultValues.invisibleCharactersThatTakesNoSpaceHexMap = invisibleCharactersThatTakesNoSpaceHexMap;
             resultValues.invisibleCharactersTotal = invisibleCharactersTotal;
@@ -2164,6 +2242,8 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Range rngGeneralTemp3 = null;
 
             #region check for unicode
+            var watchUnicodes = new System.Diagnostics.Stopwatch();
+            watchUnicodes.Start();
             //get each sequences of each 3 characters and: do the check if the middle character is invisible + on each new sequence check the brigthness
             //for example: 123456, invisible characters loops throught 123, 234, 234, 456;
             //                     color quantizations, unicode and MS Word Symbols[9] loops throught every third sequence 123, 456
@@ -2211,6 +2291,8 @@ namespace WindowsFormsApplication1
                         int unicodeCount2 = unicodeDirectoryMap[unicodeVal2] + 1;
                         unicodeDirectoryMap[unicodeVal2] = unicodeCount2;
                     }
+                    //check unicodes
+                    //add unicode code, select, press alt + x
                     if (unicodeDirectoryMap.ContainsKey(unicodeVal3))
                     {
                         int unicodeCount3 = unicodeDirectoryMap[unicodeVal3] + 1;
@@ -2388,6 +2470,8 @@ namespace WindowsFormsApplication1
             if (differentOccurencies_o > 1)
                 unicodeNumberSymbols++;
 
+            watchUnicodes.Stop();
+            LogExecutionTime("Unicodes", watchUnicodes);
             #endregion
 
             ResultValues resultValues = new ResultValues();
@@ -2421,37 +2505,43 @@ namespace WindowsFormsApplication1
             int codedScaling = 0;
             int actualSizeScaling = rngScalingAll.Text.Length - 1;
             int numCheckScaling = 0;
-            while ((rngScaling.End - 1) < actualSizeScaling)
+            if (enableConreteMethodsCheck == true)
             {
-                //if after 8 characters a code is still not detected, then skip this coding check
-                numCheckScaling++;
-                if (numCheckScaling == 9)
-                    break;
-
-                string scaleStyle = rngScaling.Font.Scaling.ToString();
-                if (scaleStyle == "99")
+                while ((rngScaling.End - 1) < actualSizeScaling)
                 {
-                    codedScaling++;
+                    //if after 8 characters a code is still not detected, then skip this coding check
+                    numCheckScaling++;
+                    if (numCheckScaling == 9)
+                        break;
+
+                    string scaleStyle = rngScaling.Font.Scaling.ToString();
+                    if (scaleStyle == "99")
+                    {
+                        codedScaling++;
+                    }
+                    else if (scaleStyle == "101")
+                    {
+                        codedScaling++;
+                    }
+
+                    //[scale = 99% if bit is 1, scale = 101% if bit is 0]
+                    //ascii to char conversion (binary vo decimal vo ascii)
+
+                    if (codedScaling == 8)
+                        break;
+
+                    rngScaling.Select();
+                    // Move the start position 1 character.
+                    rngScaling.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                    // Move the end position 1 character.
+                    rngScaling.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
                 }
-                else if (scaleStyle == "101")
-                {
-                    codedScaling++;
-                }
-
-                //[scale = 99% if bit is 1, scale = 101% if bit is 0]
-                //ascii to char conversion (binary vo decimal vo ascii)
-
-                if (codedScaling == 8)
-                    break;
-
-                rngScaling.Select();
-                // Move the start position 1 character.
-                rngScaling.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
-                // Move the end position 1 character.
-                rngScaling.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
             }
             //approach 2: then we are doing more general check if character scaling is susposious
             int actualSizeGeneralScaling = rngGeneralScalingAll.Text.Length - 1;
+
+            var watchCharactersScale = new System.Diagnostics.Stopwatch();
+            watchCharactersScale.Start();
             while ((rngGeneralScaling.End - 1) < actualSizeGeneralScaling)
             {
                 string scaleStyle = rngGeneralScaling.Font.Scaling.ToString();
@@ -2471,11 +2561,14 @@ namespace WindowsFormsApplication1
                 // Move the end position 1 character.
                 rngGeneralScaling.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
             }
+            watchCharactersScale.Stop();
+            LogExecutionTime("CharactersScale", watchCharactersScale);
             #endregion
-            
+
             ResultValues resultValues = new ResultValues();
             resultValues.codedScaling = codedScaling;
             resultValues.generalScalingMap = generalScalingMap;
+            resultValues.enableConreteMethodsCheck = enableConreteMethodsCheck;
 
             docs.Close();
             word.Quit();
@@ -2505,64 +2598,69 @@ namespace WindowsFormsApplication1
             int actualSizeUnderline = rngUnderlineAll.Text.Length - 1;
             int numCheckUnderline = 0;
 
-            while ((rngUnderline.End - 1) < actualSizeUnderline)
+            if (enableConreteMethodsCheck == true)
             {
-                if (Array.IndexOf(excludeUnderlineChars, rngUnderline.Text.Trim().ToLower()) > -1)
+                while ((rngUnderline.End - 1) < actualSizeUnderline)
                 {
+                    if (Array.IndexOf(excludeUnderlineChars, rngUnderline.Text.Trim().ToLower()) > -1)
+                    {
+                        rngUnderline.Select();
+                        // Move the start position 1 character
+                        rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                        // Move the end position 1 character
+                        rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                        continue;
+                    }
+
+                    //if after 5 characters a code is still not detected, then skip this coding check
+                    numCheckUnderline++;
+                    if (numCheckUnderline == 6)
+                        break;
+
+                    bool underlineC = false;
+                    bool underlineS = false;
+
+                    string underColor = rngUnderline.Font.UnderlineColor.ToString();
+                    //decode underline color
+                    for (int countColo = 0; countColo < colorUnderlineStringMap.Length; countColo++)
+                    {
+                        if (colorUnderlineStringMap[countColo] == underColor)
+                        {
+                            underlineC = true;
+                        }
+                    }
+
+                    string underStyle = rngUnderline.Font.Underline.ToString();
+                    //decode underline styles                
+                    for (int countStyl = 0; countStyl < lineUnderlineStyleMap.Length; countStyl++)
+                    {
+                        if (lineUnderlineStyleMap[countStyl].ToString() == underStyle)
+                        {
+                            underlineS = true;
+                        }
+                    }
+
+                    //[4 bis for UnderlineColor][4 bits for UnderlineStyle]
+                    //ascii to char conversion (binary vo decimal vo ascii)
+
+                    if (underlineC == true && underlineS == true)
+                    {
+                        codedUnderline++;
+                        //break;
+                    }
+
                     rngUnderline.Select();
                     // Move the start position 1 character
                     rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
                     // Move the end position 1 character
                     rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
-                    continue;
                 }
-
-                //if after 5 characters a code is still not detected, then skip this coding check
-                numCheckUnderline++;
-                if (numCheckUnderline == 6)
-                    break;
-
-                bool underlineC = false;
-                bool underlineS = false;
-
-                string underColor = rngUnderline.Font.UnderlineColor.ToString();
-                //decode underline color
-                for (int countColo = 0; countColo < colorUnderlineStringMap.Length; countColo++)
-                {
-                    if (colorUnderlineStringMap[countColo] == underColor)
-                    {
-                        underlineC = true;
-                    }
-                }
-
-                string underStyle = rngUnderline.Font.Underline.ToString();
-                //decode underline styles                
-                for (int countStyl = 0; countStyl < lineUnderlineStyleMap.Length; countStyl++)
-                {
-                    if (lineUnderlineStyleMap[countStyl].ToString() == underStyle)
-                    {
-                        underlineS = true;
-                    }
-                }
-
-                //[4 bis for UnderlineColor][4 bits for UnderlineStyle]
-                //ascii to char conversion (binary vo decimal vo ascii)
-
-                if (underlineC == true && underlineS == true)
-                {
-                    codedUnderline++;
-                    //break;
-                }
-
-                rngUnderline.Select();
-                // Move the start position 1 character
-                rngUnderline.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
-                // Move the end position 1 character
-                rngUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
             }
             //approach 2: then we are doing more general check if character underline is susposious
             int actualSizeGeneralUnderline = rngGeneralUnderlineAll.Text.Length - 1;
 
+            var watchUnderline = new System.Diagnostics.Stopwatch();
+            watchUnderline.Start();
             while ((rngGeneralUnderline.End - 1) < actualSizeGeneralUnderline)
             {
                 if (Array.IndexOf(excludeUnderlineChars, rngUnderline.Text.Trim().ToLower()) > -1)
@@ -2593,11 +2691,14 @@ namespace WindowsFormsApplication1
                 // Move the end position 1 character
                 rngGeneralUnderline.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
             }
+            watchUnderline.Stop();
+            LogExecutionTime("Underline", watchUnderline);
             #endregion
 
             ResultValues resultValues = new ResultValues();
             resultValues.codedUnderline = codedUnderline;
             resultValues.generalUnderlineMap = generalUnderlineMap;
+            resultValues.enableConreteMethodsCheck = enableConreteMethodsCheck;
 
             docs.Close();
             word.Quit();
@@ -2620,47 +2721,53 @@ namespace WindowsFormsApplication1
             //approach 1: first we check if our concrete algotirtam is used    
             var leftBorderSentenceBorder = WdBorderType.wdBorderLeft;
             int codedSentenceBorder = 0;
-            for (int k = 1; k <= rangeSentenceBorderCountSentences.Sentences.Count; k++)
+            if (enableConreteMethodsCheck == true)
             {
-                //if after 5 sentences a code is still not detected, then skip this coding check
-                if (k == 6)
-                    break;
-
-                bool leftBorderSentenceBorderC = false;
-                bool leftBorderSentenceBorderS = false;
-
-                Microsoft.Office.Interop.Word.Range s1 = rangeSentenceBorderCountSentences.Sentences[k];
-                string bordColor = s1.Borders[leftBorderSentenceBorder].Color.ToString();
-                //decode border colors
-                for (int countColo = 0; countColo < colorSentenceBorderStringMap.Length; countColo++)
+                for (int k = 1; k <= rangeSentenceBorderCountSentences.Sentences.Count; k++)
                 {
-                    if (colorSentenceBorderStringMap[countColo] == bordColor)
+                    //if after 5 sentences a code is still not detected, then skip this coding check
+                    if (k == 6)
+                        break;
+
+                    bool leftBorderSentenceBorderC = false;
+                    bool leftBorderSentenceBorderS = false;
+
+                    Microsoft.Office.Interop.Word.Range s1 = rangeSentenceBorderCountSentences.Sentences[k];
+                    string bordColor = s1.Borders[leftBorderSentenceBorder].Color.ToString();
+                    //decode border colors
+                    for (int countColo = 0; countColo < colorSentenceBorderStringMap.Length; countColo++)
                     {
-                        leftBorderSentenceBorderC = true;
+                        if (colorSentenceBorderStringMap[countColo] == bordColor)
+                        {
+                            leftBorderSentenceBorderC = true;
+                        }
                     }
-                }
 
-                string bordStyle = s1.Borders[leftBorderSentenceBorder].LineStyle.ToString();
-                //decode border styles                
-                for (int countStyl = 0; countStyl < lineSentenceBorderStyleMap.Length; countStyl++)
-                {
-                    if (lineSentenceBorderStyleMap[countStyl].ToString() == bordStyle)
+                    string bordStyle = s1.Borders[leftBorderSentenceBorder].LineStyle.ToString();
+                    //decode border styles                
+                    for (int countStyl = 0; countStyl < lineSentenceBorderStyleMap.Length; countStyl++)
                     {
-                        leftBorderSentenceBorderS = true;
+                        if (lineSentenceBorderStyleMap[countStyl].ToString() == bordStyle)
+                        {
+                            leftBorderSentenceBorderS = true;
+                        }
                     }
-                }
 
-                //[4 bis for BorderColor][3 bits for BorderStyle]
-                //ascii to char conversion (binary vo decimal vo ascii)
+                    //[4 bis for BorderColor][3 bits for BorderStyle]
+                    //ascii to char conversion (binary vo decimal vo ascii)
 
-                if (leftBorderSentenceBorderC == true && leftBorderSentenceBorderS == true)
-                {
-                    codedSentenceBorder++;
-                    break;
+                    if (leftBorderSentenceBorderC == true && leftBorderSentenceBorderS == true)
+                    {
+                        codedSentenceBorder++;
+                        break;
+                    }
                 }
             }
             //approach 2: then we are doing more general check if sentence border is susposious
             var leftBorderGeneralSentenceBorder = WdBorderType.wdBorderLeft;
+
+            var watchSentenceBorder = new System.Diagnostics.Stopwatch();
+            watchSentenceBorder.Start();
             for (int k = 1; k <= rangeSentenceGeneralBorderCountSentences.Sentences.Count; k++)
             {
                 Microsoft.Office.Interop.Word.Range s1 = rangeSentenceGeneralBorderCountSentences.Sentences[k];
@@ -2677,11 +2784,14 @@ namespace WindowsFormsApplication1
                     generalSentenceLeftBorderMap.Add(bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle, 1);
                 }
             }
+            watchSentenceBorder.Stop();
+            LogExecutionTime("SentenceBorder", watchSentenceBorder);
             #endregion
 
             ResultValues resultValues = new ResultValues();
             resultValues.codedSentenceBorder = codedSentenceBorder;
             resultValues.generalSentenceLeftBorderMap = generalSentenceLeftBorderMap;
+            resultValues.enableConreteMethodsCheck = enableConreteMethodsCheck;
 
             docs.Close();
             word.Quit();
@@ -2702,63 +2812,68 @@ namespace WindowsFormsApplication1
             //approach 1: first we check if our concrete algotirtam is used            
             int codedParagraphBorder = 0;
             int numCheckParagraphBorder = 0;
-            foreach (Microsoft.Office.Interop.Word.Paragraph aPar in docs.Paragraphs)
+            if (enableConreteMethodsCheck == true)
             {
-                //if after 5 paragraphs a code is still not detected, then skip this coding check
-                numCheckParagraphBorder++;
-                if (numCheckParagraphBorder == 5)
-                    break;
-
-                bool leftBorderParagraphBorderC = false;
-                bool leftBorderParagraphBorderS = false;
-                bool rightBorderParagraphBorderC = false;
-                bool rightBorderParagraphBorderS = false;
-
-                Microsoft.Office.Interop.Word.Range parRng = aPar.Range;
-                var leftBorderParagraph = WdBorderType.wdBorderLeft;
-                var rightBorderParagraph = WdBorderType.wdBorderRight;
-
-                string leftBordColor = parRng.Borders[leftBorderParagraph].Color.ToString();
-                string rightBordColor = parRng.Borders[rightBorderParagraph].Color.ToString();
-                //check if border colors are coded
-                for (int countColo = 0; countColo < colorParagraphBorderStringMap.Length; countColo++)
+                foreach (Microsoft.Office.Interop.Word.Paragraph aPar in docs.Paragraphs)
                 {
-                    if (colorParagraphBorderStringMap[countColo] == leftBordColor)
-                    {
-                        leftBorderParagraphBorderC = true;
-                    }
-                    if (colorParagraphBorderStringMap[countColo] == rightBordColor)
-                    {
-                        rightBorderParagraphBorderC = true;
-                    }
-                }
+                    //if after 5 paragraphs a code is still not detected, then skip this coding check
+                    numCheckParagraphBorder++;
+                    if (numCheckParagraphBorder == 5)
+                        break;
 
-                string leftBordStyle = parRng.Borders[leftBorderParagraph].LineStyle.ToString();
-                string rightBordStyle = parRng.Borders[rightBorderParagraph].LineStyle.ToString();
-                //check if border styles are coded
-                for (int countStyl = 0; countStyl < lineParagraphBorderStyleMap.Length; countStyl++)
-                {
-                    if (lineParagraphBorderStyleMap[countStyl].ToString() == leftBordStyle)
-                    {
-                        leftBorderParagraphBorderS = true;
-                    }
-                    if (lineParagraphBorderStyleMap[countStyl].ToString() == rightBordStyle)
-                    {
-                        rightBorderParagraphBorderS = true;
-                    }
-                }
+                    bool leftBorderParagraphBorderC = false;
+                    bool leftBorderParagraphBorderS = false;
+                    bool rightBorderParagraphBorderC = false;
+                    bool rightBorderParagraphBorderS = false;
 
-                //[4 bis for leftBorderColor][4 bits for leftBorderStyle][4 bis for rightBorderColor][4 bits for rightBorderStyle]
-                //ascii to char conversion (binary vo decimal vo ascii)
+                    Microsoft.Office.Interop.Word.Range parRng = aPar.Range;
+                    var leftBorderParagraph = WdBorderType.wdBorderLeft;
+                    var rightBorderParagraph = WdBorderType.wdBorderRight;
 
-                if (leftBorderParagraphBorderC == true && leftBorderParagraphBorderS == true &&
-                    rightBorderParagraphBorderC == true && rightBorderParagraphBorderS == true)
-                {
-                    codedParagraphBorder++;
-                    break;
+                    string leftBordColor = parRng.Borders[leftBorderParagraph].Color.ToString();
+                    string rightBordColor = parRng.Borders[rightBorderParagraph].Color.ToString();
+                    //check if border colors are coded
+                    for (int countColo = 0; countColo < colorParagraphBorderStringMap.Length; countColo++)
+                    {
+                        if (colorParagraphBorderStringMap[countColo] == leftBordColor)
+                        {
+                            leftBorderParagraphBorderC = true;
+                        }
+                        if (colorParagraphBorderStringMap[countColo] == rightBordColor)
+                        {
+                            rightBorderParagraphBorderC = true;
+                        }
+                    }
+
+                    string leftBordStyle = parRng.Borders[leftBorderParagraph].LineStyle.ToString();
+                    string rightBordStyle = parRng.Borders[rightBorderParagraph].LineStyle.ToString();
+                    //check if border styles are coded
+                    for (int countStyl = 0; countStyl < lineParagraphBorderStyleMap.Length; countStyl++)
+                    {
+                        if (lineParagraphBorderStyleMap[countStyl].ToString() == leftBordStyle)
+                        {
+                            leftBorderParagraphBorderS = true;
+                        }
+                        if (lineParagraphBorderStyleMap[countStyl].ToString() == rightBordStyle)
+                        {
+                            rightBorderParagraphBorderS = true;
+                        }
+                    }
+
+                    //[4 bis for leftBorderColor][4 bits for leftBorderStyle][4 bis for rightBorderColor][4 bits for rightBorderStyle]
+                    //ascii to char conversion (binary vo decimal vo ascii)
+
+                    if (leftBorderParagraphBorderC == true && leftBorderParagraphBorderS == true &&
+                        rightBorderParagraphBorderC == true && rightBorderParagraphBorderS == true)
+                    {
+                        codedParagraphBorder++;
+                        break;
+                    }
                 }
             }
             //approach 2: then we are doing more general check if pargraph border is susposious
+            var watchParagraphBorder = new System.Diagnostics.Stopwatch();
+            watchParagraphBorder.Start();
             foreach (Microsoft.Office.Interop.Word.Paragraph aGeneralPar in docs.Paragraphs)
             {
                 Microsoft.Office.Interop.Word.Range parGeneralRng = aGeneralPar.Range;
@@ -2791,17 +2906,47 @@ namespace WindowsFormsApplication1
                     generalParagraphRightBorderMap.Add(rightBordGeneralColor + "-" + rightBordGeneralStyle, 1);
                 }
             }
+            watchParagraphBorder.Stop();
+            LogExecutionTime("ParagraphBorder", watchParagraphBorder);
             #endregion
 
             ResultValues resultValues = new ResultValues();
             resultValues.codedParagraphBorder = codedParagraphBorder;
             resultValues.generalParagraphLeftBorderMap = generalParagraphLeftBorderMap;
             resultValues.generalParagraphRightBorderMap = generalParagraphRightBorderMap;
+            resultValues.enableConreteMethodsCheck = enableConreteMethodsCheck;
 
             docs.Close();
             word.Quit();
 
             (new ResultParagraphBorderGeneralScreen(resultValues)).ShowDialog();
+        }
+
+        private void DetectCoding_Load(object sender, EventArgs e)
+        {
+            if (!System.IO.File.Exists(documentTimeLogsPath))
+            {
+                using (System.IO.FileStream fs = System.IO.File.Create(documentTimeLogsPath)) { }
+                using (System.IO.StreamWriter fileTimeLog = new System.IO.StreamWriter(documentTimeLogsPath, true))
+                {
+                    fileTimeLog.WriteLine("-----------------------");
+                }
+            }
+        }
+
+        public void LogExecutionTime(string methodName, System.Diagnostics.Stopwatch watchTimer)
+        {
+            if (enableTimeExecutionLog == false)
+                return;
+
+            using (System.IO.StreamWriter fileTimeLog = new System.IO.StreamWriter(documentTimeLogsPath, true))
+            {                
+                fileTimeLog.WriteLine("Method: " + methodName);
+                fileTimeLog.WriteLine("Document: " + chosenDocumentLabel.Text);
+                fileTimeLog.WriteLine("Execution Time: " + watchTimer.ElapsedMilliseconds + " milliseconds / " + (decimal)(watchTimer.ElapsedMilliseconds / 1000.0) + " seconds / " + (decimal)(watchTimer.ElapsedMilliseconds / 60000.0) + " minutes");
+                fileTimeLog.WriteLine("-----------------------");
+                watchTimer.Reset();
+            }
         }
     }
 }

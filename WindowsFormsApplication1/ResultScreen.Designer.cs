@@ -41,9 +41,9 @@
             this.openSpacesSentencesTotal_label = new System.Windows.Forms.Label();
             this.invisible_characters_colors_group = new System.Windows.Forms.GroupBox();
             this.codedWhiteSpaces_value = new System.Windows.Forms.Label();
-            this.codedWhiteSpaces_label = new System.Windows.Forms.Label();
             this.invisibleCharactersPotential_value = new System.Windows.Forms.Label();
             this.invisibleCharactersTotal_value = new System.Windows.Forms.Label();
+            this.codedWhiteSpaces_label = new System.Windows.Forms.Label();
             this.invisibleCharactersPotential_label = new System.Windows.Forms.Label();
             this.invisibleCharactersTotal_label = new System.Windows.Forms.Label();
             this.color_quantization_group = new System.Windows.Forms.GroupBox();
@@ -242,18 +242,6 @@
             this.codedWhiteSpaces_value.Size = new System.Drawing.Size(42, 17);
             this.codedWhiteSpaces_value.TabIndex = 13;
             this.codedWhiteSpaces_value.Text = "value";
-            this.codedWhiteSpaces_value.Visible = false;
-            // 
-            // codedWhiteSpaces_label
-            // 
-            this.codedWhiteSpaces_label.AutoSize = true;
-            this.codedWhiteSpaces_label.Location = new System.Drawing.Point(11, 79);
-            this.codedWhiteSpaces_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.codedWhiteSpaces_label.Name = "codedWhiteSpaces_label";
-            this.codedWhiteSpaces_label.Size = new System.Drawing.Size(147, 17);
-            this.codedWhiteSpaces_label.TabIndex = 13;
-            this.codedWhiteSpaces_label.Text = "Concrete white space:";
-            this.codedWhiteSpaces_label.Visible = false;
             // 
             // invisibleCharactersPotential_value
             // 
@@ -274,6 +262,16 @@
             this.invisibleCharactersTotal_value.Size = new System.Drawing.Size(42, 17);
             this.invisibleCharactersTotal_value.TabIndex = 7;
             this.invisibleCharactersTotal_value.Text = "value";
+            // 
+            // codedWhiteSpaces_label
+            // 
+            this.codedWhiteSpaces_label.AutoSize = true;
+            this.codedWhiteSpaces_label.Location = new System.Drawing.Point(11, 79);
+            this.codedWhiteSpaces_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.codedWhiteSpaces_label.Name = "codedWhiteSpaces_label";
+            this.codedWhiteSpaces_label.Size = new System.Drawing.Size(147, 17);
+            this.codedWhiteSpaces_label.TabIndex = 13;
+            this.codedWhiteSpaces_label.Text = "Concrete white space:";
             // 
             // invisibleCharactersPotential_label
             // 
@@ -894,6 +892,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultScreen";
             this.Text = "Steganalysis Result";
+            this.Load += new System.EventHandler(this.ResultScreen_Load);
             this.open_spaces_words_group.ResumeLayout(false);
             this.open_spaces_words_group.PerformLayout();
             this.open_spaces_sentences_group.ResumeLayout(false);

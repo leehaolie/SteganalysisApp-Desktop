@@ -91,6 +91,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ResultUnderlineGeneralScreen";
             this.Text = "Steganalysis Result (Underline - General)";
+            this.Load += new System.EventHandler(this.ResultUnderlineGeneralScreen_Load);
             this.underline_group.ResumeLayout(false);
             this.underline_group.PerformLayout();
             this.ResumeLayout(false);

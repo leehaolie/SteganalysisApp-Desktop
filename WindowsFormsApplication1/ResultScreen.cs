@@ -43,13 +43,13 @@ namespace WindowsFormsApplication1
             //MessageBox.Show("invisibleCharactersTotal = " + resultValues.invisibleCharactersTotal + " / invisibleCharactersPotential = " + resultValues.invisibleCharactersPotential);
             invisibleCharactersTotal_value.Text = resultValues.invisibleCharactersTotal.ToString();
             invisibleCharactersPotential_value.Text = resultValues.invisibleCharactersPotential.ToString();
-            /*
-            if (resultValues.codedWhiteSpaces > 0)
-                MessageBox.Show("Steganography method is 'Word Spacing'");
-            else
-                MessageBox.Show("Steganography method is NOT 'Word Spacing'");
-            */
-            //codedWhiteSpaces_value.Text = (resultValues.codedWhiteSpaces > 0) ? "true" : "false";
+
+            codedWhiteSpaces_value.Text = (resultValues.codedWhiteSpaces > 0) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedWhiteSpaces_label.Visible = false;
+                codedWhiteSpaces_value.Visible = false;
+            }
 
             //MessageBox.Show("colorQuantizationTotal = " + resultValues.colorQuantizationTotal + " / colorQuantizationLight = " + resultValues.colorQuantizationLight + " / colorQuantizationDark = " + resultValues.colorQuantizationDark);
             colorQuantizationTotal_value.Text = resultValues.colorQuantizationTotal.ToString();
@@ -150,13 +150,13 @@ namespace WindowsFormsApplication1
             unicodeNumberSymbols_table.Controls.Add(new Label() { Text = resultValues.unicodeDirectoryMap["o1D0F"].ToString() }, 3, 13);
             unicodeNumberSymbols_table.Controls.Add(new Label() { Text = resultValues.unicodeDirectoryMap["o043E"].ToString() }, 4, 13);
 
-            /*
-            if (resultValues.codedScaling == 8)
-                MessageBox.Show("Steganography method is 'Scaling Character'");
-            else
-                MessageBox.Show("Steganography method is NOT 'Scaling Character'");
-            */
             codedScaling_value.Text = (resultValues.codedScaling >= 8) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedScaling_label.Visible = false;
+                codedScaling_value.Visible = false;
+            }
+
             generalScalingMap_table.Controls.Clear();
             generalScalingMap_table.Controls.Add(new Label() { Text = "Scale Size", Name = "generalScalingMap_table_col0_header" }, 0, 0);
             generalScalingMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalScalingMap_table_col1_header" }, 1, 0);
@@ -178,13 +178,13 @@ namespace WindowsFormsApplication1
                 generalScalingMap_table_row++;
             }
 
-            /*
-            if (resultValues.codedUnderline > 0)
-                MessageBox.Show("Steganography method is 'Underline Character'");
-            else
-                MessageBox.Show("Steganography method is NOT 'Underline Character'");
-            */
             codedUnderline_value.Text = (resultValues.codedUnderline >= 5) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedUnderline_label.Visible = false;
+                codedUnderline_value.Visible = false;
+            }
+
             generalUnderlineMap_table.Controls.Clear();
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Underline Style", Name = "generalUnderlineMap_table_col0_header" }, 0, 0);
             generalUnderlineMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalUnderlineMap_table_col1_header" }, 1, 0);
@@ -212,13 +212,13 @@ namespace WindowsFormsApplication1
                 generalUnderlineMap_table_row++;
             }
 
-            /*
-            if (resultValues.codedSentenceBorder > 0)
-                MessageBox.Show("Steganography method is 'Sentence Border'");
-            else
-                MessageBox.Show("Steganography method is NOT 'Sentence Border'");
-            */
             codedSentenceBorder_value.Text = (resultValues.codedSentenceBorder >= 5) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedSentenceBorder_label.Visible = false;
+                codedSentenceBorder_value.Visible = false;
+            }
+
             generalSentenceLeftBorderMap_table.Controls.Clear();
             generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalSentenceLeftBorderMap_table_col0_header" }, 0, 0);
             generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalSentenceLeftBorderMap_table_col1_header" }, 1, 0);
@@ -246,13 +246,13 @@ namespace WindowsFormsApplication1
                 generalSentenceLeftBorderMap_table_row++;
             }
 
-            /*
-            if (resultValues.codedParagraphBorder > 0)
-                MessageBox.Show("Steganography method is 'Paragraph Border'");
-            else
-                MessageBox.Show("Steganography method is NOT 'Paragraph Border'");
-            */
             codedParagraphBorder_value.Text = (resultValues.codedParagraphBorder >= 5) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedParagraphBorder_label.Visible = false;
+                codedParagraphBorder_value.Visible = false;
+            }
+
             generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style" }, 0, 0);
             generalParagraphLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency" }, 1, 0);
             int generalParagraphLeftBorderMap_table_row = 1;
@@ -312,6 +312,11 @@ namespace WindowsFormsApplication1
                 invisibleCharactersThatTakesNoSpaceHexMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "invisibleCharactersThatTakesNoSpaceHexMap_table_col1_row" + invisibleCharactersThatTakesNoSpaceHexMap_table_row }, 1, invisibleCharactersThatTakesNoSpaceHexMap_table_row);
                 invisibleCharactersThatTakesNoSpaceHexMap_table_row++;
             }
+        }
+
+        private void ResultScreen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

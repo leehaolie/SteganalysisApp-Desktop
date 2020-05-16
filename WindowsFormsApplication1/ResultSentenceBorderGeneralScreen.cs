@@ -25,6 +25,12 @@ namespace WindowsFormsApplication1
             InitializeComponent();
 
             codedSentenceBorder_value.Text = (resultValues.codedSentenceBorder >= 5) ? "true" : "false";
+            if (resultValues.enableConreteMethodsCheck == false)
+            {
+                codedSentenceBorder_label.Visible = false;
+                codedSentenceBorder_value.Visible = false;
+            }
+
             generalSentenceLeftBorderMap_table.Controls.Clear();
             generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalSentenceLeftBorderMap_table_col0_header" }, 0, 0);
             generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalSentenceLeftBorderMap_table_col1_header" }, 1, 0);
@@ -51,6 +57,11 @@ namespace WindowsFormsApplication1
                 generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalSentenceLeftBorderMap_table_col1_row" + generalSentenceLeftBorderMap_table_row }, 1, generalSentenceLeftBorderMap_table_row);
                 generalSentenceLeftBorderMap_table_row++;
             }
+        }
+
+        private void ResultSentenceBorderGeneralScreen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
