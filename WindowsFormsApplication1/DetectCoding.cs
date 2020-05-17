@@ -1211,9 +1211,20 @@ namespace WindowsFormsApplication1
                 string color1 = rngGeneralTemp1.Font.Color.ToString();
                 string color2 = rngGeneralTemp2.Font.Color.ToString();
                 string color3 = rngGeneralTemp3.Font.Color.ToString();
-                byte[] asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
-                byte[] asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
-                byte[] asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+
+                bool byte1proceed = true;
+                if (rngGeneralTemp1 == null || rngGeneralTemp1.Text == null)
+                    byte1proceed = false;
+                bool byte2proceed = true;
+                if (rngGeneralTemp2 == null || rngGeneralTemp2.Text == null)
+                    byte2proceed = false;
+                bool byte3proceed = true;
+                if (rngGeneralTemp3 == null || rngGeneralTemp3.Text == null)
+                    byte3proceed = false;
+
+                byte[] asciiBytes1 = null;
+                byte[] asciiBytes2 = null;
+                byte[] asciiBytes3 = null;
 
                 //for each third sequence, calculate the brigtness based on RGB values 
                 //https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
@@ -1221,128 +1232,151 @@ namespace WindowsFormsApplication1
                 //for each third sequence, check and count the invisible symbols that do not takes space (MS Word Symbols[9])
                 if (checkEachCharacterIndividually == 0 || (checkEachCharacterIndividually) % 3 == 0)
                 {
-                    //calculate the brightness related values
-                    var systemColor1 = ColorTranslator.FromWin32((int)rngGeneralTemp1.Font.Color);
-                    var systemColor2 = ColorTranslator.FromWin32((int)rngGeneralTemp2.Font.Color);
-                    var systemColor3 = ColorTranslator.FromWin32((int)rngGeneralTemp3.Font.Color);
-                    var brigthness1 = (0.2126 * (systemColor1.R / 255.0) + 0.7152 * (systemColor1.G / 255.0) + 0.0722 * (systemColor1.B / 255.0));
-                    var brigthness2 = (0.2126 * (systemColor2.R / 255.0) + 0.7152 * (systemColor2.G / 255.0) + 0.0722 * (systemColor2.B / 255.0));
-                    var brigthness3 = (0.2126 * (systemColor3.R / 255.0) + 0.7152 * (systemColor3.G / 255.0) + 0.0722 * (systemColor3.B / 255.0));
-                    colorQuantizationTotal += 3;
-
-                    if (rngGeneralTemp1.Font.Color != WdColor.wdColorAutomatic)
+                    if (byte1proceed == true)
                     {
-                        if (brigthness1 < 0.5)
+                        asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
+                        var systemColor1 = ColorTranslator.FromWin32((int)rngGeneralTemp1.Font.Color);
+                        var brigthness1 = (0.2126 * (systemColor1.R / 255.0) + 0.7152 * (systemColor1.G / 255.0) + 0.0722 * (systemColor1.B / 255.0));
+                        colorQuantizationTotal += 1;
+
+                        if (rngGeneralTemp1.Font.Color != WdColor.wdColorAutomatic)
                         {
-                            colorQuantizationDark++;
-                            if (Array.IndexOf(colorQuantizationDarkLevels, brigthness1) == -1)
+                            if (brigthness1 < 0.5)
                             {
-                                //push into array
-                                Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness1;
+                                colorQuantizationDark++;
+                                if (Array.IndexOf(colorQuantizationDarkLevels, brigthness1) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                    colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness1;
+                                }
+                            }
+                            else
+                            {
+                                colorQuantizationLight++;
+                                if (Array.IndexOf(colorQuantizationLightLevels, brigthness1) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                    colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness1;
+                                }
                             }
                         }
-                        else
+
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
+                        //check and count occrencies for the unicode approach
+                        if (unicodeDirectoryMap.ContainsKey(unicodeVal1))
                         {
-                            colorQuantizationLight++;
-                            if (Array.IndexOf(colorQuantizationLightLevels, brigthness1) == -1)
-                            {
-                                //push into array
-                                Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness1;
-                            }
+                            int unicodeCount1 = unicodeDirectoryMap[unicodeVal1] + 1;
+                            unicodeDirectoryMap[unicodeVal1] = unicodeCount1;
+                        }
+                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal1))
+                        {
+                            int wordSymbols1 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] + 1;
+                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] = wordSymbols1;
                         }
                     }
-                    if (rngGeneralTemp2.Font.Color != WdColor.wdColorAutomatic)
+
+                    if (byte2proceed == true)
                     {
-                        if (brigthness2 < 0.5)
+                        asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
+                        var systemColor2 = ColorTranslator.FromWin32((int)rngGeneralTemp2.Font.Color);
+                        var brigthness2 = (0.2126 * (systemColor2.R / 255.0) + 0.7152 * (systemColor2.G / 255.0) + 0.0722 * (systemColor2.B / 255.0));
+                        colorQuantizationTotal += 1;
+
+                        if (rngGeneralTemp2.Font.Color != WdColor.wdColorAutomatic)
                         {
-                            colorQuantizationDark++;
-                            if (Array.IndexOf(colorQuantizationDarkLevels, brigthness2) == -1)
+                            if (brigthness2 < 0.5)
                             {
-                                //push into array
-                                Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness2;
+                                colorQuantizationDark++;
+                                if (Array.IndexOf(colorQuantizationDarkLevels, brigthness2) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                    colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness2;
+                                }
+                            }
+                            else
+                            {
+                                colorQuantizationLight++;
+                                if (Array.IndexOf(colorQuantizationLightLevels, brigthness2) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                    colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness2;
+                                }
                             }
                         }
-                        else
+
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
+                        //check and count occrencies for the unicode approach
+                        if (unicodeDirectoryMap.ContainsKey(unicodeVal2))
                         {
-                            colorQuantizationLight++;
-                            if (Array.IndexOf(colorQuantizationLightLevels, brigthness2) == -1)
-                            {
-                                //push into array
-                                Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness2;
-                            }
-                        }                            
+                            int unicodeCount2 = unicodeDirectoryMap[unicodeVal2] + 1;
+                            unicodeDirectoryMap[unicodeVal2] = unicodeCount2;
+                        }
+                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal2))
+                        {
+                            int wordSymbols2 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] + 1;
+                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] = wordSymbols2;
+                        }
                     }
-                    if (rngGeneralTemp3.Font.Color != WdColor.wdColorAutomatic)
+
+                    if (byte3proceed == true)
                     {
-                        if (brigthness3 < 0.5)
+                        asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+                        var systemColor3 = ColorTranslator.FromWin32((int)rngGeneralTemp3.Font.Color);
+                        var brigthness3 = (0.2126 * (systemColor3.R / 255.0) + 0.7152 * (systemColor3.G / 255.0) + 0.0722 * (systemColor3.B / 255.0));
+                        colorQuantizationTotal += 1;
+
+                        if (rngGeneralTemp3.Font.Color != WdColor.wdColorAutomatic)
                         {
-                            colorQuantizationDark++;
-                            if (Array.IndexOf(colorQuantizationDarkLevels, brigthness3) == -1)
+                            if (brigthness3 < 0.5)
                             {
-                                //push into array
-                                Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness3;
+                                colorQuantizationDark++;
+                                if (Array.IndexOf(colorQuantizationDarkLevels, brigthness3) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                    colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness3;
+                                }
+                            }
+                            else
+                            {
+                                colorQuantizationLight++;
+                                if (Array.IndexOf(colorQuantizationLightLevels, brigthness3) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                    colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness3;
+                                }
                             }
                         }
-                        else
+
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
+                        //check and count occrencies for the unicode approach
+                        if (unicodeDirectoryMap.ContainsKey(unicodeVal3))
                         {
-                            colorQuantizationLight++;
-                            if (Array.IndexOf(colorQuantizationLightLevels, brigthness3) == -1)
-                            {
-                                //push into array
-                                Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness3;
-                            }
-                        }                            
-                    }
-
-                    //convert to unicodes and increase the dictionary where the current character is a key
-                    String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
-                    String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
-                    String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
-
-                    //check and count occrencies for the unicode approach
-                    if (unicodeDirectoryMap.ContainsKey(unicodeVal1))
-                    {
-                        int unicodeCount1 = unicodeDirectoryMap[unicodeVal1] + 1;
-                        unicodeDirectoryMap[unicodeVal1] = unicodeCount1;
+                            int unicodeCount3 = unicodeDirectoryMap[unicodeVal3] + 1;
+                            unicodeDirectoryMap[unicodeVal3] = unicodeCount3;
+                        }
+                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal3))
+                        {
+                            int wordSymbols3 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] + 1;
+                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] = wordSymbols3;
+                        }
                     }                    
-                    if (unicodeDirectoryMap.ContainsKey(unicodeVal2))
-                    {
-                        int unicodeCount2 = unicodeDirectoryMap[unicodeVal2] + 1;
-                        unicodeDirectoryMap[unicodeVal2] = unicodeCount2;
-                    }                    
-                    if (unicodeDirectoryMap.ContainsKey(unicodeVal3))
-                    {
-                        int unicodeCount3 = unicodeDirectoryMap[unicodeVal3] + 1;
-                        unicodeDirectoryMap[unicodeVal3] = unicodeCount3;
-                    }
-
-                    //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
-                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal1))
-                    {
-                        int wordSymbols1 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] + 1;
-                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] = wordSymbols1;
-                    }
-                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal2))
-                    {
-                        int wordSymbols2 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] + 1;
-                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] = wordSymbols2;
-                    }
-                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal3))
-                    {
-                        int wordSymbols3 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] + 1;
-                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] = wordSymbols3;
-                    }
                 }
                 checkEachCharacterIndividually++;
 
                 //if the middle character is invisible, then count this situation in total cases
-                if (asciiBytes2.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes2[0]) > -1)
+                if (byte2proceed == true && asciiBytes2 != null && asciiBytes2.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes2[0]) > -1)
                 {
                     invisibleCharactersTotal++;
                     //if the 1st and 3th character are with the same color and if
@@ -1985,9 +2019,20 @@ namespace WindowsFormsApplication1
                 string color1 = rngGeneralTemp1.Font.Color.ToString();
                 string color2 = rngGeneralTemp2.Font.Color.ToString();
                 string color3 = rngGeneralTemp3.Font.Color.ToString();
-                byte[] asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
-                byte[] asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
-                byte[] asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+
+                bool byte1proceed = true;
+                if (rngGeneralTemp1 == null || rngGeneralTemp1.Text == null)
+                    byte1proceed = false;
+                bool byte2proceed = true;
+                if (rngGeneralTemp2 == null || rngGeneralTemp2.Text == null)
+                    byte2proceed = false;
+                bool byte3proceed = true;
+                if (rngGeneralTemp3 == null || rngGeneralTemp3.Text == null)
+                    byte3proceed = false;
+
+                byte[] asciiBytes1 = null;
+                byte[] asciiBytes2 = null;
+                byte[] asciiBytes3 = null;
 
                 //for each third sequence, calculate the brigtness based on RGB values 
                 //https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
@@ -1995,81 +2040,98 @@ namespace WindowsFormsApplication1
                 //for each third sequence, check and count the invisible symbols that do not takes space (MS Word Symbols[9])
                 if (checkEachCharacterIndividually == 0 || (checkEachCharacterIndividually) % 3 == 0)
                 {
-                    //calculate the brightness related values
-                    var systemColor1 = ColorTranslator.FromWin32((int)rngGeneralTemp1.Font.Color);
-                    var systemColor2 = ColorTranslator.FromWin32((int)rngGeneralTemp2.Font.Color);
-                    var systemColor3 = ColorTranslator.FromWin32((int)rngGeneralTemp3.Font.Color);
-                    var brigthness1 = (0.2126 * (systemColor1.R / 255.0) + 0.7152 * (systemColor1.G / 255.0) + 0.0722 * (systemColor1.B / 255.0));
-                    var brigthness2 = (0.2126 * (systemColor2.R / 255.0) + 0.7152 * (systemColor2.G / 255.0) + 0.0722 * (systemColor2.B / 255.0));
-                    var brigthness3 = (0.2126 * (systemColor3.R / 255.0) + 0.7152 * (systemColor3.G / 255.0) + 0.0722 * (systemColor3.B / 255.0));
-                    colorQuantizationTotal += 3;
+                    if (byte1proceed == true)
+                    {
+                        asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
+                        var systemColor1 = ColorTranslator.FromWin32((int)rngGeneralTemp1.Font.Color);
+                        var brigthness1 = (0.2126 * (systemColor1.R / 255.0) + 0.7152 * (systemColor1.G / 255.0) + 0.0722 * (systemColor1.B / 255.0));
+                        colorQuantizationTotal++;
 
-                    if (rngGeneralTemp1.Font.Color != WdColor.wdColorAutomatic)
-                    {
-                        if (brigthness1 < 0.5)
+                        if (rngGeneralTemp1.Font.Color != WdColor.wdColorAutomatic)
                         {
-                            colorQuantizationDark++;
-                            if (Array.IndexOf(colorQuantizationDarkLevels, brigthness1) == -1)
+                            if (brigthness1 < 0.5)
                             {
-                                //push into array
-                                Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness1;
+                                colorQuantizationDark++;
+                                if (Array.IndexOf(colorQuantizationDarkLevels, brigthness1) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                    colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness1;
+                                }
                             }
-                        }
-                        else
-                        {
-                            colorQuantizationLight++;
-                            if (Array.IndexOf(colorQuantizationLightLevels, brigthness1) == -1)
+                            else
                             {
-                                //push into array
-                                Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness1;
-                            }
-                        }
-                    }
-                    if (rngGeneralTemp2.Font.Color != WdColor.wdColorAutomatic)
-                    {
-                        if (brigthness2 < 0.5)
-                        {
-                            colorQuantizationDark++;
-                            if (Array.IndexOf(colorQuantizationDarkLevels, brigthness2) == -1)
-                            {
-                                //push into array
-                                Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness2;
-                            }
-                        }
-                        else
-                        {
-                            colorQuantizationLight++;
-                            if (Array.IndexOf(colorQuantizationLightLevels, brigthness2) == -1)
-                            {
-                                //push into array
-                                Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness2;
+                                colorQuantizationLight++;
+                                if (Array.IndexOf(colorQuantizationLightLevels, brigthness1) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                    colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness1;
+                                }
                             }
                         }
                     }
-                    if (rngGeneralTemp3.Font.Color != WdColor.wdColorAutomatic)
+
+                    if (byte2proceed == true)
                     {
-                        if (brigthness3 < 0.5)
+                        asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
+                        var systemColor2 = ColorTranslator.FromWin32((int)rngGeneralTemp2.Font.Color);
+                        var brigthness2 = (0.2126 * (systemColor2.R / 255.0) + 0.7152 * (systemColor2.G / 255.0) + 0.0722 * (systemColor2.B / 255.0));
+                        colorQuantizationTotal++;
+
+                        if (rngGeneralTemp2.Font.Color != WdColor.wdColorAutomatic)
                         {
-                            colorQuantizationDark++;
-                            if (Array.IndexOf(colorQuantizationDarkLevels, brigthness3) == -1)
+                            if (brigthness2 < 0.5)
                             {
-                                //push into array
-                                Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness3;
+                                colorQuantizationDark++;
+                                if (Array.IndexOf(colorQuantizationDarkLevels, brigthness2) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                    colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness2;
+                                }
+                            }
+                            else
+                            {
+                                colorQuantizationLight++;
+                                if (Array.IndexOf(colorQuantizationLightLevels, brigthness2) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                    colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness2;
+                                }
                             }
                         }
-                        else
+                    }
+
+                    if (byte3proceed == true)
+                    {
+                        asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+                        var systemColor3 = ColorTranslator.FromWin32((int)rngGeneralTemp3.Font.Color);
+                        var brigthness3 = (0.2126 * (systemColor3.R / 255.0) + 0.7152 * (systemColor3.G / 255.0) + 0.0722 * (systemColor3.B / 255.0));
+                        colorQuantizationTotal++;
+
+                        if (rngGeneralTemp3.Font.Color != WdColor.wdColorAutomatic)
                         {
-                            colorQuantizationLight++;
-                            if (Array.IndexOf(colorQuantizationLightLevels, brigthness3) == -1)
+                            if (brigthness3 < 0.5)
                             {
-                                //push into array
-                                Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness3;
+                                colorQuantizationDark++;
+                                if (Array.IndexOf(colorQuantizationDarkLevels, brigthness3) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                    colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness3;
+                                }
+                            }
+                            else
+                            {
+                                colorQuantizationLight++;
+                                if (Array.IndexOf(colorQuantizationLightLevels, brigthness3) == -1)
+                                {
+                                    //push into array
+                                    Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                    colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness3;
+                                }
                             }
                         }
                     }
@@ -2143,9 +2205,20 @@ namespace WindowsFormsApplication1
                 string color1 = rngGeneralTemp1.Font.Color.ToString();
                 string color2 = rngGeneralTemp2.Font.Color.ToString();
                 string color3 = rngGeneralTemp3.Font.Color.ToString();
-                byte[] asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
-                byte[] asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
-                byte[] asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+
+                bool byte1proceed = true;
+                if (rngGeneralTemp1 == null || rngGeneralTemp1.Text == null)
+                    byte1proceed = false;
+                bool byte2proceed = true;
+                if (rngGeneralTemp2 == null || rngGeneralTemp2.Text == null)
+                    byte2proceed = false;
+                bool byte3proceed = true;
+                if (rngGeneralTemp3 == null || rngGeneralTemp3.Text == null)
+                    byte3proceed = false;
+
+                byte[] asciiBytes1 = null;
+                byte[] asciiBytes2 = null;
+                byte[] asciiBytes3 = null;
 
                 if (!watchInvCharsNoSpace.IsRunning)
                     watchInvCharsNoSpace.Start();
@@ -2157,26 +2230,43 @@ namespace WindowsFormsApplication1
                 //for each third sequence, check and count the invisible symbols that do not takes space (MS Word Symbols[9])
                 if (checkEachCharacterIndividually == 0 || (checkEachCharacterIndividually) % 3 == 0)
                 {
-                    //convert to unicodes and increase the dictionary where the current character is a key
-                    String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
-                    String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
-                    String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
+                    if (byte1proceed == true)
+                    {
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
+                        String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
+                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal1))
+                        {
+                            int wordSymbols1 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] + 1;
+                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] = wordSymbols1;
+                        }
+                    }
 
-                    //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
-                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal1))
+                    if (byte2proceed == true)
                     {
-                        int wordSymbols1 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] + 1;
-                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] = wordSymbols1;
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
+                        String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
+                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal2))
+                        {
+                            int wordSymbols2 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] + 1;
+                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] = wordSymbols2;
+                        }
                     }
-                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal2))
+
+                    if (byte3proceed == true)
                     {
-                        int wordSymbols2 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] + 1;
-                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] = wordSymbols2;
-                    }
-                    if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal3))
-                    {
-                        int wordSymbols3 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] + 1;
-                        invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] = wordSymbols3;
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+                        String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
+                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal3))
+                        {
+                            int wordSymbols3 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] + 1;
+                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] = wordSymbols3;
+                        }
                     }
                 }
                 checkEachCharacterIndividually++;
@@ -2186,7 +2276,7 @@ namespace WindowsFormsApplication1
                 if (watchInvCharsNoSpace.IsRunning)
                     watchInvCharsNoSpace.Stop();
                 //if the middle character is invisible, then count this situation in total cases
-                if (asciiBytes2.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes2[0]) > -1)
+                if (asciiBytes2 != null && asciiBytes2.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes2[0]) > -1)
                 {
                     invisibleCharactersTotal++;
                     //if the 1st and 3th character are with the same color and if
@@ -2251,6 +2341,8 @@ namespace WindowsFormsApplication1
 
             int checkEachCharacterIndividually = 0;
 
+            //check unicodes, add unicode code in WordDocument, select it and press alt + x
+
             while ((rngGeneral.End - 1) < actualSizeGeneral)
             {
                 rngGeneral.Select();
@@ -2265,9 +2357,28 @@ namespace WindowsFormsApplication1
                 string color1 = rngGeneralTemp1.Font.Color.ToString();
                 string color2 = rngGeneralTemp2.Font.Color.ToString();
                 string color3 = rngGeneralTemp3.Font.Color.ToString();
-                byte[] asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
-                byte[] asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
-                byte[] asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+
+                bool byte1proceed = true;
+                if (rngGeneralTemp1 == null || rngGeneralTemp1.Text == null)
+                    byte1proceed = false;
+                bool byte2proceed = true;
+                if (rngGeneralTemp2 == null || rngGeneralTemp2.Text == null)
+                    byte2proceed = false;
+                bool byte3proceed = true;
+                if (rngGeneralTemp3 == null || rngGeneralTemp3.Text == null)
+                    byte3proceed = false;
+
+                byte[] asciiBytes1 = null;
+                byte[] asciiBytes2 = null;
+                byte[] asciiBytes3 = null;
+
+                //byte[] asciiBytes11 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
+                //byte[] asciiBytes12 = Encoding.BigEndianUnicode.GetBytes(rngGeneralTemp2.Text);
+                //byte[] asciiBytes13 = Encoding.Default.GetBytes(rngGeneralTemp2.Text);
+                //byte[] asciiBytes14 = Encoding.Unicode.GetBytes(rngGeneralTemp2.Text);
+                //byte[] asciiBytes15 = Encoding.UTF32.GetBytes(rngGeneralTemp2.Text);
+                //byte[] asciiBytes16 = Encoding.UTF7.GetBytes(rngGeneralTemp2.Text);
+                //byte[] asciiBytes17 = Encoding.UTF8.GetBytes(rngGeneralTemp2.Text);
 
                 //for each third sequence, calculate the brigtness based on RGB values 
                 //https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
@@ -2275,29 +2386,51 @@ namespace WindowsFormsApplication1
                 //for each third sequence, check and count the invisible symbols that do not takes space (MS Word Symbols[9])
                 if (checkEachCharacterIndividually == 0 || (checkEachCharacterIndividually) % 3 == 0)
                 {
-                    //convert to unicodes and increase the dictionary where the current character is a key
-                    String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
-                    String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
-                    String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
+                    if (byte1proceed == true)
+                    {
+                        asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
+                        //check and count occrencies for the unicode approach
+                        if (unicodeDirectoryMap.ContainsKey(unicodeVal1))
+                        {
+                            int unicodeCount1 = unicodeDirectoryMap[unicodeVal1] + 1;
+                            unicodeDirectoryMap[unicodeVal1] = unicodeCount1;
+                        }
+                    }
 
-                    //check and count occrencies for the unicode approach
-                    if (unicodeDirectoryMap.ContainsKey(unicodeVal1))
+                    if (byte2proceed == true)
                     {
-                        int unicodeCount1 = unicodeDirectoryMap[unicodeVal1] + 1;
-                        unicodeDirectoryMap[unicodeVal1] = unicodeCount1;
+                        asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
+                        if (unicodeDirectoryMap.ContainsKey(unicodeVal2))
+                        {
+                            int unicodeCount2 = unicodeDirectoryMap[unicodeVal2] + 1;
+                            unicodeDirectoryMap[unicodeVal2] = unicodeCount2;
+                        }
                     }
-                    if (unicodeDirectoryMap.ContainsKey(unicodeVal2))
+
+                    if (byte3proceed == true)
                     {
-                        int unicodeCount2 = unicodeDirectoryMap[unicodeVal2] + 1;
-                        unicodeDirectoryMap[unicodeVal2] = unicodeCount2;
+                        asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
+                        //convert to unicodes and increase the dictionary where the current character is a key
+                        String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
+                        if (unicodeDirectoryMap.ContainsKey(unicodeVal3))
+                        {
+                            int unicodeCount3 = unicodeDirectoryMap[unicodeVal3] + 1;
+                            unicodeDirectoryMap[unicodeVal3] = unicodeCount3;
+                        }
                     }
-                    //check unicodes
-                    //add unicode code, select, press alt + x
-                    if (unicodeDirectoryMap.ContainsKey(unicodeVal3))
-                    {
-                        int unicodeCount3 = unicodeDirectoryMap[unicodeVal3] + 1;
-                        unicodeDirectoryMap[unicodeVal3] = unicodeCount3;
-                    }
+
+                    //String unicodeVal11 = rngGeneralTemp2.Text + asciiBytes11[0].ToString("X4");
+                    //String unicodeVal12 = rngGeneralTemp2.Text + asciiBytes12[0].ToString("X4");
+                    //String unicodeVal13 = rngGeneralTemp2.Text + asciiBytes13[0].ToString("X4");
+                    //String unicodeVal14 = rngGeneralTemp2.Text + asciiBytes14[0].ToString("X4");
+                    //String unicodeVal15 = rngGeneralTemp2.Text + asciiBytes15[0].ToString("X4");
+                    //String unicodeVal16 = rngGeneralTemp2.Text + asciiBytes16[0].ToString("X4");
+                    //String unicodeVal17 = rngGeneralTemp2.Text + asciiBytes17[0].ToString("X4");
+                    //unicodeVal11 + " " + unicodeVal12 + " " + unicodeVal13 + " " + unicodeVal14 + " " + unicodeVal15 + " " + unicodeVal16 + " " + unicodeVal17
                 }
                 checkEachCharacterIndividually++;
 
