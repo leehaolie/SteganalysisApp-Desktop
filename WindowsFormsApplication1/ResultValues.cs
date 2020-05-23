@@ -43,6 +43,7 @@ namespace WindowsFormsApplication1
         //public Dictionary<string, int> generalParagraphRightBorderStyleMap;
         public int codedSentenceBorder;        
         public Dictionary<string, int> generalSentenceLeftBorderMap;
+        public Dictionary<string, int> generalSentenceRightBorderMap;
         //public Dictionary<string, int> generalSentenceLeftBorderColorMap;
         //public Dictionary<string, int> generalSentenceLeftBorderStyleMap;
         public int codedScaling;

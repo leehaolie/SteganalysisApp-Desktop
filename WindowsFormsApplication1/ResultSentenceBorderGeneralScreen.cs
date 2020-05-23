@@ -57,6 +57,33 @@ namespace WindowsFormsApplication1
                 generalSentenceLeftBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalSentenceLeftBorderMap_table_col1_row" + generalSentenceLeftBorderMap_table_row }, 1, generalSentenceLeftBorderMap_table_row);
                 generalSentenceLeftBorderMap_table_row++;
             }
+
+            generalSentenceRightBorderMap_table.Controls.Clear();
+            generalSentenceRightBorderMap_table.Controls.Add(new Label() { Text = "Border Style", Name = "generalSentenceRightBorderMap_table_col0_header" }, 0, 0);
+            generalSentenceRightBorderMap_table.Controls.Add(new Label() { Text = "Frequency", Name = "generalSentenceRightBorderMap_table_col1_header" }, 1, 0);
+            generalSentenceRightBorderMap_table.RowCount = 1;
+            generalSentenceRightBorderMap_table.RowStyles[0] = (new RowStyle(SizeType.Absolute, 16F));
+            int generalSentenceRightBorderMap_table_row = 1;
+            int generalSentenceRightBorderMap_combinationNumber = 1;
+            foreach (KeyValuePair<string, int> entry in resultValues.generalSentenceRightBorderMap)
+            {
+                string generalSentenceRightBorderMap_combinationName = "";
+                if (entry.Key == (WdColor.wdColorAutomatic.ToString() + "-" + WdLineStyle.wdLineStyleNone.ToString()))
+                {
+                    generalSentenceRightBorderMap_combinationName = "default";
+                }
+                else
+                {
+                    generalSentenceRightBorderMap_combinationName = "comb " + generalSentenceRightBorderMap_combinationNumber;
+                    generalSentenceRightBorderMap_combinationNumber++;
+                }
+
+                generalSentenceRightBorderMap_table.RowCount = generalSentenceRightBorderMap_table.RowCount + 1;
+                generalSentenceRightBorderMap_table.RowStyles.Add(new RowStyle(SizeType.Absolute, 16F));
+                generalSentenceRightBorderMap_table.Controls.Add(new Label() { Text = generalSentenceRightBorderMap_combinationName, Name = "generalSentenceRightBorderMap_table_col0_row" + generalSentenceRightBorderMap_table_row }, 0, generalSentenceRightBorderMap_table_row);
+                generalSentenceRightBorderMap_table.Controls.Add(new Label() { Text = entry.Value.ToString(), Name = "generalSentenceRightBorderMap_table_col1_row" + generalSentenceRightBorderMap_table_row }, 1, generalSentenceRightBorderMap_table_row);
+                generalSentenceRightBorderMap_table_row++;
+            }
         }
 
         private void ResultSentenceBorderGeneralScreen_Load(object sender, EventArgs e)

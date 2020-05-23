@@ -85,6 +85,9 @@
             this.codedUnderline_value = new System.Windows.Forms.Label();
             this.codedUnderline_label = new System.Windows.Forms.Label();
             this.sentence_border_left_group = new System.Windows.Forms.GroupBox();
+            this.generalSentenceRightBorderMap_table = new System.Windows.Forms.TableLayoutPanel();
+            this.sentence_right_border_label = new System.Windows.Forms.Label();
+            this.sentence_left_border_label = new System.Windows.Forms.Label();
             this.generalSentenceLeftBorderMap_table = new System.Windows.Forms.TableLayoutPanel();
             this.codedSentenceBorder_value = new System.Windows.Forms.Label();
             this.codedSentenceBorder_label = new System.Windows.Forms.Label();
@@ -97,9 +100,6 @@
             this.codedParagraphBorder_label = new System.Windows.Forms.Label();
             this.invisible_characters_nospace_group = new System.Windows.Forms.GroupBox();
             this.invisibleCharactersThatTakesNoSpaceHexMap_table = new System.Windows.Forms.TableLayoutPanel();
-            this.sentence_left_border_label = new System.Windows.Forms.Label();
-            this.sentence_right_border_label = new System.Windows.Forms.Label();
-            this.generalSentenceRightBorderMap_table = new System.Windows.Forms.TableLayoutPanel();
             this.open_spaces_words_group.SuspendLayout();
             this.open_spaces_sentences_group.SuspendLayout();
             this.invisible_characters_colors_group.SuspendLayout();
@@ -743,6 +743,39 @@
             this.sentence_border_left_group.TabStop = false;
             this.sentence_border_left_group.Text = "Sentence Border (Left + Right)";
             // 
+            // generalSentenceRightBorderMap_table
+            // 
+            this.generalSentenceRightBorderMap_table.AutoScroll = true;
+            this.generalSentenceRightBorderMap_table.ColumnCount = 2;
+            this.generalSentenceRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalSentenceRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.generalSentenceRightBorderMap_table.Location = new System.Drawing.Point(304, 57);
+            this.generalSentenceRightBorderMap_table.Name = "generalSentenceRightBorderMap_table";
+            this.generalSentenceRightBorderMap_table.RowCount = 1;
+            this.generalSentenceRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.generalSentenceRightBorderMap_table.Size = new System.Drawing.Size(250, 134);
+            this.generalSentenceRightBorderMap_table.TabIndex = 13;
+            // 
+            // sentence_right_border_label
+            // 
+            this.sentence_right_border_label.AutoSize = true;
+            this.sentence_right_border_label.Location = new System.Drawing.Point(301, 28);
+            this.sentence_right_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.sentence_right_border_label.Name = "sentence_right_border_label";
+            this.sentence_right_border_label.Size = new System.Drawing.Size(87, 17);
+            this.sentence_right_border_label.TabIndex = 16;
+            this.sentence_right_border_label.Text = "Right border";
+            // 
+            // sentence_left_border_label
+            // 
+            this.sentence_left_border_label.AutoSize = true;
+            this.sentence_left_border_label.Location = new System.Drawing.Point(7, 28);
+            this.sentence_left_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.sentence_left_border_label.Name = "sentence_left_border_label";
+            this.sentence_left_border_label.Size = new System.Drawing.Size(78, 17);
+            this.sentence_left_border_label.TabIndex = 15;
+            this.sentence_left_border_label.Text = "Left border";
+            // 
             // generalSentenceLeftBorderMap_table
             // 
             this.generalSentenceLeftBorderMap_table.AutoScroll = true;
@@ -879,39 +912,6 @@
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.Size = new System.Drawing.Size(290, 161);
             this.invisibleCharactersThatTakesNoSpaceHexMap_table.TabIndex = 12;
-            // 
-            // sentence_left_border_label
-            // 
-            this.sentence_left_border_label.AutoSize = true;
-            this.sentence_left_border_label.Location = new System.Drawing.Point(7, 28);
-            this.sentence_left_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.sentence_left_border_label.Name = "sentence_left_border_label";
-            this.sentence_left_border_label.Size = new System.Drawing.Size(78, 17);
-            this.sentence_left_border_label.TabIndex = 15;
-            this.sentence_left_border_label.Text = "Left border";
-            // 
-            // sentence_right_border_label
-            // 
-            this.sentence_right_border_label.AutoSize = true;
-            this.sentence_right_border_label.Location = new System.Drawing.Point(301, 35);
-            this.sentence_right_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.sentence_right_border_label.Name = "sentence_right_border_label";
-            this.sentence_right_border_label.Size = new System.Drawing.Size(87, 17);
-            this.sentence_right_border_label.TabIndex = 16;
-            this.sentence_right_border_label.Text = "Right border";
-            // 
-            // generalSentenceRightBorderMap_table
-            // 
-            this.generalSentenceRightBorderMap_table.AutoScroll = true;
-            this.generalSentenceRightBorderMap_table.ColumnCount = 2;
-            this.generalSentenceRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalSentenceRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalSentenceRightBorderMap_table.Location = new System.Drawing.Point(304, 57);
-            this.generalSentenceRightBorderMap_table.Name = "generalSentenceRightBorderMap_table";
-            this.generalSentenceRightBorderMap_table.RowCount = 1;
-            this.generalSentenceRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.generalSentenceRightBorderMap_table.Size = new System.Drawing.Size(250, 134);
-            this.generalSentenceRightBorderMap_table.TabIndex = 13;
             // 
             // ResultScreen
             // 

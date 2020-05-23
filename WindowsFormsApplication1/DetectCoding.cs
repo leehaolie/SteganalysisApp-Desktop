@@ -112,6 +112,7 @@ namespace WindowsFormsApplication1
         #endregion
         #region check for sentence border - general
         Dictionary<string, int> generalSentenceLeftBorderMap = new Dictionary<string, int>();
+        Dictionary<string, int> generalSentenceRightBorderMap = new Dictionary<string, int>();
         //Dictionary<string, int> generalSentenceLeftBorderColorMap = new Dictionary<string, int>();
         //Dictionary<string, int> generalSentenceLeftBorderStyleMap = new Dictionary<string, int>();            
         #endregion
@@ -309,6 +310,7 @@ namespace WindowsFormsApplication1
             generalParagraphLeftBorderMap = new Dictionary<string, int>();
             generalParagraphRightBorderMap = new Dictionary<string, int>();
             generalSentenceLeftBorderMap = new Dictionary<string, int>();
+            generalSentenceRightBorderMap = new Dictionary<string, int>();
             generalScalingMap = new Dictionary<string, int>();
             generalUnderlineMap = new Dictionary<string, int>();
 
@@ -590,20 +592,34 @@ namespace WindowsFormsApplication1
             }
             //approach 2: then we are doing more general check if sentence border is susposious
             var leftBorderGeneralSentenceBorder = WdBorderType.wdBorderLeft;
+            var rightBorderGeneralSentenceBorder = WdBorderType.wdBorderRight;
+
             for (int k = 1; k <= rangeSentenceGeneralBorderCountSentences.Sentences.Count; k++)
             {
                 Microsoft.Office.Interop.Word.Range s1 = rangeSentenceGeneralBorderCountSentences.Sentences[k];
 
-                string bordSentenceGeneralColor = s1.Borders[leftBorderGeneralSentenceBorder].Color.ToString();
-                string bordSentenceGeneralStyle = s1.Borders[leftBorderGeneralSentenceBorder].LineStyle.ToString();
-                if (generalSentenceLeftBorderMap.ContainsKey(bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle))
+                string leftBordSentenceGeneralColor = s1.Borders[leftBorderGeneralSentenceBorder].Color.ToString();
+                string leftBordSentenceGeneralStyle = s1.Borders[leftBorderGeneralSentenceBorder].LineStyle.ToString();
+                if (generalSentenceLeftBorderMap.ContainsKey(leftBordSentenceGeneralColor + "-" + leftBordSentenceGeneralStyle))
                 {
-                    int generalUnderlineColorCount = generalSentenceLeftBorderMap[bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle] + 1;
-                    generalSentenceLeftBorderMap[bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle] = generalUnderlineColorCount;
+                    int generalLeftBorderCount = generalSentenceLeftBorderMap[leftBordSentenceGeneralColor + "-" + leftBordSentenceGeneralStyle] + 1;
+                    generalSentenceLeftBorderMap[leftBordSentenceGeneralColor + "-" + leftBordSentenceGeneralStyle] = generalLeftBorderCount;
                 }
                 else
                 {
-                    generalSentenceLeftBorderMap.Add(bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle, 1);
+                    generalSentenceLeftBorderMap.Add(leftBordSentenceGeneralColor + "-" + leftBordSentenceGeneralStyle, 1);
+                }
+
+                string rightBordSentenceGeneralColor = s1.Borders[rightBorderGeneralSentenceBorder].Color.ToString();
+                string rightBordSentenceGeneralStyle = s1.Borders[rightBorderGeneralSentenceBorder].LineStyle.ToString();
+                if (generalSentenceRightBorderMap.ContainsKey(rightBordSentenceGeneralColor + "-" + rightBordSentenceGeneralStyle))
+                {
+                    int generalRightBorderCount = generalSentenceRightBorderMap[rightBordSentenceGeneralColor + "-" + rightBordSentenceGeneralStyle] + 1;
+                    generalSentenceRightBorderMap[rightBordSentenceGeneralColor + "-" + rightBordSentenceGeneralStyle] = generalRightBorderCount;
+                }
+                else
+                {
+                    generalSentenceRightBorderMap.Add(rightBordSentenceGeneralColor + "-" + rightBordSentenceGeneralStyle, 1);
                 }
 
                 /*string bordSentenceGeneralColor = s1.Borders[leftBorderGeneralSentenceBorder].Color.ToString();
@@ -1704,6 +1720,7 @@ namespace WindowsFormsApplication1
             //resultValues.generalParagraphRightBorderStyleMap = generalParagraphRightBorderStyleMap;
             resultValues.codedSentenceBorder = codedSentenceBorder;
             resultValues.generalSentenceLeftBorderMap = generalSentenceLeftBorderMap;
+            resultValues.generalSentenceRightBorderMap = generalSentenceRightBorderMap;
             //resultValues.generalSentenceLeftBorderColorMap = generalSentenceLeftBorderColorMap;
             //resultValues.generalSentenceLeftBorderStyleMap = generalSentenceLeftBorderStyleMap;
             resultValues.codedScaling = codedScaling;
@@ -2933,23 +2950,36 @@ namespace WindowsFormsApplication1
             }
             //approach 2: then we are doing more general check if sentence border is susposious
             var leftBorderGeneralSentenceBorder = WdBorderType.wdBorderLeft;
-
+            var rightBorderGeneralSentenceBorder = WdBorderType.wdBorderRight;
+            //count left border color - left border style occurencies
             var watchSentenceBorder = new System.Diagnostics.Stopwatch();
             watchSentenceBorder.Start();
             for (int k = 1; k <= rangeSentenceGeneralBorderCountSentences.Sentences.Count; k++)
             {
                 Microsoft.Office.Interop.Word.Range s1 = rangeSentenceGeneralBorderCountSentences.Sentences[k];
 
-                string bordSentenceGeneralColor = s1.Borders[leftBorderGeneralSentenceBorder].Color.ToString();
-                string bordSentenceGeneralStyle = s1.Borders[leftBorderGeneralSentenceBorder].LineStyle.ToString();
-                if (generalSentenceLeftBorderMap.ContainsKey(bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle))
+                string leftBordSentenceGeneralColor = s1.Borders[leftBorderGeneralSentenceBorder].Color.ToString();
+                string leftBordSentenceGeneralStyle = s1.Borders[leftBorderGeneralSentenceBorder].LineStyle.ToString();
+                if (generalSentenceLeftBorderMap.ContainsKey(leftBordSentenceGeneralColor + "-" + leftBordSentenceGeneralStyle))
                 {
-                    int generalUnderlineColorCount = generalSentenceLeftBorderMap[bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle] + 1;
-                    generalSentenceLeftBorderMap[bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle] = generalUnderlineColorCount;
+                    int generalLeftBorderCount = generalSentenceLeftBorderMap[leftBordSentenceGeneralColor + "-" + leftBordSentenceGeneralStyle] + 1;
+                    generalSentenceLeftBorderMap[leftBordSentenceGeneralColor + "-" + leftBordSentenceGeneralStyle] = generalLeftBorderCount;
                 }
                 else
                 {
-                    generalSentenceLeftBorderMap.Add(bordSentenceGeneralColor + "-" + bordSentenceGeneralStyle, 1);
+                    generalSentenceLeftBorderMap.Add(leftBordSentenceGeneralColor + "-" + leftBordSentenceGeneralStyle, 1);
+                }
+
+                string rightBordSentenceGeneralColor = s1.Borders[rightBorderGeneralSentenceBorder].Color.ToString();
+                string rightBordSentenceGeneralStyle = s1.Borders[rightBorderGeneralSentenceBorder].LineStyle.ToString();
+                if (generalSentenceRightBorderMap.ContainsKey(rightBordSentenceGeneralColor + "-" + rightBordSentenceGeneralStyle))
+                {
+                    int generalRightBorderCount = generalSentenceRightBorderMap[rightBordSentenceGeneralColor + "-" + rightBordSentenceGeneralStyle] + 1;
+                    generalSentenceRightBorderMap[rightBordSentenceGeneralColor + "-" + rightBordSentenceGeneralStyle] = generalRightBorderCount;
+                }
+                else
+                {
+                    generalSentenceRightBorderMap.Add(rightBordSentenceGeneralColor + "-" + rightBordSentenceGeneralStyle, 1);
                 }
             }
             watchSentenceBorder.Stop();
@@ -2959,6 +2989,7 @@ namespace WindowsFormsApplication1
             ResultValues resultValues = new ResultValues();
             resultValues.codedSentenceBorder = codedSentenceBorder;
             resultValues.generalSentenceLeftBorderMap = generalSentenceLeftBorderMap;
+            resultValues.generalSentenceRightBorderMap = generalSentenceRightBorderMap;
             resultValues.enableConreteMethodsCheck = enableConreteMethodsCheck;
 
             docs.Close();

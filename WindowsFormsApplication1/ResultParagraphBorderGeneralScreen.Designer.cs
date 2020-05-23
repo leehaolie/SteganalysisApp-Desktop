@@ -49,7 +49,7 @@
             this.paragraph_border_group.Controls.Add(this.generalParagraphLeftBorderMap_table);
             this.paragraph_border_group.Location = new System.Drawing.Point(21, 22);
             this.paragraph_border_group.Name = "paragraph_border_group";
-            this.paragraph_border_group.Size = new System.Drawing.Size(580, 549);
+            this.paragraph_border_group.Size = new System.Drawing.Size(580, 550);
             this.paragraph_border_group.TabIndex = 16;
             this.paragraph_border_group.TabStop = false;
             this.paragraph_border_group.Text = "Paragraph Border (Left + Right)";
@@ -57,7 +57,7 @@
             // codedParagraphBorder_value
             // 
             this.codedParagraphBorder_value.AutoSize = true;
-            this.codedParagraphBorder_value.Location = new System.Drawing.Point(258, 22);
+            this.codedParagraphBorder_value.Location = new System.Drawing.Point(529, 14);
             this.codedParagraphBorder_value.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.codedParagraphBorder_value.Name = "codedParagraphBorder_value";
             this.codedParagraphBorder_value.Size = new System.Drawing.Size(42, 17);
@@ -67,7 +67,7 @@
             // codedParagraphBorder_label
             // 
             this.codedParagraphBorder_label.AutoSize = true;
-            this.codedParagraphBorder_label.Location = new System.Drawing.Point(9, 22);
+            this.codedParagraphBorder_label.Location = new System.Drawing.Point(280, 14);
             this.codedParagraphBorder_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.codedParagraphBorder_label.Name = "codedParagraphBorder_label";
             this.codedParagraphBorder_label.Size = new System.Drawing.Size(236, 17);
@@ -77,7 +77,7 @@
             // right_border_label
             // 
             this.right_border_label.AutoSize = true;
-            this.right_border_label.Location = new System.Drawing.Point(303, 43);
+            this.right_border_label.Location = new System.Drawing.Point(303, 35);
             this.right_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.right_border_label.Name = "right_border_label";
             this.right_border_label.Size = new System.Drawing.Size(87, 17);
@@ -87,7 +87,7 @@
             // left_border_label
             // 
             this.left_border_label.AutoSize = true;
-            this.left_border_label.Location = new System.Drawing.Point(9, 43);
+            this.left_border_label.Location = new System.Drawing.Point(9, 35);
             this.left_border_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.left_border_label.Name = "left_border_label";
             this.left_border_label.Size = new System.Drawing.Size(78, 17);
@@ -99,7 +99,7 @@
             this.generalParagraphRightBorderMap_table.ColumnCount = 2;
             this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalParagraphRightBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphRightBorderMap_table.Location = new System.Drawing.Point(306, 70);
+            this.generalParagraphRightBorderMap_table.Location = new System.Drawing.Point(306, 62);
             this.generalParagraphRightBorderMap_table.Name = "generalParagraphRightBorderMap_table";
             this.generalParagraphRightBorderMap_table.RowCount = 1;
             this.generalParagraphRightBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -111,7 +111,7 @@
             this.generalParagraphLeftBorderMap_table.ColumnCount = 2;
             this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.generalParagraphLeftBorderMap_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.generalParagraphLeftBorderMap_table.Location = new System.Drawing.Point(12, 70);
+            this.generalParagraphLeftBorderMap_table.Location = new System.Drawing.Point(12, 62);
             this.generalParagraphLeftBorderMap_table.Name = "generalParagraphLeftBorderMap_table";
             this.generalParagraphLeftBorderMap_table.RowCount = 1;
             this.generalParagraphLeftBorderMap_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
