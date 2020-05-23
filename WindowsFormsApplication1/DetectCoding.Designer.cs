@@ -90,7 +90,7 @@
             // 
             // detectWordMappingsMethods
             // 
-            this.detectWordMappingsMethods.Location = new System.Drawing.Point(338, 106);
+            this.detectWordMappingsMethods.Location = new System.Drawing.Point(65, 214);
             this.detectWordMappingsMethods.Margin = new System.Windows.Forms.Padding(4);
             this.detectWordMappingsMethods.Name = "detectWordMappingsMethods";
             this.detectWordMappingsMethods.Size = new System.Drawing.Size(265, 28);
@@ -101,7 +101,7 @@
             // 
             // detectFontTypeMethod
             // 
-            this.detectFontTypeMethod.Location = new System.Drawing.Point(338, 142);
+            this.detectFontTypeMethod.Location = new System.Drawing.Point(338, 106);
             this.detectFontTypeMethod.Margin = new System.Windows.Forms.Padding(4);
             this.detectFontTypeMethod.Name = "detectFontTypeMethod";
             this.detectFontTypeMethod.Size = new System.Drawing.Size(265, 28);
@@ -112,7 +112,7 @@
             // 
             // detectColorQuantizationMethod
             // 
-            this.detectColorQuantizationMethod.Location = new System.Drawing.Point(338, 178);
+            this.detectColorQuantizationMethod.Location = new System.Drawing.Point(65, 250);
             this.detectColorQuantizationMethod.Margin = new System.Windows.Forms.Padding(4);
             this.detectColorQuantizationMethod.Name = "detectColorQuantizationMethod";
             this.detectColorQuantizationMethod.Size = new System.Drawing.Size(265, 28);
@@ -123,7 +123,7 @@
             // 
             // detectInvisibleCharactesMethods
             // 
-            this.detectInvisibleCharactesMethods.Location = new System.Drawing.Point(338, 214);
+            this.detectInvisibleCharactesMethods.Location = new System.Drawing.Point(338, 142);
             this.detectInvisibleCharactesMethods.Margin = new System.Windows.Forms.Padding(4);
             this.detectInvisibleCharactesMethods.Name = "detectInvisibleCharactesMethods";
             this.detectInvisibleCharactesMethods.Size = new System.Drawing.Size(265, 28);
@@ -134,7 +134,7 @@
             // 
             // detectUnicodesMethod
             // 
-            this.detectUnicodesMethod.Location = new System.Drawing.Point(338, 250);
+            this.detectUnicodesMethod.Location = new System.Drawing.Point(65, 286);
             this.detectUnicodesMethod.Margin = new System.Windows.Forms.Padding(4);
             this.detectUnicodesMethod.Name = "detectUnicodesMethod";
             this.detectUnicodesMethod.Size = new System.Drawing.Size(265, 28);
@@ -145,7 +145,7 @@
             // 
             // detectCharactersScaleGeneralMethod
             // 
-            this.detectCharactersScaleGeneralMethod.Location = new System.Drawing.Point(338, 286);
+            this.detectCharactersScaleGeneralMethod.Location = new System.Drawing.Point(338, 178);
             this.detectCharactersScaleGeneralMethod.Margin = new System.Windows.Forms.Padding(4);
             this.detectCharactersScaleGeneralMethod.Name = "detectCharactersScaleGeneralMethod";
             this.detectCharactersScaleGeneralMethod.Size = new System.Drawing.Size(265, 28);
@@ -156,7 +156,7 @@
             // 
             // detectUnderlineGeneralMethod
             // 
-            this.detectUnderlineGeneralMethod.Location = new System.Drawing.Point(338, 322);
+            this.detectUnderlineGeneralMethod.Location = new System.Drawing.Point(338, 214);
             this.detectUnderlineGeneralMethod.Margin = new System.Windows.Forms.Padding(4);
             this.detectUnderlineGeneralMethod.Name = "detectUnderlineGeneralMethod";
             this.detectUnderlineGeneralMethod.Size = new System.Drawing.Size(265, 28);
@@ -167,7 +167,7 @@
             // 
             // detectSentenceBorderGeneralMethod
             // 
-            this.detectSentenceBorderGeneralMethod.Location = new System.Drawing.Point(338, 358);
+            this.detectSentenceBorderGeneralMethod.Location = new System.Drawing.Point(338, 250);
             this.detectSentenceBorderGeneralMethod.Margin = new System.Windows.Forms.Padding(4);
             this.detectSentenceBorderGeneralMethod.Name = "detectSentenceBorderGeneralMethod";
             this.detectSentenceBorderGeneralMethod.Size = new System.Drawing.Size(265, 28);
@@ -178,7 +178,7 @@
             // 
             // detectParagraphBorderGeneralMethod
             // 
-            this.detectParagraphBorderGeneralMethod.Location = new System.Drawing.Point(338, 397);
+            this.detectParagraphBorderGeneralMethod.Location = new System.Drawing.Point(338, 286);
             this.detectParagraphBorderGeneralMethod.Margin = new System.Windows.Forms.Padding(4);
             this.detectParagraphBorderGeneralMethod.Name = "detectParagraphBorderGeneralMethod";
             this.detectParagraphBorderGeneralMethod.Size = new System.Drawing.Size(265, 28);
@@ -191,7 +191,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(751, 462);
+            this.ClientSize = new System.Drawing.Size(751, 363);
             this.Controls.Add(this.detectParagraphBorderGeneralMethod);
             this.Controls.Add(this.detectSentenceBorderGeneralMethod);
             this.Controls.Add(this.detectUnderlineGeneralMethod);

@@ -9,6 +9,9 @@ namespace WindowsFormsApplication1
     {
         public string test;
         public bool enableConreteMethodsCheck;
+        public bool enableWordMapping;
+        public bool enableColorQuantization;
+        public bool enableUnicodes;
         public int countPotetntialScaleSizes;
         public int openSpacesWordsTotal;
         public int openSpacesWordsPotential;

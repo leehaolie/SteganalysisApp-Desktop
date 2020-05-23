@@ -24,6 +24,27 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
+            if (resultValues.enableColorQuantization == true)
+            {
+                color_quantization_group.Visible = true;
+            }                
+            if (resultValues.enableWordMapping == true)
+            {
+                word_mapping_1_group.Visible = true;
+                word_mapping_2_group.Visible = true;
+            }
+            if (resultValues.enableUnicodes == true)
+            {
+                unicodes_group.Visible = true;
+            }
+
+            if (resultValues.enableColorQuantization == true ||
+                resultValues.enableWordMapping == true ||
+                resultValues.enableUnicodes == true)
+            {
+                this.Width = 1350;
+            }
+
             //MessageBox.Show("openSpacesSentencesTotal = " + resultValues.openSpacesSentencesTotal + " / openSpacesSentencesPotential = " + resultValues.openSpacesSentencesPotential);
             openSpacesSentencesTotal_value.Text = resultValues.openSpacesSentencesTotal.ToString();
             openSpacesSentencesPotential_value.Text = resultValues.openSpacesSentencesPotential.ToString();
