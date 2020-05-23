@@ -71,6 +71,7 @@ namespace WindowsFormsApplication1
         int[] invisibleCharASCII = new int[] { 9, 13, 32 }; //9 - tab;      //13 - new line     //32 - space
         Dictionary<string, int> invisibleCharactersThatTakesNoSpaceHexMap = new Dictionary<string, int>()
         {
+            {"200B", 0},    //Zero width characters
             {"200C", 0},    //Zero width non-joiner
             {"200D", 0},    //Zero width joiner
             {"200E", 0},    //Right remark
@@ -280,7 +281,8 @@ namespace WindowsFormsApplication1
                     {"o006F", 0}, {"o03BF", 0}, {"o1D0F", 0}, {"o043E", 0}
                 };
             invisibleCharactersThatTakesNoSpaceHexMap = new Dictionary<string, int>()
-                {
+                {                
+                    {"200B", 0},    //Zero width characters
                     {"200C", 0},    //Zero width non-joiner
                     {"200D", 0},    //Zero width joiner
                     {"200E", 0},    //Right remark
