@@ -81,6 +81,8 @@ namespace WindowsFormsApplication1
             {"200E", 0},    //Right remark
             {"200F", 0}     //Left remark
         };
+        string lastSavedColor = null;
+        Dictionary<string, int> invisibleCharactersColorMap = new Dictionary<string, int>();
         #endregion
         #region check for unicode
         int unicodeNumberSymbols = 0;
@@ -293,6 +295,8 @@ namespace WindowsFormsApplication1
                     {"200E", 0},    //Right remark
                     {"200F", 0}     //Left remark
                 };
+            invisibleCharactersColorMap = new Dictionary<string, int>();
+            lastSavedColor = null;
             fontTypeTotal = 0;
             fontTypePotential = 0;
             fontTypeDirectoryCount = new Dictionary<string, int>();
@@ -349,7 +353,9 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Range rngGeneralTemp3 = null;
             Microsoft.Office.Interop.Word.Range rngFirstLetter = word.ActiveDocument.Content;
             Microsoft.Office.Interop.Word.Range rngSecondLetter = word.ActiveDocument.Content;
-            
+            Microsoft.Office.Interop.Word.Range rngGeneralInvChars = docs.Range(ref start, ref end);
+            Microsoft.Office.Interop.Word.Range rngGeneralInvCharsAll = docs.Range(ref start);
+
             #region check for paragraph border
             //approach 1: first we check if our concrete algotirtam is used            
             int codedParagraphBorder = 0;
@@ -1211,387 +1217,435 @@ namespace WindowsFormsApplication1
                 }
             }
             #endregion
-            #region check for invisible characters and for color quantization and for unicode and for invisible characters that does not takes space (MS Word Symbols[9])
-            //get each sequences of each 3 characters and: do the check if the middle character is invisible + on each new sequence check the brigthness
-            //for example: 123456, invisible characters loops throught 123, 234, 234, 456;
-            //                     color quantizations, unicode and MS Word Symbols[9] loops throught every third sequence 123, 456
-            int actualSizeGeneral = rngGeneralAll.Text.Length - 1;
+            #region check for invisible characters and for invisible characters that does not takes space (MS Word Symbols[9]) (old way includes for color quantization and for unicode)
+            int actualSizeInvChars = rngGeneralInvCharsAll.Text.Length - 1;
 
-            int checkEachCharacterIndividually = 0;
-
-            while ((rngGeneral.End - 1) < actualSizeGeneral)
+            while ((rngGeneralInvChars.End - 1) < actualSizeInvChars)
             {
-                rngGeneral.Select();
-
-                startTemp0 = (object)(startGeneralCount);
-                startTemp1 = (object)(startGeneralCount + 1);
-                startTemp2 = (object)(startGeneralCount + 2);
-                startTemp3 = (object)(startGeneralCount + 3);
-                rngGeneralTemp1 = docs.Range(ref startTemp0, ref startTemp1);
-                rngGeneralTemp2 = docs.Range(ref startTemp1, ref startTemp2);
-                rngGeneralTemp3 = docs.Range(ref startTemp2, ref startTemp3);                
-                string color1 = rngGeneralTemp1.Font.Color.ToString();
-                string color2 = rngGeneralTemp2.Font.Color.ToString();
-                string color3 = rngGeneralTemp3.Font.Color.ToString();
-
-                bool byte1proceed = true;
-                if (rngGeneralTemp1 == null || rngGeneralTemp1.Text == null)
-                    byte1proceed = false;
-                bool byte2proceed = true;
-                if (rngGeneralTemp2 == null || rngGeneralTemp2.Text == null)
-                    byte2proceed = false;
-                bool byte3proceed = true;
-                if (rngGeneralTemp3 == null || rngGeneralTemp3.Text == null)
-                    byte3proceed = false;
-
-                byte[] asciiBytes1 = null;
-                byte[] asciiBytes2 = null;
-                byte[] asciiBytes3 = null;
-
-                //for each third sequence, calculate the brigtness based on RGB values 
-                //https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
-                //for each third sequence, calculate the UNICODE value for each character + count and update the unicodeDirectoryMap
-                //for each third sequence, check and count the invisible symbols that do not takes space (MS Word Symbols[9])
-                if (checkEachCharacterIndividually == 0 || (checkEachCharacterIndividually) % 3 == 0)
+                //convert to unicodes and increase the dictionary where the current character is a key
+                byte[] asciiBytes = Encoding.ASCII.GetBytes(rngGeneralInvChars.Text);
+                String unicodeVal = rngGeneralInvChars.Text + asciiBytes[0].ToString("X4");
+                //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal))
                 {
-                    if (byte1proceed == true)
-                    {
-                        colorQuantizationTotal += 1;
-                        asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
-
-                        if (enableColorQuantization == true)
-                        {
-                            var systemColor1 = ColorTranslator.FromWin32((int)rngGeneralTemp1.Font.Color);
-                            var brigthness1 = (0.2126 * (systemColor1.R / 255.0) + 0.7152 * (systemColor1.G / 255.0) + 0.0722 * (systemColor1.B / 255.0));
-
-                            if (rngGeneralTemp1.Font.Color != WdColor.wdColorAutomatic)
-                            {
-                                if (brigthness1 < 0.5)
-                                {
-                                    colorQuantizationDark++;
-                                    if (Array.IndexOf(colorQuantizationDarkLevels, brigthness1) == -1)
-                                    {
-                                        //push into array
-                                        Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                        colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness1;
-                                    }
-                                }
-                                else
-                                {
-                                    colorQuantizationLight++;
-                                    if (Array.IndexOf(colorQuantizationLightLevels, brigthness1) == -1)
-                                    {
-                                        //push into array
-                                        Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                        colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness1;
-                                    }
-                                }
-                            }
-                        }
-
-                        //convert to unicodes and increase the dictionary where the current character is a key
-                        String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
-                        //check and count occrencies for the unicode approach
-                        if (enableUnicodes == true && unicodeDirectoryMap.ContainsKey(unicodeVal1))
-                        {
-                            int unicodeCount1 = unicodeDirectoryMap[unicodeVal1] + 1;
-                            unicodeDirectoryMap[unicodeVal1] = unicodeCount1;
-                        }
-                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
-                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal1))
-                        {
-                            int wordSymbols1 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] + 1;
-                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] = wordSymbols1;
-                        }
-                    }
-
-                    if (byte2proceed == true)
-                    {
-                        colorQuantizationTotal += 1;
-                        asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
-
-                        if (enableColorQuantization == true)
-                        {
-                            var systemColor2 = ColorTranslator.FromWin32((int)rngGeneralTemp2.Font.Color);
-                            var brigthness2 = (0.2126 * (systemColor2.R / 255.0) + 0.7152 * (systemColor2.G / 255.0) + 0.0722 * (systemColor2.B / 255.0));
-                            if (rngGeneralTemp2.Font.Color != WdColor.wdColorAutomatic)
-                            {
-                                if (brigthness2 < 0.5)
-                                {
-                                    colorQuantizationDark++;
-                                    if (Array.IndexOf(colorQuantizationDarkLevels, brigthness2) == -1)
-                                    {
-                                        //push into array
-                                        Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                        colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness2;
-                                    }
-                                }
-                                else
-                                {
-                                    colorQuantizationLight++;
-                                    if (Array.IndexOf(colorQuantizationLightLevels, brigthness2) == -1)
-                                    {
-                                        //push into array
-                                        Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                        colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness2;
-                                    }
-                                }
-                            }
-                        }
-
-                        //convert to unicodes and increase the dictionary where the current character is a key
-                        String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
-                        //check and count occrencies for the unicode approach
-                        if (enableUnicodes == true && unicodeDirectoryMap.ContainsKey(unicodeVal2))
-                        {
-                            int unicodeCount2 = unicodeDirectoryMap[unicodeVal2] + 1;
-                            unicodeDirectoryMap[unicodeVal2] = unicodeCount2;
-                        }
-                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
-                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal2))
-                        {
-                            int wordSymbols2 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] + 1;
-                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] = wordSymbols2;
-                        }
-                    }
-
-                    if (byte3proceed == true)
-                    {
-                        colorQuantizationTotal += 1;
-                        asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
-
-                        if (enableColorQuantization == true)
-                        {
-                            var systemColor3 = ColorTranslator.FromWin32((int)rngGeneralTemp3.Font.Color);
-                            var brigthness3 = (0.2126 * (systemColor3.R / 255.0) + 0.7152 * (systemColor3.G / 255.0) + 0.0722 * (systemColor3.B / 255.0));
-                            if (rngGeneralTemp3.Font.Color != WdColor.wdColorAutomatic)
-                            {
-                                if (brigthness3 < 0.5)
-                                {
-                                    colorQuantizationDark++;
-                                    if (Array.IndexOf(colorQuantizationDarkLevels, brigthness3) == -1)
-                                    {
-                                        //push into array
-                                        Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
-                                        colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness3;
-                                    }
-                                }
-                                else
-                                {
-                                    colorQuantizationLight++;
-                                    if (Array.IndexOf(colorQuantizationLightLevels, brigthness3) == -1)
-                                    {
-                                        //push into array
-                                        Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
-                                        colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness3;
-                                    }
-                                }
-                            }
-                        }
-
-                        //convert to unicodes and increase the dictionary where the current character is a key
-                        String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
-                        //check and count occrencies for the unicode approach
-                        if (enableUnicodes == true && unicodeDirectoryMap.ContainsKey(unicodeVal3))
-                        {
-                            int unicodeCount3 = unicodeDirectoryMap[unicodeVal3] + 1;
-                            unicodeDirectoryMap[unicodeVal3] = unicodeCount3;
-                        }
-                        //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
-                        if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal3))
-                        {
-                            int wordSymbols3 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] + 1;
-                            invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] = wordSymbols3;
-                        }
-                    }                    
+                    int wordSymbol = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal] + 1;
+                    invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal] = wordSymbol;
                 }
-                checkEachCharacterIndividually++;
 
-                //if the middle character is invisible, then count this situation in total cases
-                if (byte2proceed == true && asciiBytes2 != null && asciiBytes2.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes2[0]) > -1)
+                //if the character is invisible, get it's color and compare it with last saved color for invisile character
+                if (asciiBytes != null && asciiBytes.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes[0]) > -1)
                 {
                     invisibleCharactersTotal++;
-                    //if the 1st and 3th character are with the same color and if
-                    //if the color of the middle character is different then the color of the 1st and 3th character then this is potential case
-                    if (color1 == color3 && color1 != color2)
+
+                    string currentColor = rngGeneralInvChars.Font.Color.ToString();
+                    if (lastSavedColor != null && currentColor != lastSavedColor)
                     {
                         invisibleCharactersPotential++;
                     }
+                    else if (lastSavedColor == null)
+                    {
+                        lastSavedColor = currentColor;
+                    }
+
+                    if (invisibleCharactersColorMap.ContainsKey(currentColor))
+                    {
+                        int generalLeftBorderCount = invisibleCharactersColorMap[currentColor] + 1;
+                        invisibleCharactersColorMap[currentColor] = generalLeftBorderCount;
+                    }
+                    else
+                    {
+                        invisibleCharactersColorMap.Add(currentColor, 1);
+                    }
                 }
-                
-                // Move the start position 1 character
-                rngGeneral.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
-                // Move the end position 1 character
-                rngGeneral.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
-                startGeneralCount++;
-                endGeneralCount++;
+
+                rngGeneralInvChars.Select();
+                // Move the start position 1 character.
+                rngGeneralInvChars.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                // Move the end position 1 character.
+                rngGeneralInvChars.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
             }
 
-            if (enableUnicodes == true)
-            {
-                //check if there are occurencies for the same character but different encodings and if there are more then 0 occurencies, get a note of this
-                //for example: differentOccurencies_A will hold the cout of how many different encodings for character A are present in the doc
-                int differentOccurencies_A = 0;
-                if (unicodeDirectoryMap["A0041"] > 0)
-                    differentOccurencies_A++;
-                if (unicodeDirectoryMap["A0391"] > 0)
-                    differentOccurencies_A++;
-                if (unicodeDirectoryMap["A0410"] > 0)
-                    differentOccurencies_A++;
-                if (unicodeDirectoryMap["A13AA"] > 0)
-                    differentOccurencies_A++;
+            /* OLD WAY
+                //get each sequences of each 3 characters and: do the check if the middle character is invisible + on each new sequence check the brigthness
+                //for example: 123456, invisible characters loops throught 123, 234, 234, 456;
+                //                     color quantizations, unicode and MS Word Symbols[9] loops throught every third sequence 123, 456
+                int actualSizeGeneral = rngGeneralAll.Text.Length - 1;
 
-                int differentOccurencies_B = 0;
-                if (unicodeDirectoryMap["B0042"] > 0)
-                    differentOccurencies_B++;
-                if (unicodeDirectoryMap["B0392"] > 0)
-                    differentOccurencies_B++;
-                if (unicodeDirectoryMap["B0412"] > 0)
-                    differentOccurencies_B++;
-                if (unicodeDirectoryMap["B0181"] > 0)
-                    differentOccurencies_B++;
+                int checkEachCharacterIndividually = 0;
 
-                int differentOccurencies_E = 0;
-                if (unicodeDirectoryMap["E0045"] > 0)
-                    differentOccurencies_E++;
-                if (unicodeDirectoryMap["E0395"] > 0)
-                    differentOccurencies_E++;
-                if (unicodeDirectoryMap["E0415"] > 0)
-                    differentOccurencies_E++;
-                if (unicodeDirectoryMap["E13AC"] > 0)
-                    differentOccurencies_E++;
+                while ((rngGeneral.End - 1) < actualSizeGeneral)
+                {
+                    rngGeneral.Select();
 
-                int differentOccurencies_G = 0;
-                if (unicodeDirectoryMap["G0047"] > 0)
-                    differentOccurencies_G++;
-                if (unicodeDirectoryMap["G050C"] > 0)
-                    differentOccurencies_G++;
-                if (unicodeDirectoryMap["G13C0"] > 0)
-                    differentOccurencies_G++;
-                if (unicodeDirectoryMap["G13B6"] > 0)
-                    differentOccurencies_G++;
+                    startTemp0 = (object)(startGeneralCount);
+                    startTemp1 = (object)(startGeneralCount + 1);
+                    startTemp2 = (object)(startGeneralCount + 2);
+                    startTemp3 = (object)(startGeneralCount + 3);
+                    rngGeneralTemp1 = docs.Range(ref startTemp0, ref startTemp1);
+                    rngGeneralTemp2 = docs.Range(ref startTemp1, ref startTemp2);
+                    rngGeneralTemp3 = docs.Range(ref startTemp2, ref startTemp3);                
+                    string color1 = rngGeneralTemp1.Font.Color.ToString();
+                    string color2 = rngGeneralTemp2.Font.Color.ToString();
+                    string color3 = rngGeneralTemp3.Font.Color.ToString();
 
-                int differentOccurencies_H = 0;
-                if (unicodeDirectoryMap["H0048"] > 0)
-                    differentOccurencies_H++;
-                if (unicodeDirectoryMap["H0397"] > 0)
-                    differentOccurencies_H++;
-                if (unicodeDirectoryMap["H041D"] > 0)
-                    differentOccurencies_H++;
-                if (unicodeDirectoryMap["H13BB"] > 0)
-                    differentOccurencies_H++;
+                    bool byte1proceed = true;
+                    if (rngGeneralTemp1 == null || rngGeneralTemp1.Text == null)
+                        byte1proceed = false;
+                    bool byte2proceed = true;
+                    if (rngGeneralTemp2 == null || rngGeneralTemp2.Text == null)
+                        byte2proceed = false;
+                    bool byte3proceed = true;
+                    if (rngGeneralTemp3 == null || rngGeneralTemp3.Text == null)
+                        byte3proceed = false;
 
-                int differentOccurencies_I = 0;
-                if (unicodeDirectoryMap["I0049"] > 0)
-                    differentOccurencies_I++;
-                if (unicodeDirectoryMap["I0399"] > 0)
-                    differentOccurencies_I++;
-                if (unicodeDirectoryMap["I04C0"] > 0)
-                    differentOccurencies_I++;
-                if (unicodeDirectoryMap["I0406"] > 0)
-                    differentOccurencies_I++;
+                    byte[] asciiBytes1 = null;
+                    byte[] asciiBytes2 = null;
+                    byte[] asciiBytes3 = null;
 
-                int differentOccurencies_M = 0;
-                if (unicodeDirectoryMap["M004D"] > 0)
-                    differentOccurencies_M++;
-                if (unicodeDirectoryMap["M039C"] > 0)
-                    differentOccurencies_M++;
-                if (unicodeDirectoryMap["M041C"] > 0)
-                    differentOccurencies_M++;
-                if (unicodeDirectoryMap["M216F"] > 0)
-                    differentOccurencies_M++;
+                    //for each third sequence, calculate the brigtness based on RGB values 
+                    //https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+                    //for each third sequence, calculate the UNICODE value for each character + count and update the unicodeDirectoryMap
+                    //for each third sequence, check and count the invisible symbols that do not takes space (MS Word Symbols[9])
+                    if (checkEachCharacterIndividually == 0 || (checkEachCharacterIndividually) % 3 == 0)
+                    {
+                        if (byte1proceed == true)
+                        {
+                            colorQuantizationTotal += 1;
+                            asciiBytes1 = Encoding.ASCII.GetBytes(rngGeneralTemp1.Text);
 
-                int differentOccurencies_O = 0;
-                if (unicodeDirectoryMap["O004F"] > 0)
-                    differentOccurencies_O++;
-                if (unicodeDirectoryMap["O039F"] > 0)
-                    differentOccurencies_O++;
-                if (unicodeDirectoryMap["O041E"] > 0)
-                    differentOccurencies_O++;
-                if (unicodeDirectoryMap["O0555"] > 0)
-                    differentOccurencies_O++;
+                            if (enableColorQuantization == true)
+                            {
+                                var systemColor1 = ColorTranslator.FromWin32((int)rngGeneralTemp1.Font.Color);
+                                var brigthness1 = (0.2126 * (systemColor1.R / 255.0) + 0.7152 * (systemColor1.G / 255.0) + 0.0722 * (systemColor1.B / 255.0));
 
-                int differentOccurencies_P = 0;
-                if (unicodeDirectoryMap["P0050"] > 0)
-                    differentOccurencies_P++;
-                if (unicodeDirectoryMap["P0420"] > 0)
-                    differentOccurencies_P++;
-                if (unicodeDirectoryMap["P03A1"] > 0)
-                    differentOccurencies_P++;
-                if (unicodeDirectoryMap["P01A4"] > 0)
-                    differentOccurencies_P++;
+                                if (rngGeneralTemp1.Font.Color != WdColor.wdColorAutomatic)
+                                {
+                                    if (brigthness1 < 0.5)
+                                    {
+                                        colorQuantizationDark++;
+                                        if (Array.IndexOf(colorQuantizationDarkLevels, brigthness1) == -1)
+                                        {
+                                            //push into array
+                                            Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                            colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness1;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        colorQuantizationLight++;
+                                        if (Array.IndexOf(colorQuantizationLightLevels, brigthness1) == -1)
+                                        {
+                                            //push into array
+                                            Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                            colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness1;
+                                        }
+                                    }
+                                }
+                            }
 
-                int differentOccurencies_S = 0;
-                if (unicodeDirectoryMap["S0053"] > 0)
-                    differentOccurencies_S++;
-                if (unicodeDirectoryMap["S0405"] > 0)
-                    differentOccurencies_S++;
-                if (unicodeDirectoryMap["S054F"] > 0)
-                    differentOccurencies_S++;
-                if (unicodeDirectoryMap["S13DA"] > 0)
-                    differentOccurencies_S++;
+                            //convert to unicodes and increase the dictionary where the current character is a key
+                            String unicodeVal1 = rngGeneralTemp1.Text + asciiBytes1[0].ToString("X4");
+                            //check and count occrencies for the unicode approach
+                            if (enableUnicodes == true && unicodeDirectoryMap.ContainsKey(unicodeVal1))
+                            {
+                                int unicodeCount1 = unicodeDirectoryMap[unicodeVal1] + 1;
+                                unicodeDirectoryMap[unicodeVal1] = unicodeCount1;
+                            }
+                            //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                            if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal1))
+                            {
+                                int wordSymbols1 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] + 1;
+                                invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal1] = wordSymbols1;
+                            }
+                        }
 
-                int differentOccurencies_T = 0;
-                if (unicodeDirectoryMap["T0054"] > 0)
-                    differentOccurencies_T++;
-                if (unicodeDirectoryMap["T0422"] > 0)
-                    differentOccurencies_T++;
-                if (unicodeDirectoryMap["T03A4"] > 0)
-                    differentOccurencies_T++;
-                if (unicodeDirectoryMap["T01AC"] > 0)
-                    differentOccurencies_T++;
+                        if (byte2proceed == true)
+                        {
+                            colorQuantizationTotal += 1;
+                            asciiBytes2 = Encoding.ASCII.GetBytes(rngGeneralTemp2.Text);
 
-                int differentOccurencies_j = 0;
-                if (unicodeDirectoryMap["j006A"] > 0)
-                    differentOccurencies_j++;
-                if (unicodeDirectoryMap["j0458"] > 0)
-                    differentOccurencies_j++;
-                if (unicodeDirectoryMap["j03F3"] > 0)
-                    differentOccurencies_j++;
-                if (unicodeDirectoryMap["j029D"] > 0)
-                    differentOccurencies_j++;
+                            if (enableColorQuantization == true)
+                            {
+                                var systemColor2 = ColorTranslator.FromWin32((int)rngGeneralTemp2.Font.Color);
+                                var brigthness2 = (0.2126 * (systemColor2.R / 255.0) + 0.7152 * (systemColor2.G / 255.0) + 0.0722 * (systemColor2.B / 255.0));
+                                if (rngGeneralTemp2.Font.Color != WdColor.wdColorAutomatic)
+                                {
+                                    if (brigthness2 < 0.5)
+                                    {
+                                        colorQuantizationDark++;
+                                        if (Array.IndexOf(colorQuantizationDarkLevels, brigthness2) == -1)
+                                        {
+                                            //push into array
+                                            Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                            colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness2;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        colorQuantizationLight++;
+                                        if (Array.IndexOf(colorQuantizationLightLevels, brigthness2) == -1)
+                                        {
+                                            //push into array
+                                            Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                            colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness2;
+                                        }
+                                    }
+                                }
+                            }
 
-                int differentOccurencies_o = 0;
-                if (unicodeDirectoryMap["o006F"] > 0)
-                    differentOccurencies_o++;
-                if (unicodeDirectoryMap["o03BF"] > 0)
-                    differentOccurencies_o++;
-                if (unicodeDirectoryMap["o1D0F"] > 0)
-                    differentOccurencies_o++;
-                if (unicodeDirectoryMap["o043E"] > 0)
-                    differentOccurencies_o++;
+                            //convert to unicodes and increase the dictionary where the current character is a key
+                            String unicodeVal2 = rngGeneralTemp2.Text + asciiBytes2[0].ToString("X4");
+                            //check and count occrencies for the unicode approach
+                            if (enableUnicodes == true && unicodeDirectoryMap.ContainsKey(unicodeVal2))
+                            {
+                                int unicodeCount2 = unicodeDirectoryMap[unicodeVal2] + 1;
+                                unicodeDirectoryMap[unicodeVal2] = unicodeCount2;
+                            }
+                            //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                            if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal2))
+                            {
+                                int wordSymbols2 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] + 1;
+                                invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal2] = wordSymbols2;
+                            }
+                        }
 
-                //there are 13 characters that can be used for this steganography method, so in this case, we need to cound for each of them
-                //how many characters have more then one encodings (for the same character used)
-                //for example: if only A and B are present with different encodings, then unicodeNumberSymbols will hold the value 2
-                if (differentOccurencies_A > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_B > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_E > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_G > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_H > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_I > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_M > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_O > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_P > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_S > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_T > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_j > 1)
-                    unicodeNumberSymbols++;
-                if (differentOccurencies_o > 1)
-                    unicodeNumberSymbols++;
-            }
+                        if (byte3proceed == true)
+                        {
+                            colorQuantizationTotal += 1;
+                            asciiBytes3 = Encoding.ASCII.GetBytes(rngGeneralTemp3.Text);
 
+                            if (enableColorQuantization == true)
+                            {
+                                var systemColor3 = ColorTranslator.FromWin32((int)rngGeneralTemp3.Font.Color);
+                                var brigthness3 = (0.2126 * (systemColor3.R / 255.0) + 0.7152 * (systemColor3.G / 255.0) + 0.0722 * (systemColor3.B / 255.0));
+                                if (rngGeneralTemp3.Font.Color != WdColor.wdColorAutomatic)
+                                {
+                                    if (brigthness3 < 0.5)
+                                    {
+                                        colorQuantizationDark++;
+                                        if (Array.IndexOf(colorQuantizationDarkLevels, brigthness3) == -1)
+                                        {
+                                            //push into array
+                                            Array.Resize(ref colorQuantizationDarkLevels, colorQuantizationDarkLevels.Length + 1);
+                                            colorQuantizationDarkLevels[colorQuantizationDarkLevels.GetUpperBound(0)] = brigthness3;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        colorQuantizationLight++;
+                                        if (Array.IndexOf(colorQuantizationLightLevels, brigthness3) == -1)
+                                        {
+                                            //push into array
+                                            Array.Resize(ref colorQuantizationLightLevels, colorQuantizationLightLevels.Length + 1);
+                                            colorQuantizationLightLevels[colorQuantizationLightLevels.GetUpperBound(0)] = brigthness3;
+                                        }
+                                    }
+                                }
+                            }
+
+                            //convert to unicodes and increase the dictionary where the current character is a key
+                            String unicodeVal3 = rngGeneralTemp3.Text + asciiBytes3[0].ToString("X4");
+                            //check and count occrencies for the unicode approach
+                            if (enableUnicodes == true && unicodeDirectoryMap.ContainsKey(unicodeVal3))
+                            {
+                                int unicodeCount3 = unicodeDirectoryMap[unicodeVal3] + 1;
+                                unicodeDirectoryMap[unicodeVal3] = unicodeCount3;
+                            }
+                            //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                            if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal3))
+                            {
+                                int wordSymbols3 = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] + 1;
+                                invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal3] = wordSymbols3;
+                            }
+                        }                    
+                    }
+                    checkEachCharacterIndividually++;
+
+                    //if the middle character is invisible, then count this situation in total cases
+                    if (byte2proceed == true && asciiBytes2 != null && asciiBytes2.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes2[0]) > -1)
+                    {
+                        invisibleCharactersTotal++;
+                        //if the 1st and 3th character are with the same color and if
+                        //if the color of the middle character is different then the color of the 1st and 3th character then this is potential case
+                        if (color1 == color3 && color1 != color2)
+                        {
+                            invisibleCharactersPotential++;
+                        }
+                    }
+
+                    // Move the start position 1 character
+                    rngGeneral.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                    // Move the end position 1 character
+                    rngGeneral.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                    startGeneralCount++;
+                    endGeneralCount++;
+                }
+
+                if (enableUnicodes == true)
+                {
+                    //check if there are occurencies for the same character but different encodings and if there are more then 0 occurencies, get a note of this
+                    //for example: differentOccurencies_A will hold the cout of how many different encodings for character A are present in the doc
+                    int differentOccurencies_A = 0;
+                    if (unicodeDirectoryMap["A0041"] > 0)
+                        differentOccurencies_A++;
+                    if (unicodeDirectoryMap["A0391"] > 0)
+                        differentOccurencies_A++;
+                    if (unicodeDirectoryMap["A0410"] > 0)
+                        differentOccurencies_A++;
+                    if (unicodeDirectoryMap["A13AA"] > 0)
+                        differentOccurencies_A++;
+
+                    int differentOccurencies_B = 0;
+                    if (unicodeDirectoryMap["B0042"] > 0)
+                        differentOccurencies_B++;
+                    if (unicodeDirectoryMap["B0392"] > 0)
+                        differentOccurencies_B++;
+                    if (unicodeDirectoryMap["B0412"] > 0)
+                        differentOccurencies_B++;
+                    if (unicodeDirectoryMap["B0181"] > 0)
+                        differentOccurencies_B++;
+
+                    int differentOccurencies_E = 0;
+                    if (unicodeDirectoryMap["E0045"] > 0)
+                        differentOccurencies_E++;
+                    if (unicodeDirectoryMap["E0395"] > 0)
+                        differentOccurencies_E++;
+                    if (unicodeDirectoryMap["E0415"] > 0)
+                        differentOccurencies_E++;
+                    if (unicodeDirectoryMap["E13AC"] > 0)
+                        differentOccurencies_E++;
+
+                    int differentOccurencies_G = 0;
+                    if (unicodeDirectoryMap["G0047"] > 0)
+                        differentOccurencies_G++;
+                    if (unicodeDirectoryMap["G050C"] > 0)
+                        differentOccurencies_G++;
+                    if (unicodeDirectoryMap["G13C0"] > 0)
+                        differentOccurencies_G++;
+                    if (unicodeDirectoryMap["G13B6"] > 0)
+                        differentOccurencies_G++;
+
+                    int differentOccurencies_H = 0;
+                    if (unicodeDirectoryMap["H0048"] > 0)
+                        differentOccurencies_H++;
+                    if (unicodeDirectoryMap["H0397"] > 0)
+                        differentOccurencies_H++;
+                    if (unicodeDirectoryMap["H041D"] > 0)
+                        differentOccurencies_H++;
+                    if (unicodeDirectoryMap["H13BB"] > 0)
+                        differentOccurencies_H++;
+
+                    int differentOccurencies_I = 0;
+                    if (unicodeDirectoryMap["I0049"] > 0)
+                        differentOccurencies_I++;
+                    if (unicodeDirectoryMap["I0399"] > 0)
+                        differentOccurencies_I++;
+                    if (unicodeDirectoryMap["I04C0"] > 0)
+                        differentOccurencies_I++;
+                    if (unicodeDirectoryMap["I0406"] > 0)
+                        differentOccurencies_I++;
+
+                    int differentOccurencies_M = 0;
+                    if (unicodeDirectoryMap["M004D"] > 0)
+                        differentOccurencies_M++;
+                    if (unicodeDirectoryMap["M039C"] > 0)
+                        differentOccurencies_M++;
+                    if (unicodeDirectoryMap["M041C"] > 0)
+                        differentOccurencies_M++;
+                    if (unicodeDirectoryMap["M216F"] > 0)
+                        differentOccurencies_M++;
+
+                    int differentOccurencies_O = 0;
+                    if (unicodeDirectoryMap["O004F"] > 0)
+                        differentOccurencies_O++;
+                    if (unicodeDirectoryMap["O039F"] > 0)
+                        differentOccurencies_O++;
+                    if (unicodeDirectoryMap["O041E"] > 0)
+                        differentOccurencies_O++;
+                    if (unicodeDirectoryMap["O0555"] > 0)
+                        differentOccurencies_O++;
+
+                    int differentOccurencies_P = 0;
+                    if (unicodeDirectoryMap["P0050"] > 0)
+                        differentOccurencies_P++;
+                    if (unicodeDirectoryMap["P0420"] > 0)
+                        differentOccurencies_P++;
+                    if (unicodeDirectoryMap["P03A1"] > 0)
+                        differentOccurencies_P++;
+                    if (unicodeDirectoryMap["P01A4"] > 0)
+                        differentOccurencies_P++;
+
+                    int differentOccurencies_S = 0;
+                    if (unicodeDirectoryMap["S0053"] > 0)
+                        differentOccurencies_S++;
+                    if (unicodeDirectoryMap["S0405"] > 0)
+                        differentOccurencies_S++;
+                    if (unicodeDirectoryMap["S054F"] > 0)
+                        differentOccurencies_S++;
+                    if (unicodeDirectoryMap["S13DA"] > 0)
+                        differentOccurencies_S++;
+
+                    int differentOccurencies_T = 0;
+                    if (unicodeDirectoryMap["T0054"] > 0)
+                        differentOccurencies_T++;
+                    if (unicodeDirectoryMap["T0422"] > 0)
+                        differentOccurencies_T++;
+                    if (unicodeDirectoryMap["T03A4"] > 0)
+                        differentOccurencies_T++;
+                    if (unicodeDirectoryMap["T01AC"] > 0)
+                        differentOccurencies_T++;
+
+                    int differentOccurencies_j = 0;
+                    if (unicodeDirectoryMap["j006A"] > 0)
+                        differentOccurencies_j++;
+                    if (unicodeDirectoryMap["j0458"] > 0)
+                        differentOccurencies_j++;
+                    if (unicodeDirectoryMap["j03F3"] > 0)
+                        differentOccurencies_j++;
+                    if (unicodeDirectoryMap["j029D"] > 0)
+                        differentOccurencies_j++;
+
+                    int differentOccurencies_o = 0;
+                    if (unicodeDirectoryMap["o006F"] > 0)
+                        differentOccurencies_o++;
+                    if (unicodeDirectoryMap["o03BF"] > 0)
+                        differentOccurencies_o++;
+                    if (unicodeDirectoryMap["o1D0F"] > 0)
+                        differentOccurencies_o++;
+                    if (unicodeDirectoryMap["o043E"] > 0)
+                        differentOccurencies_o++;
+
+                    //there are 13 characters that can be used for this steganography method, so in this case, we need to cound for each of them
+                    //how many characters have more then one encodings (for the same character used)
+                    //for example: if only A and B are present with different encodings, then unicodeNumberSymbols will hold the value 2
+                    if (differentOccurencies_A > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_B > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_E > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_G > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_H > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_I > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_M > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_O > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_P > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_S > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_T > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_j > 1)
+                        unicodeNumberSymbols++;
+                    if (differentOccurencies_o > 1)
+                        unicodeNumberSymbols++;
+                }
+                */
             #endregion
             #region check for word mapping and for font type
             //get each sequences of each 2 adjective words and check the word mapping technique
@@ -1697,6 +1751,7 @@ namespace WindowsFormsApplication1
             resultValues.unicodeNumberSymbols = unicodeNumberSymbols;
             resultValues.unicodeDirectoryMap = unicodeDirectoryMap;
             resultValues.invisibleCharactersThatTakesNoSpaceHexMap = invisibleCharactersThatTakesNoSpaceHexMap;
+            resultValues.invisibleCharactersColorMap = invisibleCharactersColorMap;
             resultValues.fontTypeTotal = fontTypeTotal;
             resultValues.fontTypePotential = fontTypePotential;
             resultValues.fontTypeDirectoryCount = fontTypeDirectoryCount;
@@ -2222,6 +2277,88 @@ namespace WindowsFormsApplication1
             // Define a range of 1 character. 
             object start = 0; object startGeneral = 0; int startGeneralCount = 0;
             object end = 1; object endGeneral = 3; int endGeneralCount = 3;
+            Microsoft.Office.Interop.Word.Range rngGeneralInvChars = docs.Range(ref start, ref end);
+            Microsoft.Office.Interop.Word.Range rngGeneralInvCharsAll = docs.Range(ref start);
+
+            int actualSizeInvChars = rngGeneralInvCharsAll.Text.Length - 1;
+
+            var watchInvCharsNoSpace = new System.Diagnostics.Stopwatch();
+            watchInvCharsNoSpace.Start();
+            var watchInvCharsColors = new System.Diagnostics.Stopwatch();
+            watchInvCharsColors.Start();
+            while ((rngGeneralInvChars.End - 1) < actualSizeInvChars)
+            {
+                if (!watchInvCharsNoSpace.IsRunning)
+                    watchInvCharsNoSpace.Start();
+                if (watchInvCharsColors.IsRunning)
+                    watchInvCharsColors.Stop();
+                //convert to unicodes and increase the dictionary where the current character is a key
+                byte[] asciiBytes = Encoding.ASCII.GetBytes(rngGeneralInvChars.Text);
+                String unicodeVal = rngGeneralInvChars.Text + asciiBytes[0].ToString("X4");
+                //check and count occrencies for the invisible symbols that do not takes space (MS Word Symbols[9]) approach
+                if (invisibleCharactersThatTakesNoSpaceHexMap.ContainsKey(unicodeVal))
+                {
+                    int wordSymbol = invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal] + 1;
+                    invisibleCharactersThatTakesNoSpaceHexMap[unicodeVal] = wordSymbol;
+                }
+
+                if (!watchInvCharsColors.IsRunning)
+                    watchInvCharsColors.Start();
+                if (watchInvCharsNoSpace.IsRunning)
+                    watchInvCharsNoSpace.Stop();
+
+                //if the character is invisible, get it's color and compare it with last saved color for invisile character
+                if (asciiBytes != null && asciiBytes.Length == 1 && Array.IndexOf(invisibleCharASCII, asciiBytes[0]) > -1)
+                {
+                    invisibleCharactersTotal++;
+
+                    string currentColor = rngGeneralInvChars.Font.Color.ToString();
+                    if (lastSavedColor != null && currentColor != lastSavedColor)
+                    {
+                        invisibleCharactersPotential++;                        
+                    }
+                    else if (lastSavedColor == null)
+                    {
+                        lastSavedColor = currentColor;
+                    }
+
+                    if (invisibleCharactersColorMap.ContainsKey(currentColor))
+                    {
+                        int generalLeftBorderCount = invisibleCharactersColorMap[currentColor] + 1;
+                        invisibleCharactersColorMap[currentColor] = generalLeftBorderCount;
+                    }
+                    else
+                    {
+                        invisibleCharactersColorMap.Add(currentColor, 1);
+                    }
+                }
+
+                rngGeneralInvChars.Select();
+                // Move the start position 1 character.
+                rngGeneralInvChars.MoveStart(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+                // Move the end position 1 character.
+                rngGeneralInvChars.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
+            }
+
+            if (watchInvCharsNoSpace.IsRunning)
+                watchInvCharsNoSpace.Stop();
+            LogExecutionTime("InvisibleCharactersNoSpace", watchInvCharsNoSpace);
+            if (watchInvCharsColors.IsRunning)
+                watchInvCharsColors.Stop();
+            LogExecutionTime("InvisibleCharactersColors", watchInvCharsColors);
+
+            ResultValues resultValues = new ResultValues();
+            resultValues.invisibleCharactersThatTakesNoSpaceHexMap = invisibleCharactersThatTakesNoSpaceHexMap;
+            resultValues.invisibleCharactersTotal = invisibleCharactersTotal;
+            resultValues.invisibleCharactersPotential = invisibleCharactersPotential;
+            resultValues.invisibleCharactersColorMap = invisibleCharactersColorMap;
+
+            docs.Close();
+            word.Quit();
+
+            (new ResultInvisibleCharactersScreen(resultValues)).ShowDialog();
+
+            /* OLD WAY
             Microsoft.Office.Interop.Word.Range rngGeneral = docs.Range(ref startGeneral, ref endGeneral);
             Microsoft.Office.Interop.Word.Range rngGeneralAll = docs.Range(ref startGeneral);
             Microsoft.Office.Interop.Word.Range rngGeneralTemp1 = null;
@@ -2342,7 +2479,7 @@ namespace WindowsFormsApplication1
                 rngGeneral.MoveEnd(Microsoft.Office.Interop.Word.WdUnits.wdCharacter, 1);
                 startGeneralCount++;
                 endGeneralCount++;
-            }
+            }            
 
             if (watchInvCharsNoSpace.IsRunning)
                 watchInvCharsNoSpace.Stop();
@@ -2350,17 +2487,19 @@ namespace WindowsFormsApplication1
             if (watchInvCharsColors.IsRunning)
                 watchInvCharsColors.Stop();
             LogExecutionTime("InvisibleCharactersColors", watchInvCharsColors);
+
             #endregion
 
             ResultValues resultValues = new ResultValues();
             resultValues.invisibleCharactersThatTakesNoSpaceHexMap = invisibleCharactersThatTakesNoSpaceHexMap;
             resultValues.invisibleCharactersTotal = invisibleCharactersTotal;
             resultValues.invisibleCharactersPotential = invisibleCharactersPotential;
-
+            
             docs.Close();
             word.Quit();
 
-            (new ResultInvisibleCharactersScreen(resultValues)).ShowDialog();            
+            (new ResultInvisibleCharactersScreen(resultValues)).ShowDialog();   
+            */
         }
 
         private void detectUnicodesMethod_Click(object sender, EventArgs e)

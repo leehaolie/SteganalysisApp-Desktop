@@ -20,6 +20,7 @@ namespace WindowsFormsApplication1
         public int unicodeNumberSymbols;
         public Dictionary<string, int> unicodeDirectoryMap;
         public Dictionary<string, int> invisibleCharactersThatTakesNoSpaceHexMap;
+        public Dictionary<string, int> invisibleCharactersColorMap;
         public int fontTypeTotal;
         public int fontTypePotential;
         public Dictionary<string, int> fontTypeDirectoryCount;
