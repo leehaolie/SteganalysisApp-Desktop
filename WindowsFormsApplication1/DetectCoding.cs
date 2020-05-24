@@ -356,6 +356,9 @@ namespace WindowsFormsApplication1
             Microsoft.Office.Interop.Word.Range rngGeneralInvChars = docs.Range(ref start, ref end);
             Microsoft.Office.Interop.Word.Range rngGeneralInvCharsAll = docs.Range(ref start);
 
+            var watchAllCombined = new System.Diagnostics.Stopwatch();
+            watchAllCombined.Start();
+
             #region check for paragraph border
             //approach 1: first we check if our concrete algotirtam is used            
             int codedParagraphBorder = 0;
@@ -1742,6 +1745,10 @@ namespace WindowsFormsApplication1
                 }
             }
             #endregion
+
+            watchAllCombined.Stop();
+            LogExecutionTime("AllCombinedMethods", watchAllCombined);
+
             ResultValues resultValues = new ResultValues();
             //resultValues.countPotetntialScaleSizes = countPotetntialScaleSizes;
             resultValues.openSpacesWordsTotal = openSpacesWordsTotal;
