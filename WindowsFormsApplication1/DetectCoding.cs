@@ -60,6 +60,7 @@ namespace WindowsFormsApplication1
         int fontTypeTotal = 0;
         int fontTypePotential = 0;
         Dictionary<string, int> fontTypeDirectoryCount = new Dictionary<string, int>();
+        string lastSavedFont = null;
         #endregion
         object startTemp0 = null; object startTemp1 = null; object startTemp2 = null; object startTemp3 = null;
         #region check for color quantization
@@ -300,6 +301,7 @@ namespace WindowsFormsApplication1
             fontTypeTotal = 0;
             fontTypePotential = 0;
             fontTypeDirectoryCount = new Dictionary<string, int>();
+            lastSavedFont = null;
             invisibleCharactersTotal = 0;
             invisibleCharactersPotential = 0;
             colorQuantizationTotal = 0;
@@ -1241,23 +1243,21 @@ namespace WindowsFormsApplication1
                     invisibleCharactersTotal++;
 
                     string currentColor = rngGeneralInvChars.Font.Color.ToString();
-                    if (lastSavedColor != null && currentColor != lastSavedColor)
+                    if ((lastSavedColor == null) || (lastSavedColor != null && currentColor != lastSavedColor))
                     {
                         invisibleCharactersPotential++;
-                    }
-                    else if (lastSavedColor == null)
-                    {
-                        lastSavedColor = currentColor;
-                    }
 
-                    if (invisibleCharactersColorMap.ContainsKey(currentColor))
-                    {
-                        int generalLeftBorderCount = invisibleCharactersColorMap[currentColor] + 1;
-                        invisibleCharactersColorMap[currentColor] = generalLeftBorderCount;
-                    }
-                    else
-                    {
-                        invisibleCharactersColorMap.Add(currentColor, 1);
+                        if (invisibleCharactersColorMap.ContainsKey(currentColor))
+                        {
+                            int generalLeftBorderCount = invisibleCharactersColorMap[currentColor] + 1;
+                            invisibleCharactersColorMap[currentColor] = generalLeftBorderCount;
+                        }
+                        else
+                        {
+                            invisibleCharactersColorMap.Add(currentColor, 1);
+                        }
+
+                        lastSavedColor = currentColor;
                     }
                 }
 
@@ -1715,22 +1715,14 @@ namespace WindowsFormsApplication1
                         r.SetRange(wordStartIndex, wordStartIndex + 1);
                         string fontFamilyFirstLetter = (r.Font).Name;
                         r.SetRange(wordStartIndex + 1, wordStartIndex + 2);
-                        string fontFamilySecondLetter = null;
-                        if (r.Text.Trim().Length > 0)
-                        {
-                            fontFamilySecondLetter = (r.Font).Name;
-                        }
 
                         fontTypeTotal++;
-                        //if the first two letters of the word has different fonts, then this is a potential case
-                        if (fontFamilySecondLetter != null && fontFamilyFirstLetter != fontFamilySecondLetter)
+                        //if the font type of the first uppercase letter is different with the next uppercase letter
+                        string currentFont = fontFamilyFirstLetter;
+                        if ((lastSavedFont == null) || (lastSavedFont != null && currentFont != lastSavedFont))
                         {
                             fontTypePotential++;
-                        }
 
-                        //if the word has one letter OR is the fonts of the two letters are different, then count the occurencies of the font types
-                        if ((fontFamilySecondLetter != null && fontFamilyFirstLetter != fontFamilySecondLetter) || fontFamilySecondLetter == null)
-                        {
                             if (fontTypeDirectoryCount.ContainsKey(fontFamilyFirstLetter))
                             {
                                 int value = fontTypeDirectoryCount[fontFamilyFirstLetter] + 1;
@@ -1740,6 +1732,8 @@ namespace WindowsFormsApplication1
                             {
                                 fontTypeDirectoryCount.Add(fontFamilyFirstLetter, 1);
                             }
+
+                            lastSavedFont = currentFont;
                         }
                     }
                 }
@@ -2042,22 +2036,14 @@ namespace WindowsFormsApplication1
                         r.SetRange(wordStartIndex, wordStartIndex + 1);
                         string fontFamilyFirstLetter = (r.Font).Name;
                         r.SetRange(wordStartIndex + 1, wordStartIndex + 2);
-                        string fontFamilySecondLetter = null;
-                        if (r.Text.Trim().Length > 0)
-                        {
-                            fontFamilySecondLetter = (r.Font).Name;
-                        }
 
                         fontTypeTotal++;
-                        //if the first two letters of the word has different fonts, then this is a potential case
-                        if (fontFamilySecondLetter != null && fontFamilyFirstLetter != fontFamilySecondLetter)
+                        //if the font type of the first uppercase letter is different with the next uppercase letter
+                        string currentFont = fontFamilyFirstLetter;
+                        if ((lastSavedFont == null) || (lastSavedFont != null && currentFont != lastSavedFont))
                         {
                             fontTypePotential++;
-                        }
-
-                        //if the word has one letter OR is the fonts of the two letters are different, then count the occurencies of the font types
-                        if ((fontFamilySecondLetter != null && fontFamilyFirstLetter != fontFamilySecondLetter) || fontFamilySecondLetter == null)
-                        {
+                            
                             if (fontTypeDirectoryCount.ContainsKey(fontFamilyFirstLetter))
                             {
                                 int value = fontTypeDirectoryCount[fontFamilyFirstLetter] + 1;
@@ -2067,6 +2053,8 @@ namespace WindowsFormsApplication1
                             {
                                 fontTypeDirectoryCount.Add(fontFamilyFirstLetter, 1);
                             }
+
+                            lastSavedFont = currentFont;
                         }
                     }
                 }
@@ -2320,23 +2308,21 @@ namespace WindowsFormsApplication1
                     invisibleCharactersTotal++;
 
                     string currentColor = rngGeneralInvChars.Font.Color.ToString();
-                    if (lastSavedColor != null && currentColor != lastSavedColor)
+                    if ((lastSavedColor == null) || (lastSavedColor != null && currentColor != lastSavedColor))
                     {
-                        invisibleCharactersPotential++;                        
-                    }
-                    else if (lastSavedColor == null)
-                    {
-                        lastSavedColor = currentColor;
-                    }
+                        invisibleCharactersPotential++;
 
-                    if (invisibleCharactersColorMap.ContainsKey(currentColor))
-                    {
-                        int generalLeftBorderCount = invisibleCharactersColorMap[currentColor] + 1;
-                        invisibleCharactersColorMap[currentColor] = generalLeftBorderCount;
-                    }
-                    else
-                    {
-                        invisibleCharactersColorMap.Add(currentColor, 1);
+                        if (invisibleCharactersColorMap.ContainsKey(currentColor))
+                        {
+                            int generalLeftBorderCount = invisibleCharactersColorMap[currentColor] + 1;
+                            invisibleCharactersColorMap[currentColor] = generalLeftBorderCount;
+                        }
+                        else
+                        {
+                            invisibleCharactersColorMap.Add(currentColor, 1);
+                        }
+
+                        lastSavedColor = currentColor;
                     }
                 }
 
