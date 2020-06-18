@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         public string documentTimeLogsPath = Directory.GetCurrentDirectory() + "/Execution Time Logs.txt";
 
         public bool enableConreteMethodsCheck = false;
-        public bool enableTimeExecutionLog = true;
+        public bool enableTimeExecutionLog = false;
 
         public bool enableWordMapping = false;
         public bool enableColorQuantization = false;

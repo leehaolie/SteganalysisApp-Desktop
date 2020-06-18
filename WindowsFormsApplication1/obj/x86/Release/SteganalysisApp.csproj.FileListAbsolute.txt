@@ -1,5 +1,3 @@
-G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe
-G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.pdb
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.ResultOpenSpacesScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.ResultFontTypeScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.ResultColorQuantizationScreen.resources
@@ -12,7 +10,14 @@ G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Re
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.ResultWordMappingScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.ResultScreen.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.DetectCoding.resources
-G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.Properties.Resources.resources
 G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\SteganalysisApp.csproj.GenerateResource.Cache
-G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.exe
-G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\WindowsFormsApplication1.pdb
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\SteganalysisApp.csprojResolveAssemblyReference.cache
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Release\MSWordSST.exe.manifest
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Release\MSWordSST.application
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Release\MSWordSST.exe
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\bin\Release\MSWordSST.pdb
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\MSWordSST.Properties.Resources.resources
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\MSWordSST.exe.manifest
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\MSWordSST.application
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\MSWordSST.exe
+G:\Knigi za Fax\Posdiplomski\SteganalysisApp\WindowsFormsApplication1\obj\x86\Release\MSWordSST.pdb
