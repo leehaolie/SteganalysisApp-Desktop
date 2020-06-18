@@ -1,5 +1,7 @@
 # MSWordSST – A New Steganalytical Tool for Microsoft Word Documents
 
+<a href="https://github.com/ivan0071/SteganalysisApp/blob/master/installer/setup.exe?raw=true"> 🗂️ Download MSWordSST application</a>
+
 • Open space method - the total number of sentences in the document, and the number of sentences that have more than one white space at the end; the total number of words in the document, and the number of words that have more than one white space at the end;
 
 • Two methods with special invisible characters - the total number of occurrences of each of the four invisible special characters for the method from: Right remark (U+200E), Left remark (U+200F), Zero width joiner (U+200D), and Zero width non-joiner (U+200C), together with the total number of occurrences of the Zero-Width Character (U+200B);
